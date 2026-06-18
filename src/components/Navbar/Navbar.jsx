@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 import styles from './Navbar.module.css';
 
 const links = [
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -52,9 +54,14 @@ export default function Navbar() {
               </a>
             ))}
           </div>
-          <a className="btn-primary" href="#contact">
-            Agendar conversa
-          </a>
+          <div style={{display: 'flex', gap: '0.75rem', alignItems: 'center'}}>
+            <button className={styles.themeToggle} onClick={toggle} aria-label={`Ativar ${theme === 'dark' ? 'modo claro' : 'modo escuro'}`}>
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+            <a className="btn-primary" href="#contact">
+              Agendar conversa
+            </a>
+          </div>
         </nav>
 
         <button
@@ -75,9 +82,14 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a className={`btn-primary ${styles.mobileCta}`} href="#contact" onClick={handleLinkClick}>
-            Agendar conversa
-          </a>
+          <div style={{display: 'flex', gap: 8, alignItems: 'center'}}>
+            <button className={styles.themeToggle} onClick={toggle} aria-label={`Ativar ${theme === 'dark' ? 'modo claro' : 'modo escuro'}`}>
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+            <a className={`btn-primary ${styles.mobileCta}`} href="#contact" onClick={handleLinkClick}>
+              Agendar conversa
+            </a>
+          </div>
         </div>
       </div>
     </header>
