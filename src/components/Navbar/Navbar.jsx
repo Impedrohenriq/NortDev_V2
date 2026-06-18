@@ -30,10 +30,16 @@ export default function Navbar() {
             <span className={styles.brandText}>North.Dev</span>
           ) : (
             <img
-              src="/logo-north-dev.svg"
+              src="/logo_escrita_NorthDev.png"
               alt="North Dev"
               className={styles.logo}
-              onError={() => setLogoFailed(true)}
+              onError={(e) => {
+                // fallback para o SVG existente
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/logo-north-dev.svg';
+                // se falhar também, aciona o estado para texto
+                e.currentTarget.addEventListener('error', () => setLogoFailed(true));
+              }}
             />
           )}
         </a>

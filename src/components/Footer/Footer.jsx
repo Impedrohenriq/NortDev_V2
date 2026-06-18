@@ -13,10 +13,14 @@ export default function Footer() {
             <span className={styles.brandText}>North.Dev</span>
           ) : (
             <img
-              src="/logo-north-dev.svg"
+              src="/logo_northDev.png"
               alt="North Dev"
               className={styles.logo}
-              onError={() => setLogoFailed(true)}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/logo-north-dev.svg';
+                e.currentTarget.addEventListener('error', () => setLogoFailed(true));
+              }}
             />
           )}
         </a>

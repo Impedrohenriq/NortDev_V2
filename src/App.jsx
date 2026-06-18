@@ -19,7 +19,15 @@ export default function App() {
     <div className={styles.appShell}>
       <div className={`${styles.loadingOverlay} ${booting ? styles.loadingOverlayVisible : styles.loadingOverlayHidden}`} aria-hidden={!booting}>
         <div className={styles.loadingCard}>
-          <img src="/logo-north-dev.svg" alt="North Dev" className={styles.loadingLogo} />
+          <img
+            src="/logo_escrita_NorthDev.png"
+            alt="North Dev"
+            className={styles.loadingLogo}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/logo-north-dev.svg';
+            }}
+          />
           <span className={styles.loadingText}>Build. Automate. Scale.</span>
         </div>
       </div>
