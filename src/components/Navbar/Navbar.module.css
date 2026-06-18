@@ -1,0 +1,133 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  background: rgba(7, 8, 15, 0.82);
+  backdrop-filter: blur(16px);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.scrolled {
+  border-bottom-color: var(--clr-border);
+}
+
+.inner {
+  width: min(1120px, calc(100% - 2rem));
+  min-height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.logo {
+  width: 8.6rem;
+  height: auto;
+}
+
+.brandText {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.link {
+  font-size: var(--text-sm);
+  color: var(--clr-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--clr-text-primary);
+}
+
+.menuButton {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  color: var(--clr-text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+}
+
+.menuButton:hover {
+  border-color: var(--clr-border-hover);
+  transform: translateY(-1px);
+}
+
+.mobilePanel {
+  display: none;
+}
+
+@media (max-width: 880px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .mobilePanel {
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    border-top: 1px solid transparent;
+    background: rgba(7, 8, 15, 0.94);
+    transition: max-height var(--transition-slow), border-color var(--transition-base);
+  }
+
+  .mobilePanelOpen {
+    max-height: 22rem;
+    border-top-color: var(--clr-border);
+  }
+
+  .mobileLinks {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 0 1.25rem;
+  }
+
+  .mobileLink {
+    padding: 0.75rem 0;
+    color: var(--clr-text-secondary);
+    font-size: var(--text-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobileLink:hover {
+    color: var(--clr-text-primary);
+  }
+
+  .mobileCta {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+}

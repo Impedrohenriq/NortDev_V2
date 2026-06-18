@@ -1,0 +1,77 @@
+.appShell {
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+}
+
+.appShell::before,
+.appShell::after {
+  content: '';
+  position: fixed;
+  inset: auto;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.16;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.appShell::before {
+  top: -8rem;
+  right: -9rem;
+  background: rgba(74, 143, 255, 0.18);
+}
+
+.appShell::after {
+  bottom: -10rem;
+  left: -10rem;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+.loadingOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 8, 15, 0.96);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.loadingOverlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loadingOverlayHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loadingCard {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+}
+
+.loadingLogo {
+  width: 14rem;
+  max-width: 72vw;
+  height: auto;
+}
+
+.loadingText {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--clr-text-secondary);
+}

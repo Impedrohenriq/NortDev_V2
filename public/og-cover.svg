@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#07080F"/>
+  <circle cx="1040" cy="120" r="220" fill="rgba(74,143,255,0.14)"/>
+  <circle cx="160" cy="520" r="260" fill="rgba(255,255,255,0.04)"/>
+  <rect x="360" y="165" width="480" height="300" rx="32" fill="#0E1120" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="398" y="204" width="404" height="76" rx="20" fill="#131726"/>
+  <path d="M434 258V226L447 245L460 226V258" stroke="#4A8FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M475 226H488L495 233V251L488 258H475V226Z" stroke="#4A8FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="398" y="360" fill="#ECEEF5" font-family="Space Grotesk, Arial, sans-serif" font-size="54" font-weight="600">North Dev</text>
+  <text x="398" y="408" fill="#8891A8" font-family="Inter, Arial, sans-serif" font-size="24">Build. Automate. Scale.</text>
+</svg>
