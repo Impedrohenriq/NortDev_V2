@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { company } from '../data/site';
 
 export function Contact() {
@@ -20,6 +20,7 @@ export function Contact() {
             <div className="mt-10 grid shrink-0 gap-3 text-sm text-slate-300 lg:mt-0 lg:min-w-80">
               <a href={`mailto:${company.email}`} className="contact-item"><Mail /> {company.email}</a>
               <a href={company.whatsappUrl} target="_blank" rel="noreferrer" className="contact-item"><Phone /> {company.phone}</a>
+              <a href={company.instagramUrl} target="_blank" rel="noreferrer" className="contact-item"><Instagram /> @northdeveloper</a>
               <span className="contact-item"><MapPin /> {company.location}</span>
               <a href={company.whatsappUrl} target="_blank" rel="noreferrer" className="button-primary mt-2 justify-center">
                 Pedir orçamento no WhatsApp <ArrowUpRight className="size-4" />

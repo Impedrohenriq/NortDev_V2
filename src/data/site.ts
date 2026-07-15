@@ -89,5 +89,6 @@ export const company = {
   email: 'northdev.solutions@gmail.com',
   phone: '+55 (31) 99967-0890',
   whatsappUrl: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento.')}`,
+  instagramUrl: 'https://www.instagram.com/northdeveloper/',
   location: 'Brasil · remoto ou presencial',
 };
