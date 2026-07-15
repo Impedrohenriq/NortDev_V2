@@ -40,7 +40,6 @@ export const projects: Project[] = [
     name: 'NorthDev Auto Detailing',
     category: 'Experiência premium · Serviços',
     description: 'Landing page de alta conversão para um estúdio de estética automotiva, com direção visual imersiva e foco em agendamento.',
-    technologies: ['React', 'Landing Page', 'UX/UI'],
     url: 'https://estetica-automotiva-two.vercel.app/',
     image: '/projects/estetica-automotiva.png',
     accent: 'cyan',
@@ -49,7 +48,6 @@ export const projects: Project[] = [
     name: 'MJ Emporium',
     category: 'Catálogo digital · E-commerce',
     description: 'Vitrine mobile first para venda de iPhones, com catálogo organizado, experiência refinada e contato direto pelo WhatsApp.',
-    technologies: ['React', 'Catálogo', 'Mobile First'],
     url: 'https://mjemporium.vercel.app/',
     image: '/projects/mj-emporium.png',
     accent: 'blue',
@@ -58,7 +56,6 @@ export const projects: Project[] = [
     name: 'Bendito Bolo',
     category: 'Portfólio autoral · Gastronomia',
     description: 'Site institucional para confeitaria artesanal, construído para apresentar criações autorais e facilitar novas encomendas.',
-    technologies: ['React', 'Sanity', 'Portfólio'],
     url: 'https://benditobolodecoracao.vercel.app/',
     image: '/projects/bendito-bolo.png',
     accent: 'cyan',
@@ -67,7 +64,6 @@ export const projects: Project[] = [
     name: 'Clínica de Estética Feminina',
     category: 'Landing page · Estética e bem-estar',
     description: 'Experiência institucional premium para apresentar tratamentos estéticos, transmitir cuidado e direcionar agendamentos pelo WhatsApp.',
-    technologies: ['React', 'Landing Page', 'WhatsApp'],
     url: 'https://clinicaesteticanorthdev.vercel.app/',
     image: '/projects/clinica-estetica.png',
     accent: 'blue',
@@ -76,7 +72,6 @@ export const projects: Project[] = [
     name: 'Estúdio Lume',
     category: 'Landing page · Arquitetura e interiores',
     description: 'Site institucional para um estúdio de arquitetura autoral, com apresentação imersiva de projetos, transformações e áreas de atuação.',
-    technologies: ['React', 'Landing Page', 'UX/UI'],
     url: 'https://estudiolume.vercel.app/',
     image: '/projects/estudio-lume.png',
     accent: 'cyan',
@@ -91,7 +86,8 @@ export const processSteps: ProcessStep[] = [
 ];
 
 export const company = {
-  email: 'hello@northdev.com',
-  phone: '+55 (11) 99999-0000',
+  email: 'northdev.solutions@gmail.com',
+  phone: '+55 (31) 99967-0890',
+  whatsappUrl: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento.')}`,
   location: 'Brasil · remoto ou presencial',
 };

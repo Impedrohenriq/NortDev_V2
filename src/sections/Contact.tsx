@@ -19,10 +19,10 @@ export function Contact() {
 
             <div className="mt-10 grid shrink-0 gap-3 text-sm text-slate-300 lg:mt-0 lg:min-w-80">
               <a href={`mailto:${company.email}`} className="contact-item"><Mail /> {company.email}</a>
-              <a href={`tel:${company.phone.replace(/\D/g, '')}`} className="contact-item"><Phone /> {company.phone}</a>
+              <a href={company.whatsappUrl} target="_blank" rel="noreferrer" className="contact-item"><Phone /> {company.phone}</a>
               <span className="contact-item"><MapPin /> {company.location}</span>
-              <a href={`mailto:${company.email}`} className="button-primary mt-2 justify-center">
-                Iniciar conversa <ArrowUpRight className="size-4" />
+              <a href={company.whatsappUrl} target="_blank" rel="noreferrer" className="button-primary mt-2 justify-center">
+                Pedir orçamento no WhatsApp <ArrowUpRight className="size-4" />
               </a>
             </div>
           </div>

@@ -32,7 +32,6 @@ export function Projects() {
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight text-heading sm:text-3xl">{project.name}</h3>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">{project.description}</p>
                 <div className="mt-6 flex flex-wrap items-center gap-2">
-                  {project.technologies.map((technology) => <span key={technology} className="tech-pill">{technology}</span>)}
                   <a href={project.url} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-2 text-sm font-semibold text-heading transition-colors hover:text-accent">
                     Visualizar <ArrowUpRight className="size-4" />
                   </a>

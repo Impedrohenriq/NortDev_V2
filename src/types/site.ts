@@ -16,7 +16,6 @@ export type Project = {
   name: string;
   category: string;
   description: string;
-  technologies: string[];
   url: string;
   image: string;
   accent: 'blue' | 'cyan';
