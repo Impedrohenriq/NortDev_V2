@@ -63,6 +63,15 @@ export const projects: Project[] = [
     image: '/projects/bendito-bolo.png',
     accent: 'cyan',
   },
+  {
+    name: 'Clínica de Estética Feminina',
+    category: 'Landing page · Estética e bem-estar',
+    description: 'Experiência institucional premium para apresentar tratamentos estéticos, transmitir cuidado e direcionar agendamentos pelo WhatsApp.',
+    technologies: ['React', 'Landing Page', 'WhatsApp'],
+    url: 'https://clinicaesteticanorthdev.vercel.app/',
+    image: '/projects/clinica-estetica.png',
+    accent: 'blue',
+  },
 ];
 
 export const processSteps: ProcessStep[] = [
