@@ -72,6 +72,15 @@ export const projects: Project[] = [
     image: '/projects/clinica-estetica.png',
     accent: 'blue',
   },
+  {
+    name: 'Estúdio Lume',
+    category: 'Landing page · Arquitetura e interiores',
+    description: 'Site institucional para um estúdio de arquitetura autoral, com apresentação imersiva de projetos, transformações e áreas de atuação.',
+    technologies: ['React', 'Landing Page', 'UX/UI'],
+    url: 'https://estudiolume.vercel.app/',
+    image: '/projects/estudio-lume.png',
+    accent: 'cyan',
+  },
 ];
 
 export const processSteps: ProcessStep[] = [
