@@ -1,4 +1,4 @@
-import { Check, MoveUpRight } from 'lucide-react';
+import { Check, Cpu, MoveUpRight } from 'lucide-react';
 import { SectionHeading } from '../components/SectionHeading';
 
 export function About() {
@@ -7,9 +7,15 @@ export function About() {
       <div className="container-site">
         <div className="about-panel" data-reveal>
           <div className="about-visual" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit-core"><span>N</span></div>
+            <div className="system-map">
+              <span className="system-line system-line-one" />
+              <span className="system-line system-line-two" />
+              <span className="system-line system-line-three" />
+              <span className="system-node system-node-one" />
+              <span className="system-node system-node-two" />
+              <span className="system-node system-node-three" />
+              <div className="system-core"><Cpu /></div>
+            </div>
             <div className="status-chip status-chip-top">clareza <Check /></div>
             <div className="status-chip status-chip-bottom">impacto <MoveUpRight /></div>
           </div>

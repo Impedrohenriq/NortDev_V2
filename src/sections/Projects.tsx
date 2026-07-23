@@ -19,12 +19,20 @@ export function Projects() {
           {projects.map((project, index) => (
             <article
               key={project.name}
-              className={`project-card ${index === 0 ? 'lg:col-span-2' : ''}`}
+              className={`project-card project-card-${project.accent} ${index === 0 ? 'lg:col-span-2' : ''}`}
               data-reveal
               style={{ transitionDelay: `${index * 80}ms` }}
             >
               <a href={project.url} target="_blank" rel="noreferrer" className="project-preview group" aria-label={`Visualizar ${project.name}`}>
-                <img src={project.image} alt={`Página inicial do projeto ${project.name}`} loading="lazy" />
+                <img
+                  src={project.image}
+                  alt={`Página inicial do projeto ${project.name}`}
+                  width={project.imageWidth}
+                  height={project.imageHeight}
+                  loading="lazy"
+                  decoding="async"
+                  sizes={index === 0 ? '(min-width: 1024px) 1344px, 100vw' : '(min-width: 1024px) 672px, 100vw'}
+                />
                 <span className="project-open"><ArrowUpRight /></span>
               </a>
               <div className="p-5 sm:p-7">

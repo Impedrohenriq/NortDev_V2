@@ -7,7 +7,7 @@ const storageKey = 'northdev-theme';
 function getInitialTheme(): Theme {
   const stored = localStorage.getItem(storageKey) as Theme | null;
   if (stored === 'dark' || stored === 'light') return stored;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  return 'dark';
 }
 
 export function useTheme() {

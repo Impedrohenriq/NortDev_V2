@@ -18,6 +18,8 @@ export type Project = {
   description: string;
   url: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   accent: 'blue' | 'cyan';
 };
 

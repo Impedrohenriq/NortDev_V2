@@ -6,6 +6,7 @@ export function Contact() {
     <section id="contato" className="section-space pb-6 sm:pb-8">
       <div className="container-site">
         <div className="contact-panel" data-reveal>
+          <div className="contact-circuit" aria-hidden="true" />
           <div className="contact-copy lg:flex lg:items-end lg:justify-between lg:gap-16">
             <div>
               <p className="eyebrow">Próximo movimento</p>

@@ -1,5 +1,6 @@
 import { processSteps } from '../data/site';
 import { SectionHeading } from '../components/SectionHeading';
+import { TechCard } from '../components/TechCard';
 
 export function Process() {
   return (
@@ -15,11 +16,17 @@ export function Process() {
         </div>
         <div className="process-grid mt-12 lg:mt-16">
           {processSteps.map((step, index) => (
-            <article key={step.number} className="process-step" data-reveal style={{ transitionDelay: `${index * 70}ms` }}>
+            <TechCard
+              key={step.number}
+              accent={index % 2 === 0 ? 'blue' : 'cyan'}
+              className="process-step"
+              data-reveal
+              style={{ transitionDelay: `${index * 70}ms` }}
+            >
               <span className="process-number">{step.number}</span>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
-            </article>
+            </TechCard>
           ))}
         </div>
       </div>

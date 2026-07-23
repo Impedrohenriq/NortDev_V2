@@ -1,11 +1,13 @@
-import { ArrowDownRight, ArrowRight, CheckCircle2, Code2, Orbit, Sparkles } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
 
 export function Hero() {
   return (
     <section id="inicio" className="hero-section">
       <div className="hero-grid" aria-hidden="true" />
-      <div className="container-site relative z-10 grid min-h-[760px] items-end gap-10 pb-16 pt-32 sm:min-h-[820px] sm:pb-20 lg:grid-cols-[1fr_25rem] lg:pb-24 lg:pt-40">
-        <div>
+      <div className="hero-glow hero-glow-one" aria-hidden="true" />
+      <div className="hero-glow hero-glow-two" aria-hidden="true" />
+      <div className="container-site relative z-10 grid min-h-screen items-center gap-10 pb-14 pt-32 lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)] lg:pb-20 lg:pt-36">
+        <div className="relative z-20 max-w-3xl">
           <div className="hero-badge">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-300 opacity-70" />
@@ -35,30 +37,26 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-console" aria-label="Pilares da North Dev">
-          <div className="flex items-center justify-between border-b border-line px-5 py-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">North / System</span>
-            <div className="flex gap-1.5" aria-hidden="true">
-              <span className="size-2 rounded-full bg-cyan-400/70" />
-              <span className="size-2 rounded-full bg-blue-400/40" />
-              <span className="size-2 rounded-full bg-white/15" />
+        <div className="hero-visual" aria-hidden="true">
+          <img
+            src="/images/northdev-system-core.webp"
+            alt=""
+            width="1728"
+            height="910"
+            fetchPriority="high"
+          />
+          <div className="hero-visual-frame">
+            <div className="visual-chip visual-chip-build">
+              <span><Braces /></span>
+              <div><small>BUILD</small><strong>Software sólido</strong></div>
             </div>
-          </div>
-          <div className="space-y-3 p-4">
-            <div className="console-row">
-              <span className="console-icon"><Code2 /></span>
-              <span><strong>Build</strong><small>Produtos digitais sólidos</small></span>
-              <CheckCircle2 className="ml-auto size-4 text-cyan-400" />
+            <div className="visual-chip visual-chip-automate">
+              <span><Bot /></span>
+              <div><small>AUTOMATE</small><strong>Fluxos inteligentes</strong></div>
             </div>
-            <div className="console-row">
-              <span className="console-icon"><Orbit /></span>
-              <span><strong>Automate</strong><small>Operações mais inteligentes</small></span>
-              <CheckCircle2 className="ml-auto size-4 text-cyan-400" />
-            </div>
-            <div className="console-row">
-              <span className="console-icon"><Sparkles /></span>
-              <span><strong>Scale</strong><small>Experiências preparadas</small></span>
-              <CheckCircle2 className="ml-auto size-4 text-cyan-400" />
+            <div className="visual-chip visual-chip-scale">
+              <span><Network /></span>
+              <div><small>SCALE</small><strong>Sistemas conectados</strong></div>
             </div>
           </div>
         </div>
