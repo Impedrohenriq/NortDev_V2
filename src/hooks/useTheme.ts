@@ -16,6 +16,7 @@ export function useTheme() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.style.colorScheme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#05070c' : '#edf3fa');
     localStorage.setItem(storageKey, theme);
   }, [theme]);
 

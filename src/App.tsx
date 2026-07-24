@@ -18,7 +18,7 @@ export default function App() {
       <a href="#conteudo" className="skip-link">Ir para o conteúdo</a>
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="conteudo">
-        <Hero />
+        <Hero theme={theme} />
         <Services />
         <About />
         <Projects />

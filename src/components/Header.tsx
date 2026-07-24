@@ -18,11 +18,14 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    if (isOpen) firstMobileLinkRef.current?.focus();
+    if (!isOpen) return;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      firstMobileLinkRef.current?.focus({ preventScroll: true });
+    });
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === 'Escape') {
         setIsOpen(false);
         menuButtonRef.current?.focus();
       }
@@ -30,7 +33,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.body.style.overflow = '';
+      window.cancelAnimationFrame(focusFrame);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
@@ -63,7 +66,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled || isOpen ? 'site-header-scrolled' : ''}`}>
+    <header className={`site-header ${isScrolled ? 'site-header-scrolled' : ''}`}>
       <div className="nav-shell mx-auto max-w-7xl">
         <Logo />
 

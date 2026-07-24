@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#07131f" />
+    <meta id="theme-color" name="theme-color" content="#07131f" />
     <meta name="description" content="A North Dev cria software, automações e produtos digitais sob medida para negócios que querem avançar com clareza." />
     <meta property="og:title" content="North Dev — Software com direção" />
     <meta property="og:description" content="Produtos digitais, automações e SaaS sob medida." />
@@ -17,23 +17,33 @@
     <meta name="twitter:image" content="https://northdevsolution.vercel.app/og-cover.jpg" />
     <link rel="canonical" href="https://northdevsolution.vercel.app/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="/images/northdev-system-core.webp" as="image" type="image/webp" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <title>North Dev — Software com direção</title>
-    <script type="module" crossorigin src="/assets/index-DLfHGLCD.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CdSVyMp1.css">
-  </head>
-  <body>
     <script>
       (() => {
         const saved = localStorage.getItem('northdev-theme');
-        const dark = saved ? saved === 'dark' : true;
+        const theme = saved === 'light' ? 'light' : 'dark';
+        const dark = theme === 'dark';
+
         document.documentElement.classList.toggle('dark', dark);
-        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = theme;
+        document.getElementById('theme-color')?.setAttribute('content', dark ? '#05070c' : '#edf3fa');
+
+        const imageBase = `/images/northdev-system-core-${theme}`;
+        const preload = document.createElement('link');
+        preload.rel = 'preload';
+        preload.as = 'image';
+        preload.type = 'image/webp';
+        preload.href = `${imageBase}-1024.webp`;
+        preload.setAttribute('fetchpriority', 'high');
+        preload.setAttribute('imagesrcset', `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`);
+        preload.setAttribute('imagesizes', '(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw');
+        document.head.appendChild(preload);
       })();
     </script>
+    <title>North Dev — Software com direção</title>
+    <script type="module" crossorigin src="/assets/index-C73CSo2r.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B5O4Yu8f.css">
+  </head>
+  <body>
     <div id="root"></div>
   </body>
 </html>

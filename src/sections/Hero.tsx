@@ -1,6 +1,14 @@
 import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
+import type { Theme } from '../hooks/useTheme';
 
-export function Hero() {
+type HeroProps = {
+  theme: Theme;
+};
+
+export function Hero({ theme }: HeroProps) {
+  const imageBase = `/images/northdev-system-core-${theme}`;
+  const imageSrcSet = `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`;
+
   return (
     <section id="inicio" className="hero-section">
       <div className="hero-grid" aria-hidden="true" />
@@ -39,11 +47,14 @@ export function Hero() {
 
         <div className="hero-visual" aria-hidden="true">
           <img
-            src="/images/northdev-system-core.webp"
+            src={`${imageBase}-1729.webp`}
+            srcSet={imageSrcSet}
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw"
             alt=""
-            width="1728"
+            width="1729"
             height="910"
             fetchPriority="high"
+            decoding="async"
           />
           <div className="hero-visual-frame">
             <div className="visual-chip visual-chip-build">
