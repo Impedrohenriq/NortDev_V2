@@ -14,7 +14,7 @@ export default function App() {
   useReveal();
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-bg text-body transition-colors duration-500">
+    <div className="theme-root min-h-screen overflow-x-clip bg-bg text-body transition-colors duration-500">
       <a href="#conteudo" className="skip-link">Ir para o conteúdo</a>
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="conteudo">

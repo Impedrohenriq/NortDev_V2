@@ -17,8 +17,8 @@ export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
       aria-label={isDark ? 'Ativar tema claro' : 'Ativar tema escuro'}
       title={isDark ? 'Tema claro' : 'Tema escuro'}
     >
-      <Sun aria-hidden="true" className={`absolute size-4 transition-all ${isDark ? 'scale-100 rotate-0' : 'scale-0 rotate-90'}`} />
-      <Moon aria-hidden="true" className={`absolute size-4 transition-all ${isDark ? 'scale-0 -rotate-90' : 'scale-100 rotate-0'}`} />
+      <Sun aria-hidden="true" className={`absolute size-4 transition-[opacity,transform] duration-150 ${isDark ? 'scale-100 rotate-0 opacity-100' : 'scale-0 rotate-90 opacity-0'}`} />
+      <Moon aria-hidden="true" className={`absolute size-4 transition-[opacity,transform] duration-150 ${isDark ? 'scale-0 -rotate-90 opacity-0' : 'scale-100 rotate-0 opacity-100'}`} />
     </button>
   );
 }

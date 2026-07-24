@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { navItems } from '../data/site';
 import type { Theme } from '../hooks/useTheme';
 import { Logo } from './Logo';
@@ -16,13 +17,16 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   const [activeHref, setActiveHref] = useState('#inicio');
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  const shouldFocusMenuRef = useRef(false);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    const focusFrame = window.requestAnimationFrame(() => {
-      firstMobileLinkRef.current?.focus({ preventScroll: true });
-    });
+    const focusFrame = shouldFocusMenuRef.current
+      ? window.requestAnimationFrame(() => {
+          firstMobileLinkRef.current?.focus({ preventScroll: true });
+        })
+      : undefined;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -33,10 +37,15 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.cancelAnimationFrame(focusFrame);
+      if (focusFrame !== undefined) window.cancelAnimationFrame(focusFrame);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
+
+  const handleMenuToggle = (event: ReactMouseEvent<HTMLButtonElement>) => {
+    shouldFocusMenuRef.current = event.detail === 0;
+    setIsOpen((open) => !open);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 24);
@@ -66,7 +75,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled ? 'site-header-scrolled' : ''}`}>
+    <header className={`site-header ${isScrolled ? 'site-header-scrolled' : ''} ${isOpen ? 'site-header-menu-open' : ''}`}>
       <div className="nav-shell mx-auto max-w-7xl">
         <Logo />
 
@@ -92,10 +101,11 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
             ref={menuButtonRef}
             type="button"
             className="icon-button lg:hidden"
-            onClick={() => setIsOpen((open) => !open)}
+            onClick={handleMenuToggle}
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
+            aria-haspopup="menu"
           >
             {isOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>

@@ -1,13 +1,107 @@
 import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import type { Theme } from '../hooks/useTheme';
 
 type HeroProps = {
   theme: Theme;
 };
 
-export function Hero({ theme }: HeroProps) {
+const heroImageSizes = '(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw';
+
+function getHeroImage(theme: Theme) {
   const imageBase = `/images/northdev-system-core-${theme}`;
-  const imageSrcSet = `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`;
+  return {
+    src: `${imageBase}-1729.webp`,
+    srcSet: `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`,
+  };
+}
+
+function HeroArtwork({ theme }: HeroProps) {
+  const [currentTheme, setCurrentTheme] = useState(theme);
+  const [incomingTheme, setIncomingTheme] = useState<Theme | null>(null);
+  const [showIncoming, setShowIncoming] = useState(false);
+
+  useEffect(() => {
+    if (theme === currentTheme) {
+      setIncomingTheme(null);
+      setShowIncoming(false);
+      return;
+    }
+
+    let cancelled = false;
+    let animationFrame: number | undefined;
+    const incomingImage = getHeroImage(theme);
+    const preload = new Image();
+    preload.src = incomingImage.src;
+    preload.srcset = incomingImage.srcSet;
+    preload.sizes = heroImageSizes;
+
+    const reveal = () => {
+      if (cancelled) return;
+      setIncomingTheme(theme);
+      animationFrame = window.requestAnimationFrame(() => {
+        if (!cancelled) setShowIncoming(true);
+      });
+    };
+
+    if (typeof preload.decode === 'function') {
+      preload.decode().then(reveal).catch(reveal);
+    } else {
+      preload.onload = reveal;
+      preload.onerror = reveal;
+    }
+
+    return () => {
+      cancelled = true;
+      if (animationFrame !== undefined) window.cancelAnimationFrame(animationFrame);
+    };
+  }, [currentTheme, theme]);
+
+  useEffect(() => {
+    if (!incomingTheme || !showIncoming) return;
+
+    const transitionTimer = window.setTimeout(() => {
+      setCurrentTheme(incomingTheme);
+      setIncomingTheme(null);
+      setShowIncoming(false);
+    }, 380);
+
+    return () => window.clearTimeout(transitionTimer);
+  }, [incomingTheme, showIncoming]);
+
+  const currentImage = getHeroImage(currentTheme);
+  const incomingImage = incomingTheme ? getHeroImage(incomingTheme) : null;
+
+  return (
+    <>
+      <img
+        className="hero-image-current"
+        src={currentImage.src}
+        srcSet={currentImage.srcSet}
+        sizes={heroImageSizes}
+        alt=""
+        width="1729"
+        height="910"
+        fetchPriority="high"
+        decoding="async"
+      />
+      {incomingImage && (
+        <img
+          className={`hero-image-incoming ${showIncoming ? 'hero-image-incoming-visible' : ''}`}
+          src={incomingImage.src}
+          srcSet={incomingImage.srcSet}
+          sizes={heroImageSizes}
+          alt=""
+          width="1729"
+          height="910"
+          decoding="async"
+        />
+      )}
+    </>
+  );
+}
+
+export function Hero({ theme }: HeroProps) {
 
   return (
     <section id="inicio" className="hero-section">
@@ -18,7 +112,7 @@ export function Hero({ theme }: HeroProps) {
         <div className="relative z-20 max-w-3xl">
           <div className="hero-badge">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan-300 opacity-70" />
+              <span className="hero-pulse absolute inline-flex size-full animate-ping rounded-full bg-cyan-300 opacity-70" />
               <span className="relative inline-flex size-2 rounded-full bg-cyan-300" />
             </span>
             Software com estratégia e direção
@@ -46,16 +140,7 @@ export function Hero({ theme }: HeroProps) {
         </div>
 
         <div className="hero-visual" aria-hidden="true">
-          <img
-            src={`${imageBase}-1729.webp`}
-            srcSet={imageSrcSet}
-            sizes="(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw"
-            alt=""
-            width="1729"
-            height="910"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <HeroArtwork theme={theme} />
           <div className="hero-visual-frame">
             <div className="visual-chip visual-chip-build">
               <span><Braces /></span>

@@ -96,6 +96,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
 button, a { outline: none; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
   outline: 2px solid var(--accent);
@@ -123,6 +124,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     @apply rounded-2xl border-line shadow-[0_12px_36px_rgba(0,0,0,0.18)];
     background: color-mix(in srgb, var(--surface) 96%, transparent);
   }
+  .site-header-menu-open .nav-shell {
+    @apply rounded-2xl border-line bg-surface shadow-[0_10px_28px_rgba(0,0,0,0.16)];
+  }
   .brand-wordmark { color: var(--heading); }
   .brand-accent { color: var(--accent); }
   .site-header:not(.site-header-scrolled) .brand-wordmark { color: var(--hero-heading); }
@@ -143,12 +147,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .nav-link:hover::after { @apply origin-left scale-x-100; }
   .nav-link-active { @apply text-heading; }
   .nav-link-active::after { @apply origin-left scale-x-100; }
-  .icon-button { @apply relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-soft/80 text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50; }
+  .icon-button {
+    @apply relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-soft/80 text-heading;
+    transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+  }
   .mobile-menu {
     @apply mt-2 overflow-hidden rounded-2xl border border-line bg-surface opacity-0 shadow-[0_14px_38px_rgba(0,0,0,0.2)] lg:hidden;
     will-change: opacity, transform;
+    contain: layout paint;
+    backface-visibility: hidden;
   }
-  .mobile-menu-open { animation: menu-in 150ms cubic-bezier(.2, .75, .25, 1) forwards; }
+  .mobile-menu-open { animation: menu-in 120ms cubic-bezier(.2, .75, .25, 1) forwards; }
   .mobile-link { @apply rounded-xl px-4 py-3 text-sm font-medium text-body transition-colors hover:bg-surface-soft hover:text-heading; }
   .mobile-link-active { @apply bg-surface-soft text-heading; }
 
@@ -198,7 +207,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     @apply absolute inset-0 z-10;
     background: linear-gradient(90deg, var(--hero-edge) 0%, transparent 25%, transparent 82%, var(--hero-edge) 100%), linear-gradient(0deg, var(--hero-edge) 0%, transparent 28%);
   }
-  .hero-visual img { @apply absolute inset-0 size-full object-cover object-center; transition: opacity 300ms ease; }
+  .hero-visual img { @apply absolute inset-0 size-full object-cover object-center; }
+  .hero-image-current { @apply z-0 opacity-100; }
+  .hero-image-incoming {
+    @apply z-[1] opacity-0;
+    transition: opacity 360ms cubic-bezier(.2, .75, .25, 1);
+  }
+  .hero-image-incoming-visible { @apply opacity-100; }
   .hero-visual-frame { @apply absolute inset-0 z-20; }
   .hero-visual-frame::before {
     content: "";
@@ -343,8 +358,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .js [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
 @keyframes menu-in {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, -6px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes circuit-pulse {
@@ -355,6 +370,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 1023px) {
   .hero-visual { order: 2; }
   .hero-metrics { order: 3; }
+  .hero-section { contain: paint; }
+  .hero-glow { display: none; }
+  .hero-pulse { animation: none; opacity: .45; }
+  .site-header-menu-open { isolation: isolate; }
 }
 
 @media (max-width: 639px) {
@@ -364,6 +383,34 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-visual::before { background: linear-gradient(0deg, var(--hero-edge) 0%, transparent 32%), linear-gradient(90deg, var(--hero-edge) 0%, transparent 16%, transparent 90%, var(--hero-edge) 100%); }
   .tech-card::before { opacity: .32; }
   .service-copy { margin-top: 3.5rem; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .icon-button:hover { @apply -translate-y-0.5 border-accent/50; }
+}
+
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  html.theme-changing .hero-section,
+  html.theme-changing .hero-badge,
+  html.theme-changing .hero-title,
+  html.theme-changing .hero-copy,
+  html.theme-changing .button-secondary,
+  html.theme-changing .hero-metrics,
+  html.theme-changing .metric-item {
+    transition-property: background-color, color, border-color;
+    transition-duration: 460ms;
+    transition-timing-function: cubic-bezier(.2, .75, .25, 1);
+    transition-delay: var(--theme-delay, 0ms);
+  }
+
+  html.theme-changing .hero-badge { --theme-delay: 35ms; }
+  html.theme-changing .hero-title { --theme-delay: 70ms; }
+  html.theme-changing .hero-copy { --theme-delay: 105ms; }
+  html.theme-changing .hero-section .button-secondary { --theme-delay: 140ms; }
+  html.theme-changing .hero-metrics { --theme-delay: 190ms; }
+  html.theme-changing .metric-item:nth-child(1) { --theme-delay: 190ms; }
+  html.theme-changing .metric-item:nth-child(2) { --theme-delay: 225ms; }
+  html.theme-changing .metric-item:nth-child(3) { --theme-delay: 260ms; }
 }
 
 @media (prefers-reduced-motion: reduce) {
