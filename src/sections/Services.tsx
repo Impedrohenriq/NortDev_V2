@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
 import { services } from '../data/site';
@@ -34,9 +35,9 @@ export function Services() {
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
                 </div>
-                <a href="#contato" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+                <Link to="/#contato" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent">
                   Conversar <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
+                </Link>
               </TechCard>
             );
           })}

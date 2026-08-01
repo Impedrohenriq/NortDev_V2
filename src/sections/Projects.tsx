@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SectionHeading } from '../components/SectionHeading';
 import { projects } from '../data/site';
 
@@ -12,7 +13,7 @@ export function Projects() {
             title="Trabalhos que transformam intenção em presença digital."
             description="Experiências criadas para contextos, públicos e objetivos diferentes — sempre com clareza e personalidade."
           />
-          <a href="#contato" className="button-secondary w-fit shrink-0">Criar algo novo <ArrowUpRight className="size-4" /></a>
+          <Link to="/#contato" className="button-secondary w-fit shrink-0">Criar algo novo <ArrowUpRight className="size-4" /></Link>
         </div>
 
         <div className="mt-10 grid gap-4 lg:mt-14 lg:grid-cols-2">

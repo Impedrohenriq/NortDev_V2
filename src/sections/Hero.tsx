@@ -1,5 +1,6 @@
 import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { Theme } from '../hooks/useTheme';
 
 type HeroProps = {
@@ -128,14 +129,14 @@ export function Hero({ theme }: HeroProps) {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#contato" className="button-primary justify-center">
+            <Link to="/#contato" className="button-primary justify-center">
               Falar sobre seu projeto
               <ArrowRight className="size-4" aria-hidden="true" />
-            </a>
-            <a href="#projetos" className="button-secondary justify-center">
+            </Link>
+            <Link to="/projetos" className="button-secondary justify-center">
               Conhecer projetos
               <ArrowDownRight className="size-4" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </div>
 

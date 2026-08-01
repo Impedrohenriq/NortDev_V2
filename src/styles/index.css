@@ -173,6 +173,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     background: var(--hero-bg);
     transition: background-color 360ms ease;
   }
+  .page-hero {
+    @apply relative isolate overflow-hidden border-b border-line;
+    background: var(--hero-bg);
+    transition: background-color 360ms ease;
+  }
+  .page-title {
+    @apply max-w-5xl font-display text-[clamp(3rem,7vw,6.5rem)] font-extrabold leading-[0.94] tracking-[-0.065em];
+    color: var(--hero-heading);
+  }
+  .page-copy {
+    @apply max-w-3xl text-base leading-7 sm:text-lg sm:leading-8;
+    color: var(--hero-copy);
+  }
   .hero-section::after {
     content: "";
     @apply pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48;
@@ -241,6 +254,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .metric-item { @apply flex items-center gap-4 border-b px-5 py-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0; border-color: var(--hero-line); }
   .metric-item strong { @apply font-display text-2xl font-bold; color: var(--hero-heading); }
   .metric-item span { @apply text-xs leading-5; color: var(--hero-muted); }
+
+  .overview-grid { @apply grid gap-4 sm:grid-cols-2; }
+  .overview-card { @apply min-h-[20rem] p-6 sm:p-7; }
+  .overview-card .tech-card-content { @apply flex flex-col justify-between; }
+  .overview-card h2 { @apply mt-12 text-2xl font-semibold tracking-tight text-heading sm:text-3xl; }
+  .overview-card p { @apply mt-3 max-w-md text-sm leading-6 text-muted sm:text-base sm:leading-7; }
+  .overview-link { @apply mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent; }
 
   .services-grid { @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-12; }
   .tech-card {
@@ -370,7 +390,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 1023px) {
   .hero-visual { order: 2; }
   .hero-metrics { order: 3; }
-  .hero-section { contain: paint; }
+  .hero-section, .page-hero { contain: paint; }
   .hero-glow { display: none; }
   .hero-pulse { animation: none; opacity: .45; }
   .site-header-menu-open { isolation: isolate; }
@@ -391,6 +411,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
   html.theme-changing .hero-section,
+  html.theme-changing .page-hero,
   html.theme-changing .hero-badge,
   html.theme-changing .hero-title,
   html.theme-changing .hero-copy,

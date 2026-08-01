@@ -1,6 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { navItems } from '../data/site';
 import type { Theme } from '../hooks/useTheme';
 import { Logo } from './Logo';
@@ -14,7 +15,6 @@ type HeaderProps = {
 export function Header({ theme, onToggleTheme }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeHref, setActiveHref] = useState('#inicio');
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
   const shouldFocusMenuRef = useRef(false);
@@ -54,26 +54,6 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const sectionIds = ['inicio', ...navItems.map((item) => item.href.slice(1))];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveHref(`#${visible.target.id}`);
-      },
-      { rootMargin: '-20% 0px -65%', threshold: [0.05, 0.3] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <header className={`site-header ${isScrolled ? 'site-header-scrolled' : ''} ${isOpen ? 'site-header-menu-open' : ''}`}>
       <div className="nav-shell mx-auto max-w-7xl">
@@ -81,22 +61,21 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegação principal">
           {navItems.map((item) => (
-            <a
+            <NavLink
               key={item.href}
-              href={item.href}
-              className={`nav-link ${activeHref === item.href ? 'nav-link-active' : ''}`}
-              aria-current={activeHref === item.href ? 'location' : undefined}
+              to={item.href}
+              className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
             >
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-          <a href="#contato" className="button-primary hidden sm:inline-flex">
+          <Link to="/#contato" className="button-primary hidden sm:inline-flex">
             Iniciar projeto
-          </a>
+          </Link>
           <button
             ref={menuButtonRef}
             type="button"
@@ -116,20 +95,19 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         <div id="mobile-navigation" className="mobile-menu mobile-menu-open mx-auto max-w-7xl">
           <nav className="grid gap-1 p-3" aria-label="Navegação mobile">
             {navItems.map((item, index) => (
-              <a
+              <NavLink
                 ref={index === 0 ? firstMobileLinkRef : undefined}
                 key={item.href}
-                href={item.href}
-                className={`mobile-link ${activeHref === item.href ? 'mobile-link-active' : ''}`}
+                to={item.href}
+                className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
                 onClick={() => setIsOpen(false)}
-                aria-current={activeHref === item.href ? 'location' : undefined}
               >
                 {item.label}
-              </a>
+              </NavLink>
             ))}
-            <a href="#contato" className="button-primary mt-2 justify-center sm:hidden" onClick={() => setIsOpen(false)}>
+            <Link to="/#contato" className="button-primary mt-2 justify-center sm:hidden" onClick={() => setIsOpen(false)}>
               Iniciar projeto
-            </a>
+            </Link>
           </nav>
         </div>
       )}

@@ -2,10 +2,10 @@ import { Blocks, Braces, Gauge, Workflow } from 'lucide-react';
 import type { NavItem, ProcessStep, Project, Service } from '../types/site';
 
 export const navItems: NavItem[] = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Projetos', href: '#projetos' },
-  { label: 'Processo', href: '#processo' },
+  { label: 'Sobre', href: '/sobre' },
+  { label: 'Soluções', href: '/solucoes' },
+  { label: 'Projetos', href: '/projetos' },
+  { label: 'Processo', href: '/processo' },
 ];
 
 export const services: Service[] = [
