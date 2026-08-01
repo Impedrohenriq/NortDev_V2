@@ -73,9 +73,13 @@ function Site() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const reduceMotion = useReducedMotion();
+  const pageTheme = location.pathname === '/' ? 'home' : location.pathname.slice(1);
 
   return (
-    <div className="theme-root min-h-screen overflow-x-clip bg-bg text-body transition-colors duration-500">
+    <div
+      className="theme-root min-h-screen overflow-x-clip bg-bg text-body transition-colors duration-500"
+      data-page={pageTheme}
+    >
       <RouteEffects />
       <a href="#conteudo" className="skip-link">Ir para o conteúdo</a>
       <Header theme={theme} onToggleTheme={toggleTheme} />

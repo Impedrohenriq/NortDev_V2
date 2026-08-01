@@ -82,6 +82,72 @@
   --shadow-card: 0 26px 80px rgba(0, 0, 0, 0.34);
 }
 
+.dark .theme-root[data-page="sobre"] {
+  --bg: #140b29;
+  --surface: #1c1134;
+  --surface-soft: #271945;
+  --line: rgba(135, 132, 255, 0.17);
+  --accent: #8784ff;
+  --accent-strong: #a6a4ff;
+  --cyan: #6ebbf3;
+  --violet: #705df2;
+  --nav: rgba(20, 11, 41, 0.84);
+  --hero-bg: #140b29;
+  --hero-line: rgba(135, 132, 255, 0.2);
+  --hero-surface: rgba(135, 132, 255, 0.07);
+  --hero-chip: rgba(28, 17, 52, 0.86);
+  --hero-edge: #140b29;
+  --hero-grid: rgba(135, 132, 255, 0.14);
+  --hero-gradient: linear-gradient(105deg, #8784ff 0%, #705df2 42%, #6ebbf3 76%, #ff5b86 110%);
+  --contact-bg: #1c1134;
+  --contact-line: rgba(135, 132, 255, 0.18);
+  --contact-item-bg: rgba(135, 132, 255, 0.06);
+}
+
+.dark .theme-root[data-page="processo"] {
+  --bg: #160c09;
+  --surface: #21110d;
+  --surface-soft: #2c1710;
+  --line: rgba(255, 162, 87, 0.17);
+  --accent: #ff7850;
+  --accent-strong: #ffa257;
+  --cyan: #fbb606;
+  --violet: #ff5b86;
+  --nav: rgba(22, 12, 9, 0.84);
+  --hero-bg: #160c09;
+  --hero-line: rgba(255, 162, 87, 0.2);
+  --hero-surface: rgba(255, 120, 80, 0.06);
+  --hero-chip: rgba(33, 17, 13, 0.86);
+  --hero-edge: #160c09;
+  --hero-grid: rgba(255, 162, 87, 0.13);
+  --hero-gradient: linear-gradient(105deg, #ff7850 0%, #ffa257 54%, #fbb606 100%);
+  --contact-bg: #21110d;
+  --contact-line: rgba(255, 162, 87, 0.18);
+  --contact-item-bg: rgba(255, 120, 80, 0.055);
+}
+
+.dark .theme-root[data-page="projetos"] {
+  --bg: #160810;
+  --surface: #220d17;
+  --surface-soft: #2d1220;
+  --line: rgba(255, 91, 134, 0.17);
+  --accent: #ff5b86;
+  --accent-strong: #ff789d;
+  --cyan: #ff7850;
+  --violet: #ffa257;
+  --nav: rgba(22, 8, 16, 0.84);
+  --hero-bg: #160810;
+  --hero-line: rgba(255, 91, 134, 0.2);
+  --hero-surface: rgba(255, 91, 134, 0.06);
+  --hero-chip: rgba(34, 13, 23, 0.86);
+  --hero-edge: #160810;
+  --hero-grid: rgba(255, 91, 134, 0.13);
+  --hero-gradient: linear-gradient(105deg, #ff5b86 0%, #ff7850 58%, #ffa257 108%);
+  --contact-bg: #220d17;
+  --contact-line: rgba(255, 91, 134, 0.18);
+  --contact-item-bg: rgba(255, 91, 134, 0.055);
+}
+
 @theme inline {
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Manrope", system-ui, sans-serif;
@@ -400,6 +466,91 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .footer-main { @apply flex flex-col gap-8 border-t border-line pt-8 md:flex-row md:items-end md:justify-between; }
   .footer-icon { @apply grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent/40 hover:text-accent; }
   .footer-icon svg { @apply size-4; }
+}
+
+.dark .theme-root:is([data-page="sobre"], [data-page="processo"], [data-page="projetos"]) {
+  .hero-glow-one {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  .hero-glow-two {
+    background: color-mix(in srgb, var(--violet) 14%, transparent);
+  }
+
+  .contact-panel::before {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .contact-circuit {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1px);
+  }
+}
+
+.dark .theme-root[data-page="sobre"] {
+  .button-primary {
+    border-color: color-mix(in srgb, #8784ff 30%, transparent);
+    background: #705df2;
+  }
+
+  .button-primary:hover {
+    background: #604bdc;
+  }
+
+  .about-visual {
+    background:
+      linear-gradient(rgba(135, 132, 255, .09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(135, 132, 255, .09) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 46%),
+      var(--surface-soft);
+  }
+
+  .system-map::after {
+    border-color: color-mix(in srgb, var(--cyan) 28%, transparent);
+  }
+
+  .system-core {
+    border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+    box-shadow: 0 0 80px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .system-node {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 72%, transparent);
+  }
+}
+
+.dark .theme-root[data-page="processo"] .button-primary,
+.dark .theme-root[data-page="projetos"] .button-primary {
+  color: #140b29;
+}
+
+.dark .theme-root[data-page="processo"] {
+  .button-primary {
+    border-color: color-mix(in srgb, #ffa257 36%, transparent);
+    background: #ff7850;
+  }
+
+  .button-primary:hover {
+    background: #ffa257;
+  }
+}
+
+.dark .theme-root[data-page="projetos"] {
+  .button-primary {
+    border-color: color-mix(in srgb, #ff5b86 38%, transparent);
+    background: #ff5b86;
+  }
+
+  .button-primary:hover {
+    background: #ff7850;
+  }
+
+  .project-card-blue:hover,
+  .project-card-cyan:hover {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    box-shadow: 0 28px 85px color-mix(in srgb, var(--accent) 10%, rgba(0, 0, 0, .3));
+  }
 }
 
 .js [data-reveal] {
