@@ -20,8 +20,7 @@ export function Process() {
               key={step.number}
               accent={index % 2 === 0 ? 'blue' : 'cyan'}
               className="process-step"
-              data-reveal
-              style={{ transitionDelay: `${index * 70}ms` }}
+              revealDelay={index * 0.07}
             >
               <span className="process-number">{step.number}</span>
               <h3>{step.title}</h3>

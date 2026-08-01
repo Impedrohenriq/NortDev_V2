@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
@@ -70,6 +71,8 @@ function RouteEffects() {
 
 function Site() {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const reduceMotion = useReducedMotion();
 
   return (
     <div className="theme-root min-h-screen overflow-x-clip bg-bg text-body transition-colors duration-500">
@@ -77,14 +80,24 @@ function Site() {
       <a href="#conteudo" className="skip-link">Ir para o conteúdo</a>
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="conteudo">
-        <Routes>
-          <Route path="/" element={<HomePage theme={theme} />} />
-          <Route path="/sobre" element={<AboutPage />} />
-          <Route path="/solucoes" element={<ServicesPage />} />
-          <Route path="/projetos" element={<ProjectsPage />} />
-          <Route path="/processo" element={<ProcessPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={location.pathname}
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Routes location={location}>
+              <Route path="/" element={<HomePage theme={theme} />} />
+              <Route path="/sobre" element={<AboutPage />} />
+              <Route path="/solucoes" element={<ServicesPage />} />
+              <Route path="/projetos" element={<ProjectsPage />} />
+              <Route path="/processo" element={<ProcessPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </motion.div>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

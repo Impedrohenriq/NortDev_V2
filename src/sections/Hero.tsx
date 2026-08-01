@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Theme } from '../hooks/useTheme';
@@ -103,6 +104,11 @@ function HeroArtwork({ theme }: HeroProps) {
 }
 
 export function Hero({ theme }: HeroProps) {
+  const reduceMotion = useReducedMotion();
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <section id="inicio" className="hero-section">
@@ -110,25 +116,33 @@ export function Hero({ theme }: HeroProps) {
       <div className="hero-glow hero-glow-one" aria-hidden="true" />
       <div className="hero-glow hero-glow-two" aria-hidden="true" />
       <div className="container-site relative z-10 grid min-h-screen items-center gap-10 pb-14 pt-32 lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)] lg:pb-20 lg:pt-36">
-        <div className="relative z-20 max-w-3xl">
-          <div className="hero-badge">
+        <motion.div
+          className="relative z-20 max-w-3xl"
+          initial={reduceMotion ? false : 'hidden'}
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { delayChildren: 0.12, staggerChildren: 0.09 } },
+          }}
+        >
+          <motion.div className="hero-badge" variants={itemVariants}>
             <span className="relative flex size-2">
               <span className="hero-pulse absolute inline-flex size-full animate-ping rounded-full bg-cyan-300 opacity-70" />
               <span className="relative inline-flex size-2 rounded-full bg-cyan-300" />
             </span>
             Software com estratégia e direção
-          </div>
+          </motion.div>
 
-          <h1 className="hero-title mt-7">
+          <motion.h1 className="hero-title mt-7" variants={itemVariants}>
             Ideias fortes.
             <span className="block text-gradient">Produtos que avançam.</span>
-          </h1>
-          <p className="hero-copy mt-6 max-w-2xl">
+          </motion.h1>
+          <motion.p className="hero-copy mt-6 max-w-2xl" variants={itemVariants}>
             Criamos software, automações e experiências digitais sob medida para transformar desafios complexos em produtos claros,
             rápidos e prontos para crescer.
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <motion.div className="mt-8 flex flex-col gap-3 sm:flex-row" variants={itemVariants}>
             <Link to="/#contato" className="button-primary justify-center">
               Falar sobre seu projeto
               <ArrowRight className="size-4" aria-hidden="true" />
@@ -137,10 +151,16 @@ export function Hero({ theme }: HeroProps) {
               Conhecer projetos
               <ArrowDownRight className="size-4" aria-hidden="true" />
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="hero-visual" aria-hidden="true">
+        <motion.div
+          className="hero-visual"
+          aria-hidden="true"
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.97, x: 24 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+        >
           <HeroArtwork theme={theme} />
           <div className="hero-visual-frame">
             <div className="visual-chip visual-chip-build">
@@ -156,20 +176,32 @@ export function Hero({ theme }: HeroProps) {
               <div><small>SCALE</small><strong>Sistemas conectados</strong></div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="hero-metrics lg:col-span-2">
+        <motion.div
+          className="hero-metrics lg:col-span-2"
+          initial={reduceMotion ? false : 'hidden'}
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, y: 18 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { delayChildren: 0.36, staggerChildren: 0.08, duration: 0.5 },
+            },
+          }}
+        >
           {[
             ['+20', 'Projetos desenvolvidos'],
             ['24h', 'Tempo médio de resposta'],
             ['100%', 'Soluções personalizadas'],
           ].map(([value, label]) => (
-            <div key={label} className="metric-item">
+            <motion.div key={label} className="metric-item" variants={itemVariants}>
               <strong>{value}</strong>
               <span>{label}</span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

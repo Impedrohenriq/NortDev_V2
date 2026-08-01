@@ -41,6 +41,11 @@
   --hero-edge: #edf3fa;
   --hero-grid: rgba(45, 92, 145, 0.11);
   --hero-gradient: linear-gradient(105deg, #0b49c8 0%, #087f9f 45%, #6246d8 82%, #b62f67 110%);
+  --contact-bg: #ffffff;
+  --contact-heading: #09111e;
+  --contact-copy: #53687d;
+  --contact-line: rgba(14, 42, 72, 0.15);
+  --contact-item-bg: #f2f5f9;
   --radius-card: 1.45rem;
   --shadow-card: 0 24px 70px rgba(8, 22, 42, 0.12);
   --transition: 280ms cubic-bezier(.2, .75, .25, 1);
@@ -69,6 +74,11 @@
   --hero-edge: #05070c;
   --hero-grid: rgba(120, 160, 210, 0.13);
   --hero-gradient: linear-gradient(105deg, #72a3ff 0%, #35d5f4 45%, #8d73ff 82%, #f05c91 110%);
+  --contact-bg: #07101c;
+  --contact-heading: #ffffff;
+  --contact-copy: #cbd5e1;
+  --contact-line: rgba(255, 255, 255, 0.1);
+  --contact-item-bg: rgba(255, 255, 255, 0.045);
   --shadow-card: 0 26px 80px rgba(0, 0, 0, 0.34);
 }
 
@@ -267,7 +277,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     --card-accent: var(--accent);
     @apply relative isolate overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface;
     box-shadow: var(--shadow-card);
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    transition: border-color var(--transition), box-shadow var(--transition);
   }
   .tech-card::before {
     content: "";
@@ -282,7 +292,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     @apply pointer-events-none absolute inset-[1px] -z-10 rounded-[calc(var(--radius-card)-1px)];
     background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--card-accent) 5%, transparent), transparent 70%);
   }
-  .tech-card:hover { @apply -translate-y-1; border-color: color-mix(in srgb, var(--card-accent) 48%, transparent); box-shadow: 0 28px 85px color-mix(in srgb, var(--card-accent) 10%, rgba(0, 0, 0, .28)); }
+  .tech-card:hover { border-color: color-mix(in srgb, var(--card-accent) 48%, transparent); box-shadow: 0 28px 85px color-mix(in srgb, var(--card-accent) 10%, rgba(0, 0, 0, .28)); }
   .tech-card-cyan { --card-accent: var(--cyan); }
   .tech-card-violet { --card-accent: var(--violet); }
   .tech-card-content { @apply relative z-10 size-full; }
@@ -337,8 +347,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .value-item { @apply flex gap-3 border-t border-line pt-4; }
   .value-item span { @apply pt-0.5 text-xs font-bold text-accent; }
   .value-item p { @apply text-sm leading-6 text-muted; }
+  .about-expertise-card { @apply h-full min-h-[19rem] p-6 sm:p-7; }
+  .about-capability-card { @apply h-full min-h-[18rem] p-6 sm:p-7; }
+  .about-expertise-card .tech-card-content,
+  .about-capability-card .tech-card-content { @apply flex min-h-full flex-col; }
 
-  .project-card { @apply overflow-hidden rounded-[1.5rem] border border-line bg-surface transition-all duration-500 hover:-translate-y-1; box-shadow: var(--shadow-card); }
+  .project-card { @apply overflow-hidden rounded-[1.5rem] border border-line bg-surface transition-[border-color,box-shadow] duration-500; box-shadow: var(--shadow-card); }
   .project-card-blue:hover { @apply border-blue-400/30; }
   .project-card-cyan:hover { @apply border-cyan-400/30; }
   .project-preview { @apply relative block aspect-[16/10] overflow-hidden border-b border-line bg-surface-soft; }
@@ -354,7 +368,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .process-step h3 { @apply mt-10 text-xl font-semibold tracking-tight text-heading; }
   .process-step p { @apply mt-3 text-sm leading-6 text-muted; }
 
-  .contact-panel { @apply relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#07101c] shadow-[0_30px_100px_rgba(0,0,0,0.34)]; }
+  .contact-panel {
+    @apply relative overflow-hidden rounded-[1.75rem] border;
+    border-color: var(--contact-line);
+    background: var(--contact-bg);
+    box-shadow: var(--shadow-card);
+    transition: background-color 360ms ease, border-color 360ms ease, box-shadow 360ms ease;
+  }
   .contact-panel::before { content: ""; @apply absolute -bottom-40 -left-32 size-[32rem] rounded-full bg-blue-600/20 blur-3xl; }
   .contact-circuit {
     @apply pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-25 lg:block;
@@ -363,8 +383,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     mask-image: linear-gradient(90deg, transparent, black);
   }
   .contact-copy { @apply relative z-10 overflow-hidden p-6 sm:p-10 lg:p-14; }
-  .contact-item { @apply flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.045] px-4 py-3 transition-colors hover:border-cyan-300/30 hover:bg-white/[0.07]; }
-  .contact-item svg { @apply size-4 shrink-0 text-cyan-300; }
+  .contact-title { color: var(--contact-heading); transition: color 360ms ease; }
+  .contact-description, .contact-details { color: var(--contact-copy); transition: color 360ms ease; }
+  .contact-item {
+    @apply flex items-center gap-2.5 rounded-xl border px-4 py-3;
+    border-color: var(--contact-line);
+    background: var(--contact-item-bg);
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .contact-item:hover {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--contact-item-bg));
+    color: var(--contact-heading);
+  }
+  .contact-item svg { @apply size-4 shrink-0; color: var(--accent); }
   .footer-main { @apply flex flex-col gap-8 border-t border-line pt-8 md:flex-row md:items-end md:justify-between; }
   .footer-icon { @apply grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent/40 hover:text-accent; }
   .footer-icon svg { @apply size-4; }

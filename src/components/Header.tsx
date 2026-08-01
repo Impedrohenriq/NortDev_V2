@@ -1,4 +1,5 @@
 import { Menu, X } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -13,6 +14,7 @@ type HeaderProps = {
 };
 
 export function Header({ theme, onToggleTheme }: HeaderProps) {
+  const reduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -55,7 +57,12 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled ? 'site-header-scrolled' : ''} ${isOpen ? 'site-header-menu-open' : ''}`}>
+    <motion.header
+      className={`site-header ${isScrolled ? 'site-header-scrolled' : ''} ${isOpen ? 'site-header-menu-open' : ''}`}
+      initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="nav-shell mx-auto max-w-7xl">
         <Logo />
 
@@ -111,6 +118,6 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
           </nav>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }

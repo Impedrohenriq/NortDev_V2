@@ -1,9 +1,12 @@
 import { ArrowUpRight } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { SectionHeading } from '../components/SectionHeading';
 import { projects } from '../data/site';
 
 export function Projects() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="projetos" className="section-space overflow-hidden">
       <div className="container-site">
@@ -18,11 +21,14 @@ export function Projects() {
 
         <div className="mt-10 grid gap-4 lg:mt-14 lg:grid-cols-2">
           {projects.map((project, index) => (
-            <article
+            <motion.article
               key={project.name}
               className={`project-card project-card-${project.accent} ${index === 0 ? 'lg:col-span-2' : ''}`}
-              data-reveal
-              style={{ transitionDelay: `${index * 80}ms` }}
+              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ duration: reduceMotion ? 0 : 0.58, delay: reduceMotion ? 0 : index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={reduceMotion ? undefined : { y: -6, transition: { duration: 0.24, delay: 0 } }}
             >
               <a href={project.url} target="_blank" rel="noreferrer" className="project-preview group" aria-label={`Visualizar ${project.name}`}>
                 <img
@@ -46,7 +52,7 @@ export function Projects() {
                   </a>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

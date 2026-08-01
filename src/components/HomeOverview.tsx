@@ -29,8 +29,7 @@ export function HomeOverview() {
               key={item.href}
               accent={index === 1 ? 'cyan' : index === 2 ? 'violet' : 'blue'}
               className="overview-card"
-              data-reveal
-              style={{ transitionDelay: `${index * 70}ms` }}
+              revealDelay={index * 0.07}
             >
               <span className="service-number">0{index + 1}</span>
               <div>

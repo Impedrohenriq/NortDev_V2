@@ -24,8 +24,7 @@ export function Services() {
                 key={service.title}
                 accent={index === 1 ? 'cyan' : index === 2 ? 'violet' : 'blue'}
                 className={`service-card service-card-${index + 1}`}
-                data-reveal
-                style={{ transitionDelay: `${index * 70}ms` }}
+                revealDelay={index * 0.07}
               >
                 <div className="flex items-start justify-between">
                   <span className="service-icon"><Icon /></span>
