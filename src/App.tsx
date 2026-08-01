@@ -8,6 +8,7 @@ import { useTheme } from './hooks/useTheme';
 import { AboutPage } from './pages/AboutPage';
 import { HomePage } from './pages/HomePage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { PricingPage } from './pages/PricingPage';
 import { ProcessPage } from './pages/ProcessPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -30,6 +31,10 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
   '/projetos': {
     title: 'Projetos | North Dev',
     description: 'Conheça projetos e experiências digitais desenvolvidos pela North Dev.',
+  },
+  '/precos': {
+    title: 'Preços | North Dev',
+    description: 'Conheça os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.',
   },
   '/processo': {
     title: 'Processo | North Dev',
@@ -97,6 +102,7 @@ function Site() {
               <Route path="/sobre" element={<AboutPage />} />
               <Route path="/solucoes" element={<ServicesPage />} />
               <Route path="/projetos" element={<ProjectsPage />} />
+              <Route path="/precos" element={<PricingPage />} />
               <Route path="/processo" element={<ProcessPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

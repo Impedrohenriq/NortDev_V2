@@ -6,6 +6,7 @@ export const navItems: NavItem[] = [
   { label: 'Soluções', href: '/solucoes' },
   { label: 'Projetos', href: '/projetos' },
   { label: 'Processo', href: '/processo' },
+  { label: 'Preços', href: '/precos' },
 ];
 
 export const services: Service[] = [

@@ -9,6 +9,7 @@ const pageDescriptions: Record<string, string> = {
   '/solucoes': 'Explore software, automações, SaaS e evolução de produtos digitais.',
   '/projetos': 'Veja experiências digitais desenvolvidas para diferentes mercados e objetivos.',
   '/processo': 'Entenda as etapas que conduzem cada projeto da descoberta à evolução.',
+  '/precos': 'Confira os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.',
 };
 
 export function HomeOverview() {

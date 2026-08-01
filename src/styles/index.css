@@ -148,6 +148,28 @@
   --contact-item-bg: rgba(255, 91, 134, 0.055);
 }
 
+.dark .theme-root[data-page="precos"] {
+  --bg: #06130d;
+  --surface: #0b1f16;
+  --surface-soft: #102a1d;
+  --line: rgba(52, 211, 153, 0.17);
+  --accent: #34d399;
+  --accent-strong: #6ee7b7;
+  --cyan: #6ee7b7;
+  --violet: #a7f3d0;
+  --nav: rgba(6, 19, 13, 0.84);
+  --hero-bg: #06130d;
+  --hero-line: rgba(52, 211, 153, 0.2);
+  --hero-surface: rgba(52, 211, 153, 0.06);
+  --hero-chip: rgba(11, 31, 22, 0.86);
+  --hero-edge: #06130d;
+  --hero-grid: rgba(52, 211, 153, 0.13);
+  --hero-gradient: linear-gradient(105deg, #34d399 0%, #6ee7b7 52%, #a7f3d0 105%);
+  --contact-bg: #0b1f16;
+  --contact-line: rgba(52, 211, 153, 0.18);
+  --contact-item-bg: rgba(52, 211, 153, 0.055);
+}
+
 @theme inline {
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Manrope", system-ui, sans-serif;
@@ -434,6 +456,38 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .process-step h3 { @apply mt-10 text-xl font-semibold tracking-tight text-heading; }
   .process-step p { @apply mt-3 text-sm leading-6 text-muted; }
 
+  .pricing-grid { @apply grid auto-rows-fr gap-4 lg:grid-cols-2; }
+  .pricing-card { @apply h-full min-h-[42rem] p-6 sm:p-8; }
+  .pricing-card .tech-card-content { @apply flex h-full flex-col; }
+  .pricing-card-featured {
+    border-color: color-mix(in srgb, var(--card-accent) 48%, transparent);
+    box-shadow: 0 28px 85px color-mix(in srgb, var(--card-accent) 12%, rgba(0, 0, 0, .28));
+  }
+  .pricing-icon { @apply grid size-12 place-items-center rounded-xl border border-line bg-surface-soft; color: var(--card-accent); }
+  .pricing-icon svg { @apply size-5; }
+  .pricing-featured-label {
+    @apply rounded-full border px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.14em];
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+  }
+  .pricing-label { @apply mt-8 text-xs font-bold uppercase tracking-[0.18em]; color: var(--card-accent); }
+  .pricing-name { @apply mt-3 font-display text-2xl font-bold tracking-tight text-heading sm:text-3xl; }
+  .pricing-price { @apply mt-7 font-display text-4xl font-extrabold tracking-[-0.04em] text-heading sm:text-5xl; }
+  .pricing-price span { @apply mb-1 block font-sans text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted; }
+  .pricing-monthly { @apply mt-2 text-sm font-semibold; color: var(--card-accent); }
+  .pricing-description { @apply mt-6 text-sm leading-6 text-muted sm:text-base sm:leading-7; }
+  .pricing-value { @apply mt-7 rounded-2xl border border-line bg-surface-soft p-4; }
+  .pricing-value strong, .pricing-audience strong { @apply text-xs font-bold uppercase tracking-[0.13em] text-heading; }
+  .pricing-value p, .pricing-audience p { @apply mt-2 text-sm leading-6 text-muted; }
+  .pricing-audience { @apply mt-5 border-l-2 pl-4; border-color: color-mix(in srgb, var(--card-accent) 48%, transparent); }
+  .pricing-features { @apply mt-7 grid gap-3 border-t border-line pt-6; }
+  .pricing-features li { @apply flex items-center gap-3 text-sm text-body; }
+  .pricing-features svg { @apply size-4 shrink-0; color: var(--card-accent); }
+  .pricing-cta { @apply mt-auto justify-center; }
+  .pricing-cta svg { @apply size-4; }
+  .pricing-note { @apply mx-auto mt-8 max-w-3xl text-center text-xs leading-5 text-muted sm:text-sm sm:leading-6; }
+
   .contact-panel {
     @apply relative overflow-hidden rounded-[1.75rem] border;
     border-color: var(--contact-line);
@@ -468,7 +522,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .footer-icon svg { @apply size-4; }
 }
 
-.dark .theme-root:is([data-page="sobre"], [data-page="processo"], [data-page="projetos"]) {
+.dark .theme-root:is([data-page="sobre"], [data-page="processo"], [data-page="projetos"], [data-page="precos"]) {
   .hero-glow-one {
     background: color-mix(in srgb, var(--accent) 16%, transparent);
   }
@@ -550,6 +604,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .project-card-cyan:hover {
     border-color: color-mix(in srgb, var(--accent) 42%, transparent);
     box-shadow: 0 28px 85px color-mix(in srgb, var(--accent) 10%, rgba(0, 0, 0, .3));
+  }
+}
+
+.dark .theme-root[data-page="precos"] {
+  .button-primary {
+    border-color: color-mix(in srgb, #34d399 38%, transparent);
+    background: #34d399;
+    color: #06130d;
+  }
+
+  .button-primary:hover {
+    background: #6ee7b7;
+  }
+
+  .pricing-card-featured {
+    background:
+      linear-gradient(145deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 45%),
+      var(--surface);
   }
 }
 
