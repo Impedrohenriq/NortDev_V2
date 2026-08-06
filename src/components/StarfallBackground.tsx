@@ -112,6 +112,7 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
     const mesh = new THREE.Mesh(geometry, material);
     let animationFrame = 0;
     let lastTime = performance.now();
+    let isVisible = true;
 
     scene.add(mesh);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
@@ -134,22 +135,48 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
     const themeObserver = new MutationObserver(syncTheme);
 
     const render = (now: number) => {
+      if (!isVisible) {
+        animationFrame = 0;
+        return;
+      }
       material.uniforms.iTime.value += Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
       renderer.render(scene, camera);
       animationFrame = window.requestAnimationFrame(render);
     };
 
+    const startRendering = () => {
+      if (reduceMotion || animationFrame || !isVisible) return;
+      lastTime = performance.now();
+      animationFrame = window.requestAnimationFrame(render);
+    };
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          renderer.render(scene, camera);
+          startRendering();
+        } else if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+        }
+      },
+      { rootMargin: '120px 0px' },
+    );
+
     resize();
     window.addEventListener('resize', resize);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    visibilityObserver.observe(mount);
     if (reduceMotion) renderer.render(scene, camera);
-    else animationFrame = window.requestAnimationFrame(render);
+    else startRendering();
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
       window.removeEventListener('resize', resize);
       themeObserver.disconnect();
+      visibilityObserver.disconnect();
       mesh.removeFromParent();
       geometry.dispose();
       material.dispose();

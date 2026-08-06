@@ -25,7 +25,7 @@ export function PageIntro({ eyebrow, title, highlight, description, palette = 'b
       <div className="starfall-orbit starfall-orbit-two" aria-hidden="true" />
       <div className="container-site starfall-page-shell">
         <motion.div
-          className="max-w-5xl"
+          className="mx-auto flex max-w-5xl flex-col items-center text-center"
           initial={reduceMotion ? false : 'hidden'}
           animate="visible"
           variants={{
@@ -36,11 +36,11 @@ export function PageIntro({ eyebrow, title, highlight, description, palette = 'b
           }}
         >
           <motion.p className="starfall-badge w-fit" variants={itemVariants}>{eyebrow}</motion.p>
-          <motion.h1 className="page-title mt-7" variants={itemVariants}>
+          <motion.h1 className="page-title mx-auto mt-7" variants={itemVariants}>
             {title}
             <span className="text-gradient"> {highlight}</span>
           </motion.h1>
-          <motion.p className="page-copy mt-6" variants={itemVariants}>{description}</motion.p>
+          <motion.p className="page-copy mx-auto mt-6" variants={itemVariants}>{description}</motion.p>
         </motion.div>
       </div>
     </section>

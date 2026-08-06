@@ -1,9 +1,9 @@
 import { ArrowUp, ArrowUpRight, Instagram, Mail, Phone } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { company, navItems } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 import { InfiniteLogoMarquee } from './InfiniteLogoMarquee';
@@ -53,9 +53,12 @@ function MagneticAction({ href, label, children, external = false }: MagneticAct
   );
 }
 
-export function Footer() {
+type FooterProps = {
+  refreshKey: number;
+};
+
+export function Footer({ refreshKey }: FooterProps) {
   const { language } = useLanguage();
-  const { pathname } = useLocation();
   const footerRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const auroraRef = useRef<HTMLDivElement>(null);
@@ -74,7 +77,15 @@ export function Footer() {
   useLayoutEffect(() => {
     const footer = footerRef.current;
     const panel = panelRef.current;
-    if (!footer || !panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!footer || !panel) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    if (reduceMotion || isMobile) {
+      gsap.set([panel, wordmarkRef.current, auroraRef.current], { clearProps: 'all' });
+      return;
+    }
 
     const context = gsap.context(() => {
       gsap.fromTo(
@@ -135,20 +146,52 @@ export function Footer() {
     }, footer);
 
     let cancelled = false;
-    const refreshFrame = window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => ScrollTrigger.refresh());
-    });
+    let outerFrame = 0;
+    let innerFrame = 0;
+    const scheduleRefresh = () => {
+      window.cancelAnimationFrame(outerFrame);
+      window.cancelAnimationFrame(innerFrame);
+      outerFrame = window.requestAnimationFrame(() => {
+        innerFrame = window.requestAnimationFrame(() => {
+          if (!cancelled) ScrollTrigger.refresh();
+        });
+      });
+    };
+
+    const main = document.getElementById('conteudo');
+    const layoutObserver = new ResizeObserver(scheduleRefresh);
+    if (main) layoutObserver.observe(main);
+    layoutObserver.observe(footer);
+
+    scheduleRefresh();
     void document.fonts.ready.then(() => {
-      if (!cancelled) ScrollTrigger.refresh();
+      if (!cancelled) scheduleRefresh();
     });
 
     return () => {
       cancelled = true;
-      window.cancelAnimationFrame(refreshFrame);
+      layoutObserver?.disconnect();
+      window.cancelAnimationFrame(outerFrame);
+      window.cancelAnimationFrame(innerFrame);
       context.revert();
-      ScrollTrigger.refresh();
     };
-  }, [pathname]);
+  }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    if (reduceMotion || isMobile) return;
+
+    let innerFrame = 0;
+    const outerFrame = window.requestAnimationFrame(() => {
+      innerFrame = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    return () => {
+      window.cancelAnimationFrame(outerFrame);
+      window.cancelAnimationFrame(innerFrame);
+    };
+  }, [refreshKey]);
 
   return (
     <footer ref={footerRef} className="motion-footer">

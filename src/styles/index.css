@@ -1286,8 +1286,41 @@ html:not(.dark) .logo-marquee-item { background: rgba(248, 250, 252, .78); }
   .motion-footer-content { @apply pt-12; }
   .motion-footer-intro { @apply pb-9; }
   .motion-footer-intro h2 { font-size: clamp(3rem, 15vw, 4.7rem); }
-  .motion-footer-wordmark { font-size: clamp(4.4rem, 24vw, 7rem); }
+  .motion-footer-wordmark {
+    overflow: visible;
+    padding-inline: .15rem;
+    font-size: clamp(3.15rem, 16vw, 4.4rem);
+    line-height: .82;
+    letter-spacing: -.075em;
+    white-space: nowrap;
+  }
   .logo-marquee-item { @apply min-w-40 px-4; }
+}
+
+@media (max-width: 767px) {
+  .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) {
+    background-attachment: scroll;
+  }
+
+  .motion-footer-panel,
+  .motion-footer-wordmark {
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    will-change: auto;
+  }
+
+  .motion-footer-aurora { display: none; }
+
+  .motion-footer-panel,
+  .motion-footer-action,
+  .logo-marquee-item { backdrop-filter: none; }
+
+  .motion-footer-panel {
+    box-shadow: 0 20px 56px color-mix(in srgb, var(--accent) 8%, rgba(0, 0, 0, .2));
+  }
+
+  .logo-marquee { contain: layout paint; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1295,3 +1328,10 @@ html:not(.dark) .logo-marquee-item { background: rgba(248, 250, 252, .78); }
   .motion-footer-panel,
   .motion-footer-wordmark { transform: none !important; clip-path: none !important; opacity: 1 !important; }
 }
+
+.route-loading {
+  min-height: 44rem;
+  background: var(--hero-bg);
+}
+
+.theme-root[data-page="home"] .route-loading { min-height: 64rem; }

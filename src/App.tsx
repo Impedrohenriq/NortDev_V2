@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import type { Location } from 'react-router-dom';
@@ -7,16 +8,16 @@ import { Header } from './components/Header';
 import { useReveal } from './hooks/useReveal';
 import { scrollToPageTarget, useSmoothScroll } from './hooks/useSmoothScroll';
 import { useTheme } from './hooks/useTheme';
-import { AboutPage } from './pages/AboutPage';
-import { HomePage } from './pages/HomePage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { PricingPage } from './pages/PricingPage';
-import { ProcessPage } from './pages/ProcessPage';
-import { ProjectsPage } from './pages/ProjectsPage';
-import { ServicesPage } from './pages/ServicesPage';
 import { useLanguage } from './i18n/LanguageContext';
 
-const siteUrl = 'https://northdevsolution.vercel.app';
+const siteUrl = 'https://www.northdevsolution.com.br';
+const HomePage = lazy(() => import('./pages/HomePage').then((module) => ({ default: module.HomePage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then((module) => ({ default: module.AboutPage })));
+const ServicesPage = lazy(() => import('./pages/ServicesPage').then((module) => ({ default: module.ServicesPage })));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((module) => ({ default: module.ProjectsPage })));
+const PricingPage = lazy(() => import('./pages/PricingPage').then((module) => ({ default: module.PricingPage })));
+const ProcessPage = lazy(() => import('./pages/ProcessPage').then((module) => ({ default: module.ProcessPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
 
 const routeMetadata = {
   pt: {
@@ -37,7 +38,13 @@ const routeMetadata = {
   },
 };
 
-function RouteEffects({ location }: { location: Location }) {
+function RouteEffects({
+  location,
+  onLayoutReady,
+}: {
+  location: Location;
+  onLayoutReady: Dispatch<SetStateAction<number>>;
+}) {
   const { language } = useLanguage();
   useReveal(location.pathname);
 
@@ -68,6 +75,10 @@ function RouteEffects({ location }: { location: Location }) {
     }
   }, [location.hash, location.pathname]);
 
+  useLayoutEffect(() => {
+    onLayoutReady((version) => version + 1);
+  }, [location.pathname, onLayoutReady]);
+
   return null;
 }
 
@@ -78,6 +89,7 @@ function Site() {
   const reduceMotion = useReducedMotion();
   const pageTheme = location.pathname === '/' ? 'home' : location.pathname.slice(1);
   const [activePageTheme, setActivePageTheme] = useState(pageTheme);
+  const [footerLayoutVersion, setFooterLayoutVersion] = useState(0);
 
   useSmoothScroll();
 
@@ -108,20 +120,22 @@ function Site() {
               transition: { duration: 0.15, ease: [0.4, 0, 1, 1] },
             }}
           >
-            <RouteEffects location={location} />
-            <Routes location={location}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/sobre" element={<AboutPage />} />
-              <Route path="/solucoes" element={<ServicesPage />} />
-              <Route path="/Modelos" element={<ProjectsPage />} />
-              <Route path="/precos" element={<PricingPage />} />
-              <Route path="/processo" element={<ProcessPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
+              <RouteEffects location={location} onLayoutReady={setFooterLayoutVersion} />
+              <Routes location={location}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/sobre" element={<AboutPage />} />
+                <Route path="/solucoes" element={<ServicesPage />} />
+                <Route path="/Modelos" element={<ProjectsPage />} />
+                <Route path="/precos" element={<PricingPage />} />
+                <Route path="/processo" element={<ProcessPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>
-      <Footer key={location.pathname} />
+      <Footer refreshKey={footerLayoutVersion} />
     </div>
   );
 }
