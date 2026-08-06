@@ -7,6 +7,8 @@ import { navItems } from '../data/site';
 import type { Theme } from '../hooks/useTheme';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageToggle } from './LanguageToggle';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type HeaderProps = {
   theme: Theme;
@@ -14,6 +16,7 @@ type HeaderProps = {
 };
 
 export function Header({ theme, onToggleTheme }: HeaderProps) {
+  const { language } = useLanguage();
   const reduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,29 +69,36 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
       <div className="nav-shell mx-auto max-w-7xl">
         <Logo />
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {navItems.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
               className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
             >
-              {item.label}
+              {language === 'pt' ? item.label : {
+                '/sobre': 'About',
+                '/solucoes': 'Solutions',
+                '/Modelos': 'Projects',
+                '/processo': 'Process',
+                '/precos': 'Pricing',
+              }[item.href]}
             </NavLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
           <Link to="/#contato" className="button-primary hidden sm:inline-flex">
-            Iniciar projeto
+            {language === 'pt' ? 'Iniciar projeto' : 'Start a project'}
           </Link>
           <button
             ref={menuButtonRef}
             type="button"
             className="icon-button lg:hidden"
             onClick={handleMenuToggle}
-            aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-label={isOpen ? (language === 'pt' ? 'Fechar menu' : 'Close menu') : (language === 'pt' ? 'Abrir menu' : 'Open menu')}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             aria-haspopup="menu"
@@ -100,7 +110,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
       {isOpen && (
         <div id="mobile-navigation" className="mobile-menu mobile-menu-open mx-auto max-w-7xl">
-          <nav className="grid gap-1 p-3" aria-label="Navegação mobile">
+          <nav className="grid gap-1 p-3" aria-label={language === 'pt' ? 'Navegação mobile' : 'Mobile navigation'}>
             {navItems.map((item, index) => (
               <NavLink
                 ref={index === 0 ? firstMobileLinkRef : undefined}
@@ -109,11 +119,17 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                 className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
                 onClick={() => setIsOpen(false)}
               >
-                {item.label}
+                {language === 'pt' ? item.label : {
+                  '/sobre': 'About',
+                  '/solucoes': 'Solutions',
+                  '/Modelos': 'Projects',
+                  '/processo': 'Process',
+                  '/precos': 'Pricing',
+                }[item.href]}
               </NavLink>
             ))}
             <Link to="/#contato" className="button-primary mt-2 justify-center sm:hidden" onClick={() => setIsOpen(false)}>
-              Iniciar projeto
+              {language === 'pt' ? 'Iniciar projeto' : 'Start a project'}
             </Link>
           </nav>
         </div>

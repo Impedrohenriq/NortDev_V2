@@ -19,36 +19,36 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: #f2f5f9;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-soft: #e9eef5;
-  --heading: #09111e;
-  --body: #26384b;
-  --muted: #53687d;
-  --line: rgba(14, 42, 72, 0.15);
-  --accent: #155eef;
-  --accent-strong: #0b49c8;
-  --cyan: #087f9f;
-  --violet: #6246d8;
-  --nav: rgba(246, 249, 252, 0.9);
-  --hero-bg: #edf3fa;
-  --hero-heading: #091525;
-  --hero-copy: #40546b;
-  --hero-muted: #60738a;
-  --hero-line: rgba(29, 70, 118, 0.14);
-  --hero-surface: rgba(255, 255, 255, 0.76);
+  --surface-soft: #f7f9fc;
+  --heading: #0b1220;
+  --body: #253247;
+  --muted: #5f6f85;
+  --line: rgba(15, 23, 42, 0.10);
+  --accent: #356fe5;
+  --accent-strong: #245bd0;
+  --cyan: #159bb8;
+  --violet: #7662dc;
+  --nav: rgba(255, 255, 255, 0.9);
+  --hero-bg: #ffffff;
+  --hero-heading: #0b1220;
+  --hero-copy: #45556d;
+  --hero-muted: #65758b;
+  --hero-line: rgba(15, 23, 42, 0.10);
+  --hero-surface: rgba(255, 255, 255, 0.78);
   --hero-chip: rgba(250, 253, 255, 0.86);
-  --hero-edge: #edf3fa;
-  --hero-grid: rgba(45, 92, 145, 0.11);
-  --hero-gradient: linear-gradient(105deg, #0b49c8 0%, #087f9f 45%, #6246d8 82%, #b62f67 110%);
+  --hero-edge: #ffffff;
+  --hero-grid: rgba(45, 92, 145, 0.08);
+  --hero-gradient: linear-gradient(105deg, #245bd0 0%, #159bb8 45%, #7662dc 82%, #b62f67 110%);
   --contact-bg: #ffffff;
-  --contact-heading: #09111e;
-  --contact-copy: #53687d;
-  --contact-line: rgba(14, 42, 72, 0.15);
-  --contact-item-bg: #f2f5f9;
+  --contact-heading: #0b1220;
+  --contact-copy: #5f6f85;
+  --contact-line: rgba(15, 23, 42, 0.10);
+  --contact-item-bg: #f8fafc;
   --radius-card: 1.45rem;
-  --shadow-card: 0 24px 70px rgba(8, 22, 42, 0.12);
-  --transition: 280ms cubic-bezier(.2, .75, .25, 1);
+  --shadow-card: 0 24px 70px rgba(30, 55, 90, 0.09);
+  --transition: 320ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .dark {
@@ -104,6 +104,28 @@
   --contact-item-bg: rgba(135, 132, 255, 0.06);
 }
 
+.dark .theme-root[data-page="solucoes"] {
+  --bg: #0a0c0f;
+  --surface: #11151a;
+  --surface-soft: #181e25;
+  --line: rgba(203, 213, 225, 0.14);
+  --accent: #aeb8c6;
+  --accent-strong: #d7dee8;
+  --cyan: #8996a8;
+  --violet: #6f7a89;
+  --nav: rgba(10, 12, 15, 0.86);
+  --hero-bg: #0a0c0f;
+  --hero-line: rgba(203, 213, 225, 0.16);
+  --hero-surface: rgba(203, 213, 225, 0.055);
+  --hero-chip: rgba(17, 21, 26, 0.88);
+  --hero-edge: #0a0c0f;
+  --hero-grid: rgba(203, 213, 225, 0.10);
+  --hero-gradient: linear-gradient(105deg, #f8fafc 0%, #cbd5e1 42%, #94a3b8 74%, #64748b 108%);
+  --contact-bg: #11151a;
+  --contact-line: rgba(203, 213, 225, 0.14);
+  --contact-item-bg: rgba(203, 213, 225, 0.045);
+}
+
 .dark .theme-root[data-page="processo"] {
   --bg: #160c09;
   --surface: #21110d;
@@ -126,7 +148,7 @@
   --contact-item-bg: rgba(255, 120, 80, 0.055);
 }
 
-.dark .theme-root[data-page="projetos"] {
+.dark .theme-root[data-page="Modelos"] {
   --bg: #160810;
   --surface: #220d17;
   --surface-soft: #2d1220;
@@ -186,6 +208,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+html.lenis { scroll-behavior: auto; }
 body {
   margin: 0;
   min-width: 320px;
@@ -241,14 +264,23 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .nav-link::after {
     content: "";
     @apply absolute inset-x-0 bottom-0 h-px origin-right scale-x-0 bg-accent transition-transform duration-300;
+    transition-timing-function: cubic-bezier(.16, 1, .3, 1);
   }
   .nav-link:hover::after { @apply origin-left scale-x-100; }
   .nav-link-active { @apply text-heading; }
   .nav-link-active::after { @apply origin-left scale-x-100; }
   .icon-button {
     @apply relative inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-soft/80 text-heading;
-    transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+    transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform var(--transition), box-shadow var(--transition);
   }
+  .language-toggle {
+    @apply inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface-soft/80 px-3 text-[0.68rem] font-bold tracking-[0.12em] text-heading;
+    transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform var(--transition);
+  }
+  .language-toggle:hover { @apply -translate-y-0.5 border-accent/50; }
+  .language-toggle:active { transform: scale(.94); }
+  .language-toggle svg { @apply size-3.5; }
+  .icon-button:active { transform: scale(.92); }
   .mobile-menu {
     @apply mt-2 overflow-hidden rounded-2xl border border-line bg-surface opacity-0 shadow-[0_14px_38px_rgba(0,0,0,0.2)] lg:hidden;
     will-change: opacity, transform;
@@ -260,16 +292,121 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .mobile-link-active { @apply bg-surface-soft text-heading; }
 
   .button-primary {
-    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-blue-300/20 bg-accent px-5 py-3 text-sm font-bold text-white transition-all duration-300;
+    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-blue-300/20 bg-accent px-5 py-3 text-sm font-bold text-white;
     box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 25%, transparent);
+    transition: transform var(--transition), color var(--transition), background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
   }
-  .button-primary:hover { @apply -translate-y-0.5 bg-accent-strong; box-shadow: 0 16px 38px color-mix(in srgb, var(--accent) 34%, transparent); }
-  .button-secondary { @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface/75 px-5 py-3 text-sm font-bold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface; }
+  .button-primary:hover { @apply -translate-y-1 bg-accent-strong; box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .button-primary:active { transform: translateY(1px) scale(.985); transition-duration: 120ms; }
+  .button-secondary {
+    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface/75 px-5 py-3 text-sm font-bold text-heading;
+    transition: transform var(--transition), color var(--transition), background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  }
+  .button-secondary:hover { @apply -translate-y-1 border-accent/50 bg-surface; box-shadow: 0 14px 32px color-mix(in srgb, var(--accent) 12%, transparent); }
+  .button-secondary:active { transform: translateY(1px) scale(.985); transition-duration: 120ms; }
+  .button-primary svg, .button-secondary svg { transition: transform var(--transition); }
+  .button-primary:hover svg, .button-secondary:hover svg { transform: translate3d(3px, -1px, 0); }
 
   .hero-section {
     @apply relative isolate overflow-hidden border-b border-line;
     background: var(--hero-bg);
     transition: background-color 360ms ease;
+  }
+  .starfall-hero {
+    @apply relative isolate flex min-h-[64rem] overflow-hidden border-b border-white/10 bg-[#03040b] text-white;
+  }
+  .starfall-background { @apply absolute inset-0 z-0; }
+  .starfall-background canvas { @apply size-full; display: block; }
+  .starfall-noise {
+    @apply pointer-events-none absolute inset-0 z-[1] opacity-[0.16];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    mix-blend-mode: soft-light;
+  }
+  .starfall-hero::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 z-[2];
+    background:
+      radial-gradient(circle at 50% 44%, transparent 0%, rgba(3, 4, 11, .12) 48%, rgba(3, 4, 11, .82) 100%),
+      linear-gradient(to bottom, rgba(3, 4, 11, .28), transparent 30%, rgba(3, 4, 11, .7));
+  }
+  .starfall-hero::after {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-64;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+  }
+  .starfall-orbit {
+    @apply pointer-events-none absolute z-[2] rounded-full border border-white/[0.07];
+    box-shadow: inset 0 0 90px rgba(78, 110, 255, .04);
+  }
+  .starfall-orbit-one { @apply -right-[18rem] top-[8rem] size-[42rem]; }
+  .starfall-orbit-two { @apply -left-[20rem] bottom-[4rem] size-[38rem]; }
+  .starfall-hero-shell {
+    @apply relative z-10 flex min-h-[64rem] flex-1 flex-col items-center justify-center pb-44 pt-36 text-center sm:pt-40;
+  }
+  .starfall-copy { @apply mx-auto flex max-w-6xl flex-col items-center; }
+  .starfall-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.055] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-300 backdrop-blur-xl;
+    box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 18px 50px rgba(0, 0, 0, .25);
+  }
+  .starfall-badge svg { @apply size-3.5 text-cyan-300; }
+  .starfall-title {
+    @apply mt-8 max-w-6xl font-display text-[clamp(3.65rem,9vw,8.8rem)] font-extrabold leading-[0.84] tracking-[-0.075em] text-white;
+    text-wrap: balance;
+  }
+  .starfall-title span {
+    @apply mt-2 block;
+    background: linear-gradient(110deg, #ffffff 0%, #8fb5ff 27%, #69e4f5 52%, #9a86ff 78%, #f17db1 110%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 12px 45px rgba(75, 117, 255, .22));
+  }
+  .starfall-description { @apply mt-8 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8; text-wrap: balance; }
+  .starfall-actions { @apply mt-9 flex w-full max-w-md flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row; }
+  .starfall-button {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-bold;
+    transition: transform var(--transition), border-color var(--transition), background-color var(--transition), box-shadow var(--transition);
+  }
+  .starfall-button:hover { @apply -translate-y-1; }
+  .starfall-button svg { @apply size-4; transition: transform var(--transition); }
+  .starfall-button:hover svg { transform: translate3d(3px, -1px, 0); }
+  .starfall-button-primary {
+    @apply border-blue-300/30 bg-white text-slate-950;
+    box-shadow: 0 16px 44px rgba(79, 140, 255, .28), inset 0 -2px 0 rgba(0, 0, 0, .12);
+  }
+  .starfall-button-primary:hover { @apply bg-blue-50; box-shadow: 0 22px 58px rgba(79, 140, 255, .38); }
+  .starfall-button-secondary { @apply border-white/15 bg-white/[0.055] text-white backdrop-blur-xl; }
+  .starfall-button-secondary:hover { @apply border-white/30 bg-white/[0.1]; }
+  .starfall-capabilities {
+    @apply absolute bottom-32 left-1/2 hidden w-[min(90%,60rem)] -translate-x-1/2 grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-[#070b18]/55 text-left backdrop-blur-xl md:grid;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, .35), inset 0 1px rgba(255, 255, 255, .05);
+  }
+  .starfall-capability { @apply flex items-center gap-3 border-r border-white/10 px-5 py-4 last:border-r-0; }
+  .starfall-capability > span { @apply grid size-9 shrink-0 place-items-center rounded-lg border border-blue-300/15 bg-blue-400/10 text-blue-300; }
+  .starfall-capability svg { @apply size-4; }
+  .starfall-capability small { @apply block text-[0.58rem] font-bold tracking-[0.2em] text-blue-300; }
+  .starfall-capability strong { @apply mt-1 block text-xs font-semibold text-white sm:text-sm; }
+  .starfall-metrics { @apply absolute inset-x-5 bottom-8 z-10 grid grid-cols-3 gap-2 sm:inset-x-auto sm:w-[min(90%,48rem)]; }
+  .starfall-metrics div { @apply border-r border-white/10 px-2 last:border-r-0; }
+  .starfall-metrics strong { @apply block font-display text-lg font-extrabold text-white sm:text-2xl; }
+  .starfall-metrics span { @apply mt-1 block text-[0.62rem] leading-4 text-slate-400 sm:text-xs; }
+  .starfall-scroll { @apply absolute bottom-9 right-8 z-20 hidden items-center gap-2 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-slate-400 transition-colors hover:text-white xl:flex; }
+  .starfall-scroll svg { @apply size-4; }
+  .home-overview-starfall { @apply relative; }
+  .home-overview-starfall::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-72;
+    background: radial-gradient(ellipse at top, color-mix(in srgb, var(--accent) 11%, transparent), transparent 68%);
+  }
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .brand-wordmark,
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .nav-link,
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .nav-link-active { color: #f3f6fa; }
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .brand-accent { color: #72a3ff; }
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .icon-button,
+  .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .language-toggle {
+    color: #f3f6fa;
+    border-color: rgba(255, 255, 255, .13);
+    background: rgba(255, 255, 255, .055);
   }
   .page-hero {
     @apply relative isolate overflow-hidden border-b border-line;
@@ -359,6 +496,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .overview-card h2 { @apply mt-12 text-2xl font-semibold tracking-tight text-heading sm:text-3xl; }
   .overview-card p { @apply mt-3 max-w-md text-sm leading-6 text-muted sm:text-base sm:leading-7; }
   .overview-link { @apply mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent; }
+  .overview-link svg { transition: transform var(--transition); }
+  .overview-link:hover svg { transform: translate3d(4px, -3px, 0); }
 
   .services-grid { @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-12; }
   .tech-card {
@@ -366,6 +505,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     @apply relative isolate overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface;
     box-shadow: var(--shadow-card);
     transition: border-color var(--transition), box-shadow var(--transition);
+    backface-visibility: hidden;
   }
   .tech-card::before {
     content: "";
@@ -440,14 +580,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .about-expertise-card .tech-card-content,
   .about-capability-card .tech-card-content { @apply flex min-h-full flex-col; }
 
-  .project-card { @apply overflow-hidden rounded-[1.5rem] border border-line bg-surface transition-[border-color,box-shadow] duration-500; box-shadow: var(--shadow-card); }
+  .project-card { @apply overflow-hidden rounded-[1.5rem] border border-line bg-surface; box-shadow: var(--shadow-card); transition: border-color var(--transition), box-shadow var(--transition); backface-visibility: hidden; }
   .project-card-blue:hover { @apply border-blue-400/30; }
   .project-card-cyan:hover { @apply border-cyan-400/30; }
   .project-preview { @apply relative block aspect-[16/10] overflow-hidden border-b border-line bg-surface-soft; }
   .project-preview::after { content: ""; @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-70; }
-  .project-preview img { @apply size-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.025]; }
-  .project-open { @apply absolute right-4 top-4 z-10 grid size-11 place-items-center rounded-full bg-white/90 text-slate-950 opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100; }
+  .project-preview img { @apply size-full object-cover object-top; transition: transform 800ms cubic-bezier(.16, 1, .3, 1); }
+  .project-preview:hover img, .project-preview:focus-visible img { transform: scale(1.035); }
+  .project-open {
+    @apply absolute right-4 top-4 z-10 grid size-11 place-items-center rounded-full bg-white/90 text-slate-950 opacity-0 shadow-lg;
+    transform: scale(.82) rotate(-8deg);
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .project-preview:hover .project-open, .project-preview:focus-visible .project-open { opacity: 1; transform: scale(1) rotate(0); }
   .project-open svg { @apply size-5; }
+  .project-link { @apply inline-flex items-center gap-2 text-sm font-semibold text-heading; transition: color var(--transition); }
+  .project-link svg { transition: transform var(--transition); }
+  .project-link:hover { @apply text-accent; }
+  .project-link:hover svg { transform: translate3d(4px, -3px, 0); }
 
   .process-grid { @apply relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4; }
   .process-grid::before { content: ""; @apply absolute left-[8%] right-[8%] top-11 hidden h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:block; }
@@ -509,20 +659,23 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     @apply flex items-center gap-2.5 rounded-xl border px-4 py-3;
     border-color: var(--contact-line);
     background: var(--contact-item-bg);
-    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    transition: color var(--transition), background-color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
   .contact-item:hover {
     border-color: color-mix(in srgb, var(--accent) 42%, transparent);
     background: color-mix(in srgb, var(--accent) 8%, var(--contact-item-bg));
     color: var(--contact-heading);
+    transform: translate3d(3px, 0, 0);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 8%, transparent);
   }
   .contact-item svg { @apply size-4 shrink-0; color: var(--accent); }
   .footer-main { @apply flex flex-col gap-8 border-t border-line pt-8 md:flex-row md:items-end md:justify-between; }
-  .footer-icon { @apply grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:border-accent/40 hover:text-accent; }
+  .footer-icon { @apply grid size-9 place-items-center rounded-full border border-line text-muted; transition: color var(--transition), border-color var(--transition), transform var(--transition), background-color var(--transition); }
+  .footer-icon:hover { @apply border-accent/40 bg-surface-soft text-accent; transform: translateY(-3px) scale(1.04); }
   .footer-icon svg { @apply size-4; }
 }
 
-.dark .theme-root:is([data-page="sobre"], [data-page="processo"], [data-page="projetos"], [data-page="precos"]) {
+.dark .theme-root:is([data-page="sobre"], [data-page="processo"], [data-page="Modelos"], [data-page="precos"]) {
   .hero-glow-one {
     background: color-mix(in srgb, var(--accent) 16%, transparent);
   }
@@ -574,8 +727,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   }
 }
 
+.dark .theme-root[data-page="solucoes"] {
+  .button-primary {
+    border-color: rgba(226, 232, 240, .28);
+    background: #cbd5e1;
+    color: #111827;
+  }
+
+  .button-primary:hover {
+    background: #e2e8f0;
+  }
+}
+
 .dark .theme-root[data-page="processo"] .button-primary,
-.dark .theme-root[data-page="projetos"] .button-primary {
+.dark .theme-root[data-page="Modelos"] .button-primary {
   color: #140b29;
 }
 
@@ -590,7 +755,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   }
 }
 
-.dark .theme-root[data-page="projetos"] {
+.dark .theme-root[data-page="Modelos"] {
   .button-primary {
     border-color: color-mix(in srgb, #ff5b86 38%, transparent);
     background: #ff5b86;
@@ -632,6 +797,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .js [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] { will-change: opacity, transform; }
+  .js [data-reveal].is-visible { will-change: auto; }
+}
+
 @keyframes menu-in {
   from { opacity: 0; transform: translate3d(0, -6px, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -649,6 +819,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-glow { display: none; }
   .hero-pulse { animation: none; opacity: .45; }
   .site-header-menu-open { isolation: isolate; }
+  .starfall-scroll { display: none; }
 }
 
 @media (max-width: 639px) {
@@ -658,6 +829,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-visual::before { background: linear-gradient(0deg, var(--hero-edge) 0%, transparent 32%), linear-gradient(90deg, var(--hero-edge) 0%, transparent 16%, transparent 90%, var(--hero-edge) 100%); }
   .tech-card::before { opacity: .32; }
   .service-copy { margin-top: 3.5rem; }
+  .starfall-hero,
+  .starfall-hero-shell { min-height: 54rem; }
+  .starfall-hero-shell { @apply justify-start pb-36 pt-32; }
+  .starfall-title { font-size: clamp(3.4rem, 17vw, 5rem); }
+  .starfall-description { @apply mt-6 text-[0.95rem] leading-7; }
+  .starfall-metrics { @apply bottom-7; }
+  .starfall-orbit-one { @apply -right-[24rem] top-[12rem]; }
+  .starfall-orbit-two { display: none; }
+  .language-toggle { @apply size-10 justify-center px-0; }
+  .language-toggle svg { display: none; }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -697,4 +878,420 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     transition-duration: .01ms !important;
   }
   .js [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* Unified Starfall language for every route */
+.starfall-page-hero {
+  @apply relative isolate min-h-[38rem] overflow-hidden border-b border-white/10 bg-[#03040b];
+}
+
+.starfall-page-hero::before {
+  content: "";
+  @apply pointer-events-none absolute inset-0 z-[2];
+  background:
+    radial-gradient(circle at 68% 38%, transparent 0%, rgba(3, 4, 11, .14) 45%, rgba(3, 4, 11, .82) 100%),
+    linear-gradient(to bottom, rgba(3, 4, 11, .2), transparent 52%, rgba(3, 4, 11, .72));
+}
+
+.starfall-page-hero::after {
+  content: "";
+  @apply pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-36;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+
+.starfall-page-shell {
+  @apply relative z-10 flex min-h-[38rem] items-end pb-24 pt-36 sm:min-h-[44rem] sm:pb-28 lg:pb-32;
+}
+
+.starfall-page-hero .page-title { color: #f8fafc; }
+.starfall-page-hero .page-copy { @apply max-w-2xl text-slate-300; }
+.starfall-page-hero .text-gradient {
+  background: var(--hero-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) {
+  background-image:
+    radial-gradient(circle at 8% 40%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 28rem),
+    radial-gradient(circle at 94% 68%, color-mix(in srgb, var(--violet) 4%, transparent), transparent 30rem);
+  background-attachment: fixed;
+}
+
+.theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .tech-card,
+.theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .about-panel,
+.theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .project-card {
+  border-radius: 1.75rem;
+  backdrop-filter: blur(18px);
+}
+
+.theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .tech-card::after {
+  content: "";
+  @apply pointer-events-none absolute inset-px rounded-[calc(1.75rem-1px)];
+  background: linear-gradient(145deg, rgba(255, 255, 255, .07), transparent 38%);
+}
+
+html:not(.dark) .starfall-hero,
+html:not(.dark) .starfall-page-hero {
+  @apply border-slate-200/70 bg-white;
+}
+
+html:not(.dark) .starfall-hero::before,
+html:not(.dark) .starfall-page-hero::before {
+  background:
+    radial-gradient(circle at 50% 40%, transparent 0%, rgba(255, 255, 255, .06) 42%, rgba(255, 255, 255, .7) 100%),
+    linear-gradient(to bottom, rgba(255, 255, 255, .15), transparent 48%, rgba(255, 255, 255, .66));
+}
+
+html:not(.dark) .starfall-noise {
+  opacity: .035;
+  mix-blend-mode: multiply;
+}
+
+html:not(.dark) .starfall-orbit {
+  border-color: rgba(37, 91, 208, .09);
+  box-shadow: inset 0 0 90px rgba(53, 111, 229, .035);
+}
+
+html:not(.dark) .starfall-badge {
+  border-color: rgba(15, 23, 42, .10);
+  background: rgba(255, 255, 255, .68);
+  color: #536176;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .9), 0 18px 50px rgba(47, 72, 112, .08);
+}
+
+html:not(.dark) .starfall-badge svg { color: #356fe5; }
+html:not(.dark) .starfall-title,
+html:not(.dark) .starfall-page-hero .page-title { color: #0b1220; }
+
+html:not(.dark) .starfall-title span,
+html:not(.dark) .starfall-page-hero .text-gradient {
+  background: var(--hero-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: none;
+}
+
+html:not(.dark) .theme-root[data-page="sobre"] {
+  --accent: #6657d9;
+  --accent-strong: #5646c5;
+  --cyan: #3e8ebc;
+  --violet: #705df2;
+  --hero-gradient: linear-gradient(105deg, #3f319e 0%, #6657d9 44%, #3e8ebc 78%, #b93d67 110%);
+}
+
+html:not(.dark) .theme-root[data-page="solucoes"] {
+  --accent: #5b6674;
+  --accent-strong: #3f4854;
+  --cyan: #7a8696;
+  --violet: #66717f;
+  --hero-gradient: linear-gradient(105deg, #111827 0%, #3f4854 40%, #6b7280 72%, #94a3b8 108%);
+}
+
+html:not(.dark) .theme-root[data-page="processo"] {
+  --accent: #e45d36;
+  --accent-strong: #c94b27;
+  --cyan: #c48605;
+  --violet: #d94370;
+  --hero-gradient: linear-gradient(105deg, #b73d20 0%, #e45d36 46%, #d88724 78%, #b97900 100%);
+}
+
+html:not(.dark) .theme-root[data-page="Modelos"] {
+  --accent: #d43d69;
+  --accent-strong: #b82f58;
+  --cyan: #dd603e;
+  --violet: #d8862d;
+  --hero-gradient: linear-gradient(105deg, #b42a52 0%, #d43d69 48%, #dd603e 78%, #c47a24 108%);
+}
+
+html:not(.dark) .theme-root[data-page="precos"] {
+  --accent: #15845d;
+  --accent-strong: #0f6d4c;
+  --cyan: #2d9b74;
+  --violet: #54a98a;
+  --hero-gradient: linear-gradient(105deg, #0f6d4c 0%, #15845d 48%, #2d9b74 76%, #54a98a 105%);
+}
+
+html:not(.dark) .starfall-description,
+html:not(.dark) .starfall-page-hero .page-copy { color: #506077; }
+
+html:not(.dark) .starfall-button-primary {
+  border-color: rgba(15, 23, 42, .08);
+  background: #0b1220;
+  color: #ffffff;
+  box-shadow: 0 16px 44px rgba(33, 70, 145, .17);
+}
+
+html:not(.dark) .starfall-button-primary:hover { background: #1d2a40; }
+
+html:not(.dark) .starfall-button-secondary {
+  border-color: rgba(15, 23, 42, .10);
+  background: rgba(255, 255, 255, .7);
+  color: #0b1220;
+}
+
+html:not(.dark) .starfall-capabilities {
+  border-color: rgba(15, 23, 42, .09);
+  background: rgba(255, 255, 255, .66);
+  box-shadow: 0 28px 80px rgba(47, 72, 112, .10), inset 0 1px rgba(255, 255, 255, .9);
+}
+
+html:not(.dark) .starfall-capability { border-color: rgba(15, 23, 42, .08); }
+html:not(.dark) .starfall-capability > span {
+  border-color: rgba(53, 111, 229, .13);
+  background: rgba(53, 111, 229, .07);
+  color: #356fe5;
+}
+html:not(.dark) .starfall-capability small { color: #356fe5; }
+html:not(.dark) .starfall-capability strong,
+html:not(.dark) .starfall-metrics strong { color: #0b1220; }
+html:not(.dark) .starfall-metrics div { border-color: rgba(15, 23, 42, .09); }
+html:not(.dark) .starfall-metrics span { color: #65758b; }
+html:not(.dark) .starfall-scroll { color: #65758b; }
+html:not(.dark) .starfall-scroll:hover { color: #0b1220; }
+
+html:not(.dark) .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .brand-wordmark,
+html:not(.dark) .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .nav-link,
+html:not(.dark) .theme-root[data-page="home"] .site-header:not(.site-header-scrolled) .nav-link-active,
+html:not(.dark) .theme-root:not([data-page="home"]) .site-header:not(.site-header-scrolled) .brand-wordmark,
+html:not(.dark) .theme-root:not([data-page="home"]) .site-header:not(.site-header-scrolled) .nav-link,
+html:not(.dark) .theme-root:not([data-page="home"]) .site-header:not(.site-header-scrolled) .nav-link-active {
+  color: #0b1220;
+}
+
+html:not(.dark) .theme-root .site-header:not(.site-header-scrolled) .brand-accent { color: #356fe5; }
+html:not(.dark) .theme-root .site-header:not(.site-header-scrolled) .icon-button,
+html:not(.dark) .theme-root .site-header:not(.site-header-scrolled) .language-toggle {
+  color: #0b1220;
+  border-color: rgba(15, 23, 42, .10);
+  background: rgba(255, 255, 255, .64);
+}
+
+html:not(.dark) .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .tech-card,
+html:not(.dark) .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .about-panel,
+html:not(.dark) .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="Modelos"], [data-page="processo"], [data-page="precos"]) .project-card,
+html:not(.dark) .contact-panel {
+  border-color: rgba(15, 23, 42, .09);
+  background: rgba(255, 255, 255, .82);
+  box-shadow: 0 26px 80px rgba(45, 67, 101, .09);
+}
+
+html:not(.dark) .about-visual {
+  background:
+    linear-gradient(rgba(53, 111, 229, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 111, 229, .045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(53, 111, 229, .12), transparent 48%),
+    #fbfdff;
+}
+
+html:not(.dark) .contact-panel::before { background: rgba(53, 111, 229, .10); }
+
+@media (max-width: 639px) {
+  .starfall-page-hero,
+  .starfall-page-shell { min-height: 36rem; }
+  .starfall-page-shell { @apply pb-20 pt-32; }
+}
+
+/* Cinematic Motion Footer */
+.motion-footer {
+  @apply relative isolate mt-8 overflow-hidden px-3 pb-3 sm:mt-12 sm:px-5 sm:pb-5;
+  color: var(--body);
+}
+
+.motion-footer-grid {
+  @apply pointer-events-none absolute inset-0 opacity-30;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 30%, black);
+}
+
+.motion-footer-aurora {
+  @apply pointer-events-none absolute -left-[12%] top-[4%] h-[34rem] w-[70%] rounded-full blur-[110px];
+  background:
+    radial-gradient(circle at 36% 50%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 54%),
+    radial-gradient(circle at 72% 55%, color-mix(in srgb, var(--violet) 24%, transparent), transparent 52%);
+}
+
+.motion-footer-panel {
+  @apply relative z-10 overflow-hidden rounded-[2.5rem] border border-line;
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 34rem),
+    radial-gradient(circle at 86% 82%, color-mix(in srgb, var(--violet) 10%, transparent), transparent 32rem),
+    color-mix(in srgb, var(--surface) 96%, transparent);
+  box-shadow: 0 32px 100px color-mix(in srgb, var(--accent) 9%, rgba(0, 0, 0, .28));
+  will-change: transform, clip-path;
+}
+
+.motion-footer-content { @apply relative z-10 pb-5 pt-16 sm:pt-20; }
+
+.motion-footer-intro {
+  @apply grid gap-7 border-b border-line pb-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)] lg:items-end lg:gap-16;
+}
+
+.motion-footer-intro h2 {
+  @apply mt-5 max-w-5xl font-display text-[clamp(3rem,7vw,7.2rem)] font-extrabold leading-[0.86] tracking-[-0.07em] text-heading;
+  text-wrap: balance;
+}
+
+.motion-footer-intro h2 span {
+  @apply block;
+  background: var(--hero-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.motion-footer-intro > p { @apply max-w-md text-sm leading-7 text-muted sm:text-base; }
+
+.motion-footer-actions { @apply grid gap-3 border-b border-line py-8 sm:grid-cols-2 xl:grid-cols-4; }
+
+.motion-footer-action {
+  @apply flex min-h-16 items-center justify-between gap-4 rounded-full border border-line bg-surface-soft/70 px-5 text-sm font-bold text-heading backdrop-blur-xl;
+  box-shadow: inset 0 1px color-mix(in srgb, white 7%, transparent);
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
+  will-change: transform;
+}
+
+.motion-footer-action > span { @apply flex items-center gap-2.5; }
+.motion-footer-action svg { @apply size-4 shrink-0; transition: transform var(--transition), color var(--transition); }
+
+.motion-footer-action:hover,
+.motion-footer-action:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface-soft));
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--accent) 18%, transparent), inset 0 1px rgba(255, 255, 255, .08);
+  color: var(--accent-strong);
+}
+
+.motion-footer-action:hover > svg,
+.motion-footer-action:focus-visible > svg { transform: translate3d(4px, -4px, 0) rotate(5deg); }
+
+.motion-footer-navigation { @apply flex flex-col gap-8 border-b border-line py-8 md:flex-row md:items-center md:justify-between; }
+.motion-footer-navigation nav { @apply flex flex-wrap gap-x-6 gap-y-3; }
+.motion-footer-navigation nav a {
+  @apply relative text-xs font-bold uppercase tracking-[0.11em] text-muted;
+  transition: color var(--transition), transform var(--transition);
+}
+.motion-footer-navigation nav a::after {
+  content: "";
+  @apply absolute inset-x-0 -bottom-2 h-px origin-right scale-x-0;
+  background: var(--accent);
+  transition: transform var(--transition);
+}
+.motion-footer-navigation nav a:hover,
+.motion-footer-navigation nav a:focus-visible { color: var(--heading); transform: translateY(-2px); }
+.motion-footer-navigation nav a:hover::after,
+.motion-footer-navigation nav a:focus-visible::after { @apply origin-left scale-x-100; }
+
+.motion-footer-wordmark {
+  @apply select-none overflow-hidden border-b border-line py-5 text-center font-display text-[clamp(5rem,19vw,18rem)] font-extrabold leading-[0.78] tracking-[-0.095em];
+  background: linear-gradient(100deg, color-mix(in srgb, var(--heading) 92%, transparent), color-mix(in srgb, var(--accent) 72%, var(--heading)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  will-change: transform, opacity;
+}
+.motion-footer-wordmark span { color: var(--accent); }
+
+.motion-footer-legal { @apply flex flex-col gap-3 pt-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between; }
+
+/* Infinite Logo Marquee */
+.logo-marquee-section { @apply relative z-10 border-b border-line py-8 sm:py-10; }
+.logo-marquee-heading { @apply mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between; }
+.logo-marquee-heading > span { @apply text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent; }
+.logo-marquee-heading p { @apply text-sm text-muted; }
+
+.logo-marquee {
+  @apply relative overflow-hidden;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+.logo-marquee-track {
+  @apply flex w-max;
+  animation: logo-marquee-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee-group { @apply flex shrink-0 gap-3 pr-3; }
+
+.logo-marquee-item {
+  @apply flex min-w-48 shrink-0 items-center gap-3 rounded-2xl border border-line bg-surface-soft/60 px-5 py-4 text-sm font-bold text-heading backdrop-blur-lg;
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.logo-marquee-item svg {
+  @apply size-7 shrink-0;
+  color: var(--muted);
+  filter: grayscale(1);
+  transition: color var(--transition), filter var(--transition), transform var(--transition);
+}
+
+.logo-marquee:hover .logo-marquee-track,
+.logo-marquee:focus-within .logo-marquee-track { animation-play-state: paused; }
+
+.logo-marquee-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-soft));
+  color: var(--accent-strong);
+  box-shadow: 0 16px 42px color-mix(in srgb, var(--accent) 16%, transparent);
+  transform: translateY(-5px) scale(1.025);
+}
+
+.logo-marquee-item:hover svg { filter: grayscale(0); transform: rotate(-5deg) scale(1.12); }
+.logo-html:hover svg { color: #e34f26; }
+.logo-css:hover svg { color: #1572b6; }
+.logo-javascript:hover svg { color: #d7b900; }
+.logo-typescript:hover svg { color: #3178c6; }
+.logo-python:hover svg { color: #3776ab; }
+.logo-nodejs:hover svg { color: #5fa04e; }
+.logo-nestjs:hover svg { color: #e0234e; }
+.logo-github:hover svg { color: #f8fafc; }
+.logo-supabase:hover svg { color: #3ecf8e; }
+.logo-gemini:hover svg { color: #8e75ff; }
+.logo-deepseek:hover svg { color: #4d6bfe; }
+html:not(.dark) .logo-github:hover svg { color: #181717; }
+
+@keyframes logo-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+html:not(.dark) .motion-footer-panel {
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 34rem),
+    radial-gradient(circle at 86% 82%, color-mix(in srgb, var(--violet) 6%, transparent), transparent 32rem),
+    rgba(255, 255, 255, .92);
+  box-shadow: 0 32px 100px rgba(42, 61, 92, .11);
+}
+
+html:not(.dark) .motion-footer-action,
+html:not(.dark) .logo-marquee-item { background: rgba(248, 250, 252, .78); }
+
+@media (max-width: 639px) {
+  .motion-footer { @apply px-2 pb-2; }
+  .motion-footer-panel { border-radius: 1.75rem; }
+  .motion-footer-content { @apply pt-12; }
+  .motion-footer-intro { @apply pb-9; }
+  .motion-footer-intro h2 { font-size: clamp(3rem, 15vw, 4.7rem); }
+  .motion-footer-wordmark { font-size: clamp(4.4rem, 24vw, 7rem); }
+  .logo-marquee-item { @apply min-w-40 px-4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track { animation-play-state: paused; transform: none; }
+  .motion-footer-panel,
+  .motion-footer-wordmark { transform: none !important; clip-path: none !important; opacity: 1 !important; }
 }

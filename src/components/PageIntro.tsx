@@ -1,13 +1,16 @@
 import { motion, useReducedMotion } from 'motion/react';
+import { StarfallBackground } from './StarfallBackground';
+import type { StarfallPalette } from './StarfallBackground';
 
 type PageIntroProps = {
   eyebrow: string;
   title: string;
   highlight: string;
   description: string;
+  palette?: StarfallPalette;
 };
 
-export function PageIntro({ eyebrow, title, highlight, description }: PageIntroProps) {
+export function PageIntro({ eyebrow, title, highlight, description, palette = 'blue' }: PageIntroProps) {
   const reduceMotion = useReducedMotion();
   const itemVariants = {
     hidden: { opacity: 0, y: 24 },
@@ -15,11 +18,12 @@ export function PageIntro({ eyebrow, title, highlight, description }: PageIntroP
   };
 
   return (
-    <section className="page-hero">
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-glow hero-glow-one" aria-hidden="true" />
-      <div className="hero-glow hero-glow-two" aria-hidden="true" />
-      <div className="container-site relative z-10 flex min-h-[34rem] items-end pb-20 pt-36 sm:min-h-[40rem] sm:pb-24 lg:pb-28">
+    <section className="page-hero starfall-page-hero">
+      <StarfallBackground palette={palette} />
+      <div className="starfall-noise" aria-hidden="true" />
+      <div className="starfall-orbit starfall-orbit-one" aria-hidden="true" />
+      <div className="starfall-orbit starfall-orbit-two" aria-hidden="true" />
+      <div className="container-site starfall-page-shell">
         <motion.div
           className="max-w-5xl"
           initial={reduceMotion ? false : 'hidden'}
@@ -31,8 +35,8 @@ export function PageIntro({ eyebrow, title, highlight, description }: PageIntroP
             },
           }}
         >
-          <motion.p className="eyebrow" variants={itemVariants}>{eyebrow}</motion.p>
-          <motion.h1 className="page-title mt-5" variants={itemVariants}>
+          <motion.p className="starfall-badge w-fit" variants={itemVariants}>{eyebrow}</motion.p>
+          <motion.h1 className="page-title mt-7" variants={itemVariants}>
             {title}
             <span className="text-gradient"> {highlight}</span>
           </motion.h1>

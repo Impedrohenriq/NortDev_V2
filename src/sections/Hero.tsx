@@ -1,123 +1,71 @@
-import { ArrowDownRight, ArrowRight, Bot, Braces, Network } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, Bot, Braces, Network, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Theme } from '../hooks/useTheme';
+import { StarfallBackground } from '../components/StarfallBackground';
+import { useLanguage } from '../i18n/LanguageContext';
 
-type HeroProps = {
-  theme: Theme;
+const heroContent = {
+  pt: {
+    badge: 'Software com estratégia e direção',
+    title: 'Ideias fortes.',
+    highlight: 'Produtos que avançam.',
+    copy: 'Criamos software, automações e experiências digitais sob medida para transformar desafios complexos em produtos claros, rápidos e prontos para crescer.',
+    primary: 'Falar sobre seu projeto',
+    secondary: 'Conhecer Modelos',
+    capabilities: [
+      ['BUILD', 'Software sólido'],
+      ['AUTOMATE', 'Fluxos inteligentes'],
+      ['SCALE', 'Sistemas conectados'],
+    ],
+    metrics: [
+      ['+20', 'Modelos desenvolvidos'],
+      ['24h', 'Tempo médio de resposta'],
+      ['100%', 'Soluções personalizadas'],
+    ],
+    scroll: 'Explore',
+  },
+  en: {
+    badge: 'Software with strategy and direction',
+    title: 'Strong ideas.',
+    highlight: 'Products that move forward.',
+    copy: 'We create custom software, automation and digital experiences to turn complex challenges into clear, fast products ready to grow.',
+    primary: 'Talk about your project',
+    secondary: 'Explore projects',
+    capabilities: [
+      ['BUILD', 'Solid software'],
+      ['AUTOMATE', 'Smart workflows'],
+      ['SCALE', 'Connected systems'],
+    ],
+    metrics: [
+      ['+20', 'Projects developed'],
+      ['24h', 'Average response time'],
+      ['100%', 'Custom solutions'],
+    ],
+    scroll: 'Explore',
+  },
 };
 
-const heroImageSizes = '(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw';
+const icons = [Braces, Bot, Network];
 
-function getHeroImage(theme: Theme) {
-  const imageBase = `/images/northdev-system-core-${theme}`;
-  return {
-    src: `${imageBase}-1729.webp`,
-    srcSet: `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`,
-  };
-}
-
-function HeroArtwork({ theme }: HeroProps) {
-  const [currentTheme, setCurrentTheme] = useState(theme);
-  const [incomingTheme, setIncomingTheme] = useState<Theme | null>(null);
-  const [showIncoming, setShowIncoming] = useState(false);
-
-  useEffect(() => {
-    if (theme === currentTheme) {
-      setIncomingTheme(null);
-      setShowIncoming(false);
-      return;
-    }
-
-    let cancelled = false;
-    let animationFrame: number | undefined;
-    const incomingImage = getHeroImage(theme);
-    const preload = new Image();
-    preload.src = incomingImage.src;
-    preload.srcset = incomingImage.srcSet;
-    preload.sizes = heroImageSizes;
-
-    const reveal = () => {
-      if (cancelled) return;
-      setIncomingTheme(theme);
-      animationFrame = window.requestAnimationFrame(() => {
-        if (!cancelled) setShowIncoming(true);
-      });
-    };
-
-    if (typeof preload.decode === 'function') {
-      preload.decode().then(reveal).catch(reveal);
-    } else {
-      preload.onload = reveal;
-      preload.onerror = reveal;
-    }
-
-    return () => {
-      cancelled = true;
-      if (animationFrame !== undefined) window.cancelAnimationFrame(animationFrame);
-    };
-  }, [currentTheme, theme]);
-
-  useEffect(() => {
-    if (!incomingTheme || !showIncoming) return;
-
-    const transitionTimer = window.setTimeout(() => {
-      setCurrentTheme(incomingTheme);
-      setIncomingTheme(null);
-      setShowIncoming(false);
-    }, 380);
-
-    return () => window.clearTimeout(transitionTimer);
-  }, [incomingTheme, showIncoming]);
-
-  const currentImage = getHeroImage(currentTheme);
-  const incomingImage = incomingTheme ? getHeroImage(incomingTheme) : null;
-
-  return (
-    <>
-      <img
-        className="hero-image-current"
-        src={currentImage.src}
-        srcSet={currentImage.srcSet}
-        sizes={heroImageSizes}
-        alt=""
-        width="1729"
-        height="910"
-        fetchPriority="high"
-        decoding="async"
-      />
-      {incomingImage && (
-        <img
-          className={`hero-image-incoming ${showIncoming ? 'hero-image-incoming-visible' : ''}`}
-          src={incomingImage.src}
-          srcSet={incomingImage.srcSet}
-          sizes={heroImageSizes}
-          alt=""
-          width="1729"
-          height="910"
-          decoding="async"
-        />
-      )}
-    </>
-  );
-}
-
-export function Hero({ theme }: HeroProps) {
+export function Hero() {
   const reduceMotion = useReducedMotion();
+  const { language } = useLanguage();
+  const content = heroContent[language];
   const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 28 },
     visible: { opacity: 1, y: 0 },
   };
 
   return (
-    <section id="inicio" className="hero-section">
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-glow hero-glow-one" aria-hidden="true" />
-      <div className="hero-glow hero-glow-two" aria-hidden="true" />
-      <div className="container-site relative z-10 grid min-h-screen items-center gap-10 pb-14 pt-32 lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)] lg:pb-20 lg:pt-36">
+    <section id="inicio" className="starfall-hero">
+      <StarfallBackground />
+      <div className="starfall-noise" aria-hidden="true" />
+      <div className="starfall-orbit starfall-orbit-one" aria-hidden="true" />
+      <div className="starfall-orbit starfall-orbit-two" aria-hidden="true" />
+
+      <div className="container-site starfall-hero-shell">
         <motion.div
-          className="relative z-20 max-w-3xl"
+          className="starfall-copy"
           initial={reduceMotion ? false : 'hidden'}
           animate="visible"
           variants={{
@@ -125,83 +73,68 @@ export function Hero({ theme }: HeroProps) {
             visible: { transition: { delayChildren: 0.12, staggerChildren: 0.09 } },
           }}
         >
-          <motion.div className="hero-badge" variants={itemVariants}>
-            <span className="relative flex size-2">
-              <span className="hero-pulse absolute inline-flex size-full animate-ping rounded-full bg-cyan-300 opacity-70" />
-              <span className="relative inline-flex size-2 rounded-full bg-cyan-300" />
-            </span>
-            Software com estratégia e direção
+          <motion.div className="starfall-badge" variants={itemVariants}>
+            <Sparkles aria-hidden="true" />
+            {content.badge}
           </motion.div>
 
-          <motion.h1 className="hero-title mt-7" variants={itemVariants}>
-            Ideias fortes.
-            <span className="block text-gradient">Produtos que avançam.</span>
+          <motion.h1 className="starfall-title" variants={itemVariants}>
+            {content.title}
+            <span>{content.highlight}</span>
           </motion.h1>
-          <motion.p className="hero-copy mt-6 max-w-2xl" variants={itemVariants}>
-            Criamos software, automações e experiências digitais sob medida para transformar desafios complexos em produtos claros,
-            rápidos e prontos para crescer.
-          </motion.p>
 
-          <motion.div className="mt-8 flex flex-col gap-3 sm:flex-row" variants={itemVariants}>
-            <Link to="/#contato" className="button-primary justify-center">
-              Falar sobre seu projeto
-              <ArrowRight className="size-4" aria-hidden="true" />
+          <motion.p className="starfall-description" variants={itemVariants}>{content.copy}</motion.p>
+
+          <motion.div className="starfall-actions" variants={itemVariants}>
+            <Link to="/#contato" className="starfall-button starfall-button-primary">
+              {content.primary}
+              <ArrowRight aria-hidden="true" />
             </Link>
-            <Link to="/projetos" className="button-secondary justify-center">
-              Conhecer projetos
-              <ArrowDownRight className="size-4" aria-hidden="true" />
+            <Link to="/Modelos" className="starfall-button starfall-button-secondary">
+              {content.secondary}
+              <ArrowDownRight aria-hidden="true" />
             </Link>
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="hero-visual"
-          aria-hidden="true"
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.97, x: 24 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+          className="starfall-capabilities"
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.75, delay: reduceMotion ? 0 : 0.48 }}
         >
-          <HeroArtwork theme={theme} />
-          <div className="hero-visual-frame">
-            <div className="visual-chip visual-chip-build">
-              <span><Braces /></span>
-              <div><small>BUILD</small><strong>Software sólido</strong></div>
-            </div>
-            <div className="visual-chip visual-chip-automate">
-              <span><Bot /></span>
-              <div><small>AUTOMATE</small><strong>Fluxos inteligentes</strong></div>
-            </div>
-            <div className="visual-chip visual-chip-scale">
-              <span><Network /></span>
-              <div><small>SCALE</small><strong>Sistemas conectados</strong></div>
-            </div>
-          </div>
+          {content.capabilities.map(([label, title], index) => {
+            const Icon = icons[index];
+            return (
+              <div className="starfall-capability" key={label}>
+                <span><Icon aria-hidden="true" /></span>
+                <div>
+                  <small>{label}</small>
+                  <strong>{title}</strong>
+                </div>
+              </div>
+            );
+          })}
         </motion.div>
 
         <motion.div
-          className="hero-metrics lg:col-span-2"
-          initial={reduceMotion ? false : 'hidden'}
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: 18 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { delayChildren: 0.36, staggerChildren: 0.08, duration: 0.5 },
-            },
-          }}
+          className="starfall-metrics"
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.65 }}
         >
-          {[
-            ['+20', 'Projetos desenvolvidos'],
-            ['24h', 'Tempo médio de resposta'],
-            ['100%', 'Soluções personalizadas'],
-          ].map(([value, label]) => (
-            <motion.div key={label} className="metric-item" variants={itemVariants}>
+          {content.metrics.map(([value, label]) => (
+            <div key={label}>
               <strong>{value}</strong>
               <span>{label}</span>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
+
+        <a href="#explorar" className="starfall-scroll">
+          <span>{content.scroll}</span>
+          <ArrowDownRight aria-hidden="true" />
+        </a>
       </div>
     </section>
   );

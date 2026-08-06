@@ -20,5 +20,5 @@ npm run build
 ## Conteúdo
 
 - Textos e dados do site: `src/data/site.ts`
-- Miniaturas dos projetos: `public/projects`
+- Miniaturas dos Modelos: `public/projects`
 - Materiais originais preservados: `site-content-reference`

@@ -4,7 +4,7 @@ import type { NavItem, ProcessStep, Project, Service } from '../types/site';
 export const navItems: NavItem[] = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Soluções', href: '/solucoes' },
-  { label: 'Projetos', href: '/projetos' },
+  { label: 'Modelos', href: '/Modelos' },
   { label: 'Processo', href: '/processo' },
   { label: 'Preços', href: '/precos' },
 ];
@@ -41,8 +41,8 @@ export const projects: Project[] = [
     name: 'NorthDev Auto Detailing',
     category: 'Experiência premium · Serviços',
     description: 'Landing page de alta conversão para um estúdio de estética automotiva, com direção visual imersiva e foco em agendamento.',
-    url: 'https://estetica-automotiva-two.vercel.app/',
-    image: '/projects/estetica-automotiva.webp',
+    url: 'https://estetica-automotiva2.vercel.app/',
+    image: '/projects/estetica-automotiva.png',
     imageWidth: 1265,
     imageHeight: 712,
     accent: 'cyan',
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     category: 'Catálogo digital · E-commerce',
     description: 'Vitrine mobile first para venda de iPhones, com catálogo organizado, experiência refinada e contato direto pelo WhatsApp.',
     url: 'https://mjemporium.vercel.app/',
-    image: '/projects/mj-emporium.webp',
+    image: '/projects/mj-emporium.png',
     imageWidth: 1265,
     imageHeight: 712,
     accent: 'blue',
@@ -80,7 +80,7 @@ export const projects: Project[] = [
   {
     name: 'Estúdio Lume',
     category: 'Landing page · Arquitetura e interiores',
-    description: 'Site institucional para um estúdio de arquitetura autoral, com apresentação imersiva de projetos, transformações e áreas de atuação.',
+    description: 'Site institucional para um estúdio de arquitetura autoral, com apresentação imersiva de Modelos, transformações e áreas de atuação.',
     url: 'https://estudiolume.vercel.app/',
     image: '/projects/estudio-lume.webp',
     imageWidth: 1280,

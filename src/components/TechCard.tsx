@@ -18,7 +18,8 @@ export function TechCard({ children, accent = 'blue', className = '', revealDela
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16 }}
       transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : revealDelay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={reduceMotion ? undefined : { y: -6, scale: 1.005, transition: { duration: 0.22, delay: 0 } }}
+      whileHover={reduceMotion ? undefined : { y: -8, scale: 1.008, transition: { type: 'spring', stiffness: 360, damping: 26, mass: 0.55, delay: 0 } }}
+      whileTap={reduceMotion ? undefined : { scale: 0.995 }}
       {...props}
     >
       <span className="circuit-trace circuit-trace-top" aria-hidden="true" />

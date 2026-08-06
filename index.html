@@ -9,13 +9,13 @@
     <meta property="og:description" content="Produtos digitais, automações e SaaS sob medida." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://northdevsolution.vercel.app/" />
-    <meta property="og:image" content="https://northdevsolution.vercel.app/og-cover.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image" content="https://northdevsolution.vercel.app/og.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Logotipo da North Dev" />
+    <meta property="og:image:alt" content="North Dev — Ideias fortes. Produtos que avançam." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://northdevsolution.vercel.app/og-cover.jpg" />
+    <meta name="twitter:image" content="https://northdevsolution.vercel.app/og.png" />
     <link rel="canonical" href="https://northdevsolution.vercel.app/" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
@@ -27,20 +27,7 @@
 
         document.documentElement.classList.toggle('dark', dark);
         document.documentElement.style.colorScheme = theme;
-        document.getElementById('theme-color')?.setAttribute('content', dark ? '#05070c' : '#edf3fa');
-
-        if (window.location.pathname === '/') {
-          const imageBase = `/images/northdev-system-core-${theme}`;
-          const preload = document.createElement('link');
-          preload.rel = 'preload';
-          preload.as = 'image';
-          preload.type = 'image/webp';
-          preload.href = `${imageBase}-1024.webp`;
-          preload.setAttribute('fetchpriority', 'high');
-          preload.setAttribute('imagesrcset', `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}-1729.webp 1729w`);
-          preload.setAttribute('imagesizes', '(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw - 3.5rem), 54vw');
-          document.head.appendChild(preload);
-        }
+        document.getElementById('theme-color')?.setAttribute('content', dark ? '#05070c' : '#ffffff');
       })();
     </script>
     <title>North Dev — Software com direção</title>

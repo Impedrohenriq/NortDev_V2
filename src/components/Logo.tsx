@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type LogoProps = {
   className?: string;
 };
 
 export function Logo({ className = '' }: LogoProps) {
+  const { language } = useLanguage();
+
   return (
-    <Link to="/#inicio" className={`inline-flex items-center gap-2.5 ${className}`} aria-label="North Dev — página inicial">
+    <Link
+      to="/#inicio"
+      className={`inline-flex items-center gap-2.5 ${className}`}
+      aria-label={language === 'pt' ? 'North Dev — página inicial' : 'North Dev — home page'}
+    >
       <img
         src="/northdev-logo.jpg"
         alt=""
