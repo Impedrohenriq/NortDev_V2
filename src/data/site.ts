@@ -58,7 +58,7 @@ export const projects: Project[] = [
     accent: 'blue',
   },
   {
-    name: 'Bendito Bolo',
+    name: 'Bolo & Champagne',
     category: 'Portfólio autoral · Gastronomia',
     description: 'Site institucional para confeitaria artesanal, construído para apresentar criações autorais e facilitar novas encomendas.',
     url: 'https://benditobolodecoracao.vercel.app/',
