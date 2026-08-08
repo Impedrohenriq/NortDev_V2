@@ -107,16 +107,6 @@ export const projects: Project[] = [
     imageHeight: 712,
     accent: 'cyan',
   },
-  {
-    name: 'Estúdio Lume',
-    category: 'Landing page · Arquitetura e interiores',
-    description: 'Site institucional para um estúdio de arquitetura autoral, com apresentação imersiva de Modelos, transformações e áreas de atuação.',
-    url: 'https://estudiolume.vercel.app/',
-    image: '/projects/estudio-lume.webp',
-    imageWidth: 1280,
-    imageHeight: 768,
-    accent: 'cyan',
-  },
 ];
 
 export const processSteps: ProcessStep[] = [

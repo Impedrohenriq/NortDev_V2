@@ -16,7 +16,6 @@ export function Projects() {
     ['Institutional template · Beauty and wellness', 'A premium template for beauty clinics to present treatments, convey care and guide new clients toward booking.'],
     ['Digital catalog · E-commerce', 'A mobile-first iPhone storefront with an organized catalog, refined experience and direct WhatsApp contact.'],
     ['Author portfolio · Food', 'An institutional website for an artisan bakery, designed to showcase original creations and simplify new orders.'],
-    ['Landing page · Architecture and interiors', 'An immersive institutional website for an architecture studio, presenting projects, transformations and areas of expertise.'],
   ];
 
   return (
