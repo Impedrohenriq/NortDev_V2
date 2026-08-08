@@ -9,10 +9,13 @@ export function Projects() {
   const reduceMotion = useReducedMotion();
   const { language } = useLanguage();
   const englishProjects = [
+    ['Institutional template · Technology', 'A professional website template with editorial storytelling, a modular structure and clear presentation of services, projects and differentiators.'],
     ['Premium experience · Services', 'A high-conversion landing page for an auto detailing studio, with immersive visual direction and a focus on bookings.'],
+    ['Institutional template · Real estate', 'A premium template for real estate agencies to present exclusive properties, curation services and a personalized client experience.'],
+    ['Institutional template · Dentistry', 'A sophisticated template for dental clinics to present specialties, differentiators and guide new patients toward booking.'],
+    ['Institutional template · Beauty and wellness', 'A premium template for beauty clinics to present treatments, convey care and guide new clients toward booking.'],
     ['Digital catalog · E-commerce', 'A mobile-first iPhone storefront with an organized catalog, refined experience and direct WhatsApp contact.'],
     ['Author portfolio · Food', 'An institutional website for an artisan bakery, designed to showcase original creations and simplify new orders.'],
-    ['Landing page · Beauty and wellness', 'A premium institutional experience that presents aesthetic treatments, conveys care and directs WhatsApp bookings.'],
     ['Landing page · Architecture and interiors', 'An immersive institutional website for an architecture studio, presenting projects, transformations and areas of expertise.'],
   ];
 
