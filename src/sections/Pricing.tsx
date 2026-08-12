@@ -14,7 +14,7 @@ const planDesign = [
 const planContent = {
   pt: [
     {
-      name: 'Landing Page', label: 'Presença essencial', price: 'R$ 300', monthly: 'Suporte de R$ 49 a R$ 99/mês',
+      name: 'Landing Page', label: 'Presença essencial', price: 'R$ 300', originalPrice: 'R$ 500', monthly: 'Suporte de R$ 49 a R$ 99/mês',
       description: 'Uma página moderna, rápida e responsiva para apresentar sua oferta e transformar visitantes em contatos.',
       value: 'Organiza sua comunicação, aumenta a credibilidade e cria um caminho direto para novos clientes.',
       audience: 'Profissionais, campanhas, lançamentos e pequenos negócios.',
@@ -22,7 +22,7 @@ const planContent = {
       cta: 'Quero uma landing page',
     },
     {
-      name: 'Site Completo', label: 'Autoridade digital', price: 'R$ 500', monthly: 'Suporte de R$ 79 a R$ 149/mês',
+      name: 'Site Completo', label: 'Autoridade digital', price: 'R$ 500', originalPrice: 'R$ 800', monthly: 'Suporte de R$ 79 a R$ 149/mês',
       description: 'Um site institucional com navegação estruturada para apresentar sua empresa, serviços e diferenciais.',
       value: 'Fortalece a marca, centraliza informações importantes e transmite mais confiança durante a decisão de compra.',
       audience: 'Empresas que precisam de presença profissional e mais espaço para comunicar seus serviços.',
@@ -30,7 +30,7 @@ const planContent = {
       cta: 'Quero um site completo',
     },
     {
-      name: 'Site + Chatbot com IA', label: 'Atendimento inteligente', price: 'R$ 800', monthly: 'R$ 150/mês',
+      name: 'Site + Chatbot com IA', label: 'Atendimento inteligente', price: 'R$ 800', originalPrice: 'R$ 1.200', monthly: 'R$ 150/mês',
       description: 'Site completo com um chatbot preparado para responder dúvidas, apresentar serviços e apoiar a captação de leads.',
       value: 'Mantém o negócio disponível por mais tempo, agiliza respostas e reduz tarefas repetitivas no atendimento.',
       audience: 'Negócios com volume frequente de dúvidas, contatos ou oportunidades comerciais.',
@@ -48,7 +48,7 @@ const planContent = {
   ],
   en: [
     {
-      name: 'Landing Page', label: 'Essential presence', price: 'R$ 300', monthly: 'Support from R$ 49 to R$ 99/month',
+      name: 'Landing Page', label: 'Essential presence', price: 'R$ 300', originalPrice: 'R$ 500', monthly: 'Support from R$ 49 to R$ 99/month',
       description: 'A modern, fast and responsive page to present your offer and turn visitors into contacts.',
       value: 'Organizes your communication, increases credibility and creates a direct path to new customers.',
       audience: 'Professionals, campaigns, launches and small businesses.',
@@ -56,7 +56,7 @@ const planContent = {
       cta: 'I want a landing page',
     },
     {
-      name: 'Complete Website', label: 'Digital authority', price: 'R$ 500', monthly: 'Support from R$ 79 to R$ 149/month',
+      name: 'Complete Website', label: 'Digital authority', price: 'R$ 500', originalPrice: 'R$ 800', monthly: 'Support from R$ 79 to R$ 149/month',
       description: 'An institutional website with structured navigation to present your company, services and differentiators.',
       value: 'Strengthens the brand, centralizes important information and builds trust during purchase decisions.',
       audience: 'Companies that need a professional presence and more space to communicate their services.',
@@ -64,7 +64,7 @@ const planContent = {
       cta: 'I want a complete website',
     },
     {
-      name: 'Website + AI Chatbot', label: 'Smart service', price: 'R$ 800', monthly: 'R$ 150/month',
+      name: 'Website + AI Chatbot', label: 'Smart service', price: 'R$ 800', originalPrice: 'R$ 1,200', monthly: 'R$ 150/month',
       description: 'A complete website with a chatbot prepared to answer questions, present services and support lead generation.',
       value: 'Keeps the business available longer, speeds up responses and reduces repetitive service tasks.',
       audience: 'Businesses with a frequent volume of questions, contacts or sales opportunities.',
@@ -115,7 +115,22 @@ export function Pricing() {
 
                 <p className="pricing-label">{plan.label}</p>
                 <h3 className="pricing-name">{plan.name}</h3>
-                <p className="pricing-price"><span>{language === 'pt' ? 'A partir de' : 'Starting at'}</span>{plan.price}</p>
+                {'originalPrice' in plan && plan.originalPrice ? (
+                  <div className="pricing-promo">
+                    <div className="pricing-promo-head">
+                      <span className="pricing-promo-badge">{language === 'pt' ? 'PROMOÇÃO' : 'PROMO'}</span>
+                      <span className="pricing-promo-from">
+                        {language === 'pt' ? 'de ' : 'from '}
+                        <s>{plan.originalPrice}</s>
+                        {language === 'pt' ? ' por' : ' to'}
+                      </span>
+                    </div>
+                    <p className="pricing-price pricing-price-promo">{plan.price}</p>
+                    <p className="pricing-promo-note">{language === 'pt' ? 'à vista no Pix' : 'via Pix'} <strong>{plan.price}</strong></p>
+                  </div>
+                ) : (
+                  <p className="pricing-price"><span>{language === 'pt' ? 'A partir de' : 'Starting at'}</span>{plan.price}</p>
+                )}
                 <p className="pricing-monthly">{plan.monthly}</p>
                 <p className="pricing-description">{plan.description}</p>
 

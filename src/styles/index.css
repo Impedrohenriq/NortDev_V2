@@ -1621,3 +1621,69 @@ html:not(.dark) .logo-marquee-item { background: rgba(248, 250, 252, .78); }
 .mobile-accordion-toggle[aria-expanded="true"] svg {
   transform: rotate(180deg);
 }
+
+.pricing-promo {
+  --promo-accent: #16a34a;
+  --promo-accent-strong: #15803d;
+  --promo-accent-soft: color-mix(in srgb, #22c55e 18%, transparent);
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.dark .pricing-promo {
+  --promo-accent: #4ade80;
+  --promo-accent-strong: #22c55e;
+  --promo-accent-soft: color-mix(in srgb, #22c55e 22%, transparent);
+}
+
+.pricing-promo-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans, inherit);
+}
+
+.pricing-promo-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--promo-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--promo-accent) 60%, transparent);
+}
+
+.pricing-promo-from {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.pricing-promo-from s {
+  color: color-mix(in srgb, var(--muted) 75%, transparent);
+  text-decoration-thickness: 2px;
+  margin: 0 0.2rem;
+}
+
+.pricing-price-promo {
+  margin-top: 0.1rem;
+  color: var(--promo-accent);
+}
+
+.pricing-promo-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.pricing-promo-note strong {
+  color: var(--heading);
+  font-weight: 700;
+  margin-left: 0.15rem;
+}
