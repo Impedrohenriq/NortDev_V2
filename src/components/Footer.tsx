@@ -3,8 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { company, navItems } from '../data/site';
+import { scrollToPageTarget } from '../hooks/useSmoothScroll';
 import { useLanguage } from '../i18n/LanguageContext';
 import { InfiniteLogoMarquee } from './InfiniteLogoMarquee';
 import { Logo } from './Logo';
@@ -20,6 +21,8 @@ type MagneticActionProps = {
 
 function MagneticAction({ href, label, children, external = false }: MagneticActionProps) {
   const actionRef = useRef<HTMLAnchorElement>(null);
+  const navigate = useNavigate();
+  const isInternal = !external && href.startsWith('/');
 
   const handleMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -36,6 +39,23 @@ function MagneticAction({ href, label, children, external = false }: MagneticAct
     gsap.to(actionRef.current, { x: 0, y: 0, duration: 0.72, ease: 'elastic.out(1, 0.38)', overwrite: true });
   };
 
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!isInternal) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+    event.preventDefault();
+    const [pathname, hash] = href.split('#');
+    if (pathname === window.location.pathname) {
+      if (hash) {
+        const target = document.getElementById(hash);
+        if (target) scrollToPageTarget(target, { offset: -88, lerp: 0.1 });
+        return;
+      }
+      scrollToPageTarget(0);
+      return;
+    }
+    navigate(href);
+  };
+
   return (
     <a
       ref={actionRef}
@@ -46,6 +66,7 @@ function MagneticAction({ href, label, children, external = false }: MagneticAct
       rel={external ? 'noreferrer' : undefined}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <span>{children}</span>
       <ArrowUpRight aria-hidden="true" />
@@ -66,7 +87,7 @@ export function Footer({ refreshKey }: FooterProps) {
   const labels: Record<string, string> = {
     '/sobre': 'About',
     '/solucoes': 'Solutions',
-    '/Modelos': 'Projects',
+    '/modelos': 'Projects',
     '/processo': 'Process',
     '/precos': 'Pricing',
   };

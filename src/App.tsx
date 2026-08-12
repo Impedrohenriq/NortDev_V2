@@ -15,6 +15,9 @@ const HomePage = lazy(() => import('./pages/HomePage').then((module) => ({ defau
 const AboutPage = lazy(() => import('./pages/AboutPage').then((module) => ({ default: module.AboutPage })));
 const ServicesPage = lazy(() => import('./pages/ServicesPage').then((module) => ({ default: module.ServicesPage })));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((module) => ({ default: module.ProjectsPage })));
+const LandingPagesPage = lazy(() => import('./pages/LandingPagesPage').then((module) => ({ default: module.LandingPagesPage })));
+const SitesPage = lazy(() => import('./pages/SitesPage').then((module) => ({ default: module.SitesPage })));
+const ChatbotsPage = lazy(() => import('./pages/ChatbotsPage').then((module) => ({ default: module.ChatbotsPage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then((module) => ({ default: module.PricingPage })));
 const ProcessPage = lazy(() => import('./pages/ProcessPage').then((module) => ({ default: module.ProcessPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
@@ -24,7 +27,10 @@ const routeMetadata = {
     '/': ['North Dev — Software com direção', 'Software, automações e produtos digitais sob medida para negócios que querem avançar com clareza.'],
     '/sobre': ['Sobre | North Dev', 'Conheça a North Dev e nossa forma de conectar engenharia, produto e objetivos de negócio.'],
     '/solucoes': ['Soluções | North Dev', 'Desenvolvimento, automações, SaaS sob medida e evolução de produtos digitais.'],
-    '/Modelos': ['Modelos | North Dev', 'Conheça Modelos e experiências digitais desenvolvidos pela North Dev.'],
+    '/modelos': ['Modelos | North Dev', 'Conheça Modelos e experiências digitais desenvolvidos pela North Dev.'],
+    '/projetos/landing-pages': ['Landing Pages | North Dev', 'Landing pages de alta conversão para transformar tráfego pago em oportunidades reais de venda.'],
+    '/projetos/sites': ['Sites Institucionais | North Dev', 'Sites institucionais que constroem autoridade, credibilidade e presença digital duradoura.'],
+    '/projetos/chatbots': ['Chatbots com IA | North Dev', 'Agentes de vendas com IA que atendem, qualificam e vendem 24/7 pelo WhatsApp e outros canais.'],
     '/precos': ['Preços | North Dev', 'Conheça os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.'],
     '/processo': ['Processo | North Dev', 'Entenda como a North Dev conduz Modelos da descoberta à entrega e evolução.'],
   },
@@ -32,7 +38,10 @@ const routeMetadata = {
     '/': ['North Dev — Software with direction', 'Custom software, automation and digital products for businesses ready to move forward with clarity.'],
     '/sobre': ['About | North Dev', 'Meet North Dev and the way we connect engineering, product and business goals.'],
     '/solucoes': ['Solutions | North Dev', 'Development, automation, custom SaaS and digital product evolution.'],
-    '/Modelos': ['Projects | North Dev', 'Explore digital experiences developed by North Dev.'],
+    '/modelos': ['Projects | North Dev', 'Explore digital experiences developed by North Dev.'],
+    '/projetos/landing-pages': ['Landing Pages | North Dev', 'High-conversion landing pages that turn paid traffic into real sales opportunities.'],
+    '/projetos/sites': ['Institutional Websites | North Dev', 'Institutional websites that build authority, credibility and lasting digital presence.'],
+    '/projetos/chatbots': ['AI Chatbots | North Dev', 'AI sales agents that respond, qualify and sell 24/7 on WhatsApp and other channels.'],
     '/precos': ['Pricing | North Dev', 'Explore North Dev plans for landing pages, complete websites, AI chatbots and SaaS products.'],
     '/processo': ['Process | North Dev', 'See how North Dev leads projects from discovery to delivery and evolution.'],
   },
@@ -87,7 +96,11 @@ function Site() {
   const { language } = useLanguage();
   const location = useLocation();
   const reduceMotion = useReducedMotion();
-  const pageTheme = location.pathname === '/' ? 'home' : location.pathname.slice(1);
+  const pageTheme = location.pathname === '/'
+    ? 'home'
+    : location.pathname.startsWith('/projetos/')
+      ? 'modelos'
+      : location.pathname.slice(1);
   const [activePageTheme, setActivePageTheme] = useState(pageTheme);
   const [footerLayoutVersion, setFooterLayoutVersion] = useState(0);
 
@@ -126,7 +139,10 @@ function Site() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/sobre" element={<AboutPage />} />
                 <Route path="/solucoes" element={<ServicesPage />} />
-                <Route path="/Modelos" element={<ProjectsPage />} />
+                <Route path="/modelos" element={<ProjectsPage />} />
+                <Route path="/projetos/landing-pages" element={<LandingPagesPage />} />
+                <Route path="/projetos/sites" element={<SitesPage />} />
+                <Route path="/projetos/chatbots" element={<ChatbotsPage />} />
                 <Route path="/precos" element={<PricingPage />} />
                 <Route path="/processo" element={<ProcessPage />} />
                 <Route path="*" element={<NotFoundPage />} />

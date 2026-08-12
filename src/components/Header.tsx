@@ -1,11 +1,12 @@
-import { Menu, X } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import type { MouseEvent as ReactMouseEvent } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import type { MouseEvent as ReactMouseEvent, RefObject } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { navItems } from '../data/site';
 import type { Theme } from '../hooks/useTheme';
 import { Logo } from './Logo';
+import { NavDropdown } from './NavDropdown';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageToggle } from './LanguageToggle';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -15,13 +16,23 @@ type HeaderProps = {
   onToggleTheme: () => void;
 };
 
+const englishLabels: Record<string, string> = {
+  '/sobre': 'About',
+  '/solucoes': 'Solutions',
+  '/modelos': 'Projects',
+  '/processo': 'Process',
+  '/precos': 'Pricing',
+};
+
 export function Header({ theme, onToggleTheme }: HeaderProps) {
   const { language } = useLanguage();
+  const location = useLocation();
   const reduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  const firstMobileLinkRef = useRef<HTMLElement | null>(null);
   const shouldFocusMenuRef = useRef(false);
 
   useEffect(() => {
@@ -47,6 +58,11 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    setIsOpen(false);
+    setExpandedMobile(null);
+  }, [location.pathname]);
+
   const handleMenuToggle = (event: ReactMouseEvent<HTMLButtonElement>) => {
     shouldFocusMenuRef.current = event.detail === 0;
     setIsOpen((open) => !open);
@@ -59,6 +75,8 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const closeMobile = () => setIsOpen(false);
+
   return (
     <motion.header
       className={`site-header ${isScrolled ? 'site-header-scrolled' : ''} ${isOpen ? 'site-header-menu-open' : ''}`}
@@ -70,21 +88,20 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         <Logo />
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
-          {navItems.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
-            >
-              {language === 'pt' ? item.label : {
-                '/sobre': 'About',
-                '/solucoes': 'Solutions',
-                '/Modelos': 'Projects',
-                '/processo': 'Process',
-                '/precos': 'Pricing',
-              }[item.href]}
-            </NavLink>
-          ))}
+          {navItems.map((item) => {
+            if (item.children && item.children.length > 0) {
+              return <NavDropdown key={item.href} item={item} />;
+            }
+            return (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
+              >
+                {language === 'pt' ? item.label : englishLabels[item.href] ?? item.label}
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -111,24 +128,71 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
       {isOpen && (
         <div id="mobile-navigation" className="mobile-menu mobile-menu-open mx-auto max-w-7xl">
           <nav className="grid gap-1 p-3" aria-label={language === 'pt' ? 'Navegação mobile' : 'Mobile navigation'}>
-            {navItems.map((item, index) => (
-              <NavLink
-                ref={index === 0 ? firstMobileLinkRef : undefined}
-                key={item.href}
-                to={item.href}
-                className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
-                onClick={() => setIsOpen(false)}
-              >
-                {language === 'pt' ? item.label : {
-                  '/sobre': 'About',
-                  '/solucoes': 'Solutions',
-                  '/Modelos': 'Projects',
-                  '/processo': 'Process',
-                  '/precos': 'Pricing',
-                }[item.href]}
-              </NavLink>
-            ))}
-            <Link to="/#contato" className="button-primary mt-2 justify-center sm:hidden" onClick={() => setIsOpen(false)}>
+            {navItems.map((item, index) => {
+              if (item.children && item.children.length > 0) {
+                const expanded = expandedMobile === item.href;
+                return (
+                  <div key={item.href}>
+                    <button
+                      ref={index === 0 ? (firstMobileLinkRef as RefObject<HTMLButtonElement>) : undefined}
+                      type="button"
+                      className="mobile-accordion-toggle"
+                      aria-expanded={expanded}
+                      aria-controls={`mobile-submenu-${item.href}`}
+                      onClick={() => setExpandedMobile(expanded ? null : item.href)}
+                    >
+                      <span>{language === 'pt' ? item.label : englishLabels[item.href] ?? item.label}</span>
+                      <ChevronDown className="size-4" aria-hidden="true" />
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {expanded && (
+                        <motion.div
+                          key="submenu"
+                          id={`mobile-submenu-${item.href}`}
+                          initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
+                          transition={{ duration: reduceMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <div className="mobile-submenu">
+                            <NavLink
+                              to={item.href}
+                              className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
+                              onClick={closeMobile}
+                            >
+                              {language === 'pt' ? 'Visão geral' : 'Overview'}
+                            </NavLink>
+                            {item.children.map((child) => (
+                              <NavLink
+                                key={child.href}
+                                to={child.href}
+                                className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
+                                onClick={closeMobile}
+                              >
+                                {language === 'pt' ? child.label : child.labelEn}
+                              </NavLink>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+              return (
+                <NavLink
+                  ref={index === 0 ? (firstMobileLinkRef as RefObject<HTMLAnchorElement>) : undefined}
+                  key={item.href}
+                  to={item.href}
+                  className={({ isActive }) => `mobile-link ${isActive ? 'mobile-link-active' : ''}`}
+                  onClick={closeMobile}
+                >
+                  {language === 'pt' ? item.label : englishLabels[item.href] ?? item.label}
+                </NavLink>
+              );
+            })}
+            <Link to="/#contato" className="button-primary mt-2 justify-center sm:hidden" onClick={closeMobile}>
               {language === 'pt' ? 'Iniciar projeto' : 'Start a project'}
             </Link>
           </nav>

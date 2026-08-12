@@ -8,7 +8,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 const pageDescriptions: Record<string, string> = {
   '/sobre': 'Conheça a forma como conectamos engenharia, produto e objetivos de negócio.',
   '/solucoes': 'Explore software, automações, SaaS e evolução de produtos digitais.',
-  '/Modelos': 'Veja experiências digitais desenvolvidas para diferentes mercados e objetivos.',
+  '/modelos': 'Veja experiências digitais desenvolvidas para diferentes mercados e objetivos.',
   '/processo': 'Entenda as etapas que conduzem cada projeto da descoberta à evolução.',
   '/precos': 'Confira os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.',
 };
@@ -18,14 +18,14 @@ export function HomeOverview() {
   const descriptions = language === 'pt' ? pageDescriptions : {
     '/sobre': 'See how we connect engineering, product and business goals.',
     '/solucoes': 'Explore software, automation, SaaS and digital product evolution.',
-    '/Modelos': 'See digital experiences created for different markets and goals.',
+    '/modelos': 'See digital experiences created for different markets and goals.',
     '/processo': 'Understand the stages that lead each project from discovery to evolution.',
     '/precos': 'See North Dev plans for landing pages, full websites, AI chatbots and SaaS products.',
   };
   const labels: Record<string, string> = {
     '/sobre': 'About',
     '/solucoes': 'Solutions',
-    '/Modelos': 'Projects',
+    '/modelos': 'Projects',
     '/processo': 'Process',
     '/precos': 'Pricing',
   };

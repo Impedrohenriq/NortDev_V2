@@ -90,7 +90,7 @@ export function Hero() {
               {content.primary}
               <ArrowRight aria-hidden="true" />
             </Link>
-            <Link to="/Modelos" className="starfall-button starfall-button-secondary">
+            <Link to="/modelos" className="starfall-button starfall-button-secondary">
               {content.secondary}
               <ArrowDownRight aria-hidden="true" />
             </Link>
