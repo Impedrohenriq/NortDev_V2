@@ -5,16 +5,22 @@ export type Theme = 'dark' | 'light';
 const storageKey = 'northdev-theme';
 
 function getInitialTheme(): Theme {
-  const stored = localStorage.getItem(storageKey) as Theme | null;
+  if (typeof window === 'undefined') return 'light';
+
+  const stored = window.localStorage.getItem(storageKey) as Theme | null;
   if (stored === 'dark' || stored === 'light') return stored;
-  return 'dark';
+
+  return 'light';
 }
 
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle('dark', theme === 'dark');
   document.documentElement.style.colorScheme = theme;
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#05070c' : '#ffffff');
-  localStorage.setItem(storageKey, theme);
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(storageKey, theme);
+  }
 }
 
 export function useTheme() {
