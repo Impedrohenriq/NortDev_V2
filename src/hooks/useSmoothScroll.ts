@@ -26,7 +26,7 @@ export function useSmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
       autoRaf: false,
-      smoothWheel: true,
+      smoothWheel: false,
       syncTouch: false,
       lerp: 0.09,
       wheelMultiplier: 0.9,

@@ -112,10 +112,13 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
     const mesh = new THREE.Mesh(geometry, material);
     let animationFrame = 0;
     let lastTime = performance.now();
+    let lastFrameTime = lastTime;
+    const frameInterval = 1000 / 30;
     let isVisible = true;
 
     scene.add(mesh);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    // The soft background needs no high-density rendering.
+    renderer.setPixelRatio(1);
     renderer.domElement.setAttribute('aria-hidden', 'true');
     mount.appendChild(renderer.domElement);
 
@@ -135,19 +138,24 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
     const themeObserver = new MutationObserver(syncTheme);
 
     const render = (now: number) => {
-      if (!isVisible) {
+      if (!isVisible || document.hidden) {
         animationFrame = 0;
         return;
       }
-      material.uniforms.iTime.value += Math.min((now - lastTime) / 1000, 0.05);
-      lastTime = now;
-      renderer.render(scene, camera);
+      const elapsed = now - lastFrameTime;
+      if (elapsed >= frameInterval) {
+        material.uniforms.iTime.value += Math.min((now - lastTime) / 1000, 0.1);
+        lastTime = now;
+        lastFrameTime = now - (elapsed % frameInterval);
+        renderer.render(scene, camera);
+      }
       animationFrame = window.requestAnimationFrame(render);
     };
 
     const startRendering = () => {
-      if (reduceMotion || animationFrame || !isVisible) return;
+      if (reduceMotion || animationFrame || !isVisible || document.hidden) return;
       lastTime = performance.now();
+      lastFrameTime = lastTime;
       animationFrame = window.requestAnimationFrame(render);
     };
 
@@ -165,8 +173,18 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
       { rootMargin: '120px 0px' },
     );
 
+    const syncVisibility = () => {
+      if (document.hidden) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      } else {
+        startRendering();
+      }
+    };
+
     resize();
     window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', syncVisibility);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     visibilityObserver.observe(mount);
     if (reduceMotion) renderer.render(scene, camera);
@@ -175,6 +193,7 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
     return () => {
       window.cancelAnimationFrame(animationFrame);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', syncVisibility);
       themeObserver.disconnect();
       visibilityObserver.disconnect();
       mesh.removeFromParent();

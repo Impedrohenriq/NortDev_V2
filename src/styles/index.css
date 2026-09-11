@@ -916,14 +916,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   background-image:
     radial-gradient(circle at 8% 40%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 28rem),
     radial-gradient(circle at 94% 68%, color-mix(in srgb, var(--violet) 4%, transparent), transparent 30rem);
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="modelos"], [data-page="processo"], [data-page="precos"]) .tech-card,
 .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="modelos"], [data-page="processo"], [data-page="precos"]) .about-panel,
 .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="modelos"], [data-page="processo"], [data-page="precos"]) .project-card {
   border-radius: 1.75rem;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(8px);
 }
 
 .theme-root:is([data-page="sobre"], [data-page="solucoes"], [data-page="modelos"], [data-page="processo"], [data-page="precos"]) .tech-card::after {
@@ -1123,7 +1123,7 @@ html:not(.dark) .contact-panel::before { background: rgba(53, 111, 229, .10); }
     radial-gradient(circle at 86% 82%, color-mix(in srgb, var(--violet) 10%, transparent), transparent 32rem),
     color-mix(in srgb, var(--surface) 96%, transparent);
   box-shadow: 0 32px 100px color-mix(in srgb, var(--accent) 9%, rgba(0, 0, 0, .28));
-  will-change: transform, clip-path;
+  will-change: transform;
 }
 
 .motion-footer-content { @apply relative z-10 pb-5 pt-16 sm:pt-20; }

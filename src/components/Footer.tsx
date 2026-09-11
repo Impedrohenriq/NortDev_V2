@@ -111,10 +111,9 @@ export function Footer({ refreshKey }: FooterProps) {
     const context = gsap.context(() => {
       gsap.fromTo(
         panel,
-        { y: 130, clipPath: 'inset(16% 0 0 0 round 2.5rem)' },
+        { y: 130 },
         {
           y: 0,
-          clipPath: 'inset(0% 0 0 0 round 2.5rem)',
           ease: 'none',
           scrollTrigger: {
             trigger: footer,
