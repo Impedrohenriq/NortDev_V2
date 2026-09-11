@@ -43,13 +43,13 @@ const hubCards = [
     accent: 'violet' as const,
     pt: {
       eyebrow: '03 · Automação',
-      title: 'Chatbots com IA',
-      description: 'Agentes de vendas que trabalham 24/7, respondem, qualificam leads e liberam seu tempo para o que importa.',
+      title: 'Gestão Inteligente',
+      description: 'Plataforma completa para organizar a operação, conquistar clientes e aumentar as vendas.',
     },
     en: {
       eyebrow: '03 · Automation',
-      title: 'AI Chatbots',
-      description: 'Sales agents that work 24/7, respond, qualify leads and free your time for what matters.',
+      title: 'Intelligent Management',
+      description: 'A complete platform to organize operations, win customers and increase sales.',
     },
   },
 ];

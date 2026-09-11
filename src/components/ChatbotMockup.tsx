@@ -10,16 +10,16 @@ type ChatMessage = {
 
 const conversations: Record<'pt' | 'en', ChatMessage[]> = {
   pt: [
-    { role: 'user', text: 'Olá! Vocês fazem site com integração de WhatsApp?' },
-    { role: 'bot', text: 'Olá! Fazemos sim 👋 Posso te enviar um material com valores, prazos e o que está incluído?' },
-    { role: 'user', text: 'Pode sim, aguardo.' },
-    { role: 'bot', text: 'Perfeito 🚀 Qual o melhor horário para nossa equipe te ligar hoje?' },
+    { role: 'user', text: 'Quero organizar melhor minha operação e vender mais.' },
+    { role: 'bot', text: 'Vamos começar 👋 Posso mostrar como a plataforma conecta atendimento, vendas e tarefas?' },
+    { role: 'user', text: 'Pode sim, quero entender.' },
+    { role: 'bot', text: 'Perfeito 🚀 A IA identifica oportunidades e sua equipe acompanha tudo em um só lugar.' },
   ],
   en: [
-    { role: 'user', text: 'Hi! Do you build websites with WhatsApp integration?' },
-    { role: 'bot', text: 'Hi! We do 👋 May I send you a package with prices, timelines and what is included?' },
-    { role: 'user', text: 'Sure, go ahead.' },
-    { role: 'bot', text: 'Perfect 🚀 What is the best time for our team to call you today?' },
+    { role: 'user', text: 'I want to organize my operation and sell more.' },
+    { role: 'bot', text: 'Let’s get started 👋 Can I show how the platform connects service, sales and tasks?' },
+    { role: 'user', text: 'Yes, I want to understand.' },
+    { role: 'bot', text: 'Perfect 🚀 AI identifies opportunities while your team tracks everything in one place.' },
   ],
 };
 
@@ -92,7 +92,7 @@ export function ChatbotMockup() {
         <div className="chatbot-mockup-header">
           <div className="chatbot-mockup-avatar"><Bot aria-hidden="true" /></div>
           <div>
-            <strong>North Dev · Agente</strong>
+            <strong>North Dev · Plataforma</strong>
             <span>
               <i /> {language === 'pt' ? 'Online agora' : 'Online now'}
             </span>

@@ -9,31 +9,31 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const capabilities = {
   pt: [
-    { icon: Clock, title: '24/7 sem cansar', description: 'Enquanto você opera ou descansa, o agente segue respondendo, qualificando e coletando o que interessa.' },
-    { icon: MessagesSquare, title: 'Conversas naturais', description: 'Treinado com o vocabulário e as ofertas do seu negócio, responde no tom certo e mantém a jornada humana.' },
-    { icon: ShieldCheck, title: 'Regras claras', description: 'Você define o que ele pode fazer, para onde escalar humano e como registrar cada conversa.' },
-    { icon: Sparkles, title: 'Integrado ao restante', description: 'Se conecta a WhatsApp, formulários, CRM e planilhas — o lead cai direto onde o time trabalha.' },
+    { icon: Clock, title: 'Operação mais organizada', description: 'Centralize atendimento, tarefas, agenda e informações importantes para sua equipe trabalhar com mais clareza.' },
+    { icon: MessagesSquare, title: 'Atendimento que gera oportunidades', description: 'Converse com seus clientes pelo WhatsApp, entenda cada necessidade e transforme interações em próximos passos.' },
+    { icon: ShieldCheck, title: 'Decisões com contexto', description: 'Tenha uma visão completa do relacionamento, do funil e das atividades para agir no momento certo.' },
+    { icon: Sparkles, title: 'Inteligência em toda a jornada', description: 'A IA automatiza processos, qualifica oportunidades e apoia sua equipe desde a prospecção até a venda.' },
   ],
   en: [
-    { icon: Clock, title: '24/7 without tiring', description: 'While you operate or rest, the agent keeps replying, qualifying and collecting what matters.' },
-    { icon: MessagesSquare, title: 'Natural conversation', description: 'Trained on your business vocabulary and offers, it replies in the right tone and keeps the journey human.' },
-    { icon: ShieldCheck, title: 'Clear rules', description: 'You define what it can do, when to escalate to a human, and how each conversation is recorded.' },
-    { icon: Sparkles, title: 'Fits into the stack', description: 'Connects with WhatsApp, forms, CRM and spreadsheets — leads land where your team already works.' },
+    { icon: Clock, title: 'A more organized operation', description: 'Centralize service, tasks, calendar and important information so your team can work with more clarity.' },
+    { icon: MessagesSquare, title: 'Service that creates opportunities', description: 'Talk to customers on WhatsApp, understand each need and turn interactions into clear next steps.' },
+    { icon: ShieldCheck, title: 'Context for better decisions', description: 'Get a complete view of relationships, the sales funnel and activities so you can act at the right time.' },
+    { icon: Sparkles, title: 'Intelligence across the journey', description: 'AI automates processes, qualifies opportunities and supports your team from prospecting to closing.' },
   ],
 };
 
 export function ChatbotsPage() {
   const { language } = useLanguage();
   const intro = language === 'pt' ? {
-    eyebrow: 'Chatbots com IA',
-    title: 'Um agente de vendas que trabalha',
-    highlight: 'enquanto você respira.',
-    description: 'Agentes de vendas que atendem, qualificam e vendem 24/7, liberando seu tempo para gerenciar e produzir dentro do seu negócio.',
+    eyebrow: 'Gestão inteligente',
+    title: 'Gestão Inteligente para sua',
+    highlight: 'Empresa.',
+    description: 'Uma plataforma completa para organizar sua operação, conquistar novos clientes e aumentar suas vendas.',
   } : {
-    eyebrow: 'AI Chatbots',
-    title: 'A sales agent that works',
-    highlight: 'while you breathe.',
-    description: 'Sales agents that respond, qualify and sell 24/7, freeing your time to manage and produce inside your business.',
+    eyebrow: 'Intelligent management',
+    title: 'Intelligent Management for your',
+    highlight: 'Business.',
+    description: 'A complete platform to organize your operation, win new customers and increase sales.',
   };
 
   const currentCapabilities = capabilities[language];
@@ -46,18 +46,18 @@ export function ChatbotsPage() {
         <div className="container-site">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div data-reveal>
-              <p className="eyebrow">{language === 'pt' ? 'Demonstração ao vivo' : 'Live demo'}</p>
+              <p className="eyebrow">{language === 'pt' ? 'Uma plataforma conectada' : 'One connected platform'}</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] text-heading sm:text-4xl lg:text-[2.75rem]">
-                {language === 'pt' ? 'Assim conversa um agente de vendas da North Dev.' : 'This is how a North Dev sales agent talks.'}
+                {language === 'pt' ? 'Tudo o que sua equipe precisa para crescer melhor.' : 'Everything your team needs to grow better.'}
               </h2>
               <p className="mt-5 max-w-lg text-base leading-7 text-muted">
                 {language === 'pt'
-                  ? 'Uma simulação real de como o agente responde um cliente que chega pelo WhatsApp — mantendo o ritmo, conduzindo o próximo passo e nunca deixando o lead esperando.'
-                  : 'A real simulation of how the agent replies to a customer arriving on WhatsApp — keeping the pace, guiding the next step and never letting the lead wait.'}
+                  ? 'O North Dev conecta gestão, atendimento, vendas e prospecção em um único ambiente, com inteligência artificial trabalhando para automatizar processos e apoiar as melhores decisões.'
+                  : 'North Dev connects management, service, sales and prospecting in one environment, with AI working to automate processes and support better decisions.'}
               </p>
               <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-line bg-surface-soft px-4 py-2 text-sm font-semibold text-heading">
                 <Bot className="size-4 text-accent" aria-hidden="true" />
-                {language === 'pt' ? 'Conversa gerada em tempo real' : 'Conversation generated in real time'}
+                {language === 'pt' ? 'Inteligência aplicada à operação' : 'Intelligence applied to your operation'}
               </div>
             </div>
 
@@ -72,9 +72,9 @@ export function ChatbotsPage() {
         <div className="container-site">
           <div data-reveal>
             <SectionHeading
-              eyebrow={language === 'pt' ? 'O que ele resolve' : 'What it solves'}
-              title={language === 'pt' ? 'Tempo, qualificação e presença — os três gargalos do atendimento.' : 'Time, qualification and presence — the three service bottlenecks.'}
-              description={language === 'pt' ? 'O agente entra na primeira linha, resolve as dúvidas repetitivas e entrega ao humano só o que realmente precisa dele.' : 'The agent takes the first line, handles repetitive questions and hands over to a human only what really needs one.'}
+              eyebrow={language === 'pt' ? 'O que a plataforma conecta' : 'What the platform connects'}
+              title={language === 'pt' ? 'Gestão, atendimento e vendas em um só lugar.' : 'Management, service and sales in one place.'}
+              description={language === 'pt' ? 'Agente Comercial com IA, CRM, funil de vendas, prospecção de empresas, atendimento pelo WhatsApp, agenda e gestão de tarefas — tudo integrado para sua empresa crescer de forma mais organizada e eficiente.' : 'AI Sales Agent, CRM, sales funnel, company prospecting, WhatsApp service, calendar and task management — all integrated to help your business grow in a more organized and efficient way.'}
             />
           </div>
 
@@ -96,11 +96,11 @@ export function ChatbotsPage() {
           <div className="mt-14 flex flex-col items-center gap-4 text-center" data-reveal>
             <p className="max-w-2xl text-base leading-7 text-muted">
               {language === 'pt'
-                ? 'Quer ver o agente respondendo com o vocabulário do seu negócio? A gente monta uma demonstração com o seu contexto.'
-                : 'Want to see the agent answering with your business vocabulary? We put together a demo with your context.'}
+                ? 'Quer entender como uma operação mais conectada pode ajudar sua empresa a vender mais? Vamos mostrar a plataforma no contexto do seu negócio.'
+                : 'Want to see how a more connected operation can help your business sell more? We will show the platform in your business context.'}
             </p>
             <Link to="/#contato" className="button-primary">
-              {language === 'pt' ? 'Quero uma demonstração' : 'Book a demo'} <ArrowUpRight className="size-4" />
+              {language === 'pt' ? 'Conhecer a plataforma' : 'Explore the platform'} <ArrowUpRight className="size-4" />
             </Link>
           </div>
         </div>
