@@ -31,7 +31,7 @@ const routeMetadata = {
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'Landing pages de alta conversão para transformar tráfego pago em oportunidades reais de venda.'],
     '/projetos/sites': ['Sites Institucionais | North Dev', 'Sites institucionais que constroem autoridade, credibilidade e presença digital duradoura.'],
     '/projetos/chatbots': ['Gestão Inteligente | North Dev', 'Plataforma completa para organizar sua operação, conquistar novos clientes e aumentar suas vendas.'],
-    '/precos': ['Preços | North Dev', 'Conheça os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.'],
+    '/precos': ['Preços | North Dev', 'Conheça os planos da North Dev para landing pages, sites completos, aplicativos de gestão inteligente e produtos SaaS.'],
     '/processo': ['Processo | North Dev', 'Entenda como a North Dev conduz Modelos da descoberta à entrega e evolução.'],
   },
   en: {
@@ -42,7 +42,7 @@ const routeMetadata = {
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'High-conversion landing pages that turn paid traffic into real sales opportunities.'],
     '/projetos/sites': ['Institutional Websites | North Dev', 'Institutional websites that build authority, credibility and lasting digital presence.'],
     '/projetos/chatbots': ['Intelligent Management | North Dev', 'A complete platform to organize your operation, win new customers and increase sales.'],
-    '/precos': ['Pricing | North Dev', 'Explore North Dev plans for landing pages, complete websites, AI chatbots and SaaS products.'],
+    '/precos': ['Pricing | North Dev', 'Explore North Dev plans for landing pages, complete websites, intelligent management apps and SaaS products.'],
     '/processo': ['Process | North Dev', 'See how North Dev leads projects from discovery to delivery and evolution.'],
   },
 };

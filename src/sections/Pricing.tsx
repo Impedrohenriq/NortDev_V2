@@ -1,4 +1,4 @@
-import { ArrowUpRight, Bot, Boxes, Check, PanelsTopLeft, Rocket } from 'lucide-react';
+import { ArrowUpRight, Boxes, Check, LayoutDashboard, PanelsTopLeft, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
@@ -7,7 +7,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 const planDesign = [
   { icon: Rocket, accent: 'blue' as const },
   { icon: PanelsTopLeft, accent: 'cyan' as const },
-  { icon: Bot, accent: 'violet' as const, featured: true },
+  { icon: LayoutDashboard, accent: 'violet' as const, featured: true },
   { icon: Boxes, accent: 'blue' as const },
 ];
 
@@ -30,20 +30,20 @@ const planContent = {
       cta: 'Quero um site completo',
     },
     {
-      name: 'Site + Chatbot com IA', label: 'Atendimento inteligente', price: 'R$ 800', originalPrice: 'R$ 1.200', slotsTaken: 3, slotsTotal: 20, monthly: 'R$ 150/mês',
-      description: 'Site completo com um chatbot preparado para responder dúvidas, apresentar serviços e apoiar a captação de leads.',
-      value: 'Mantém o negócio disponível por mais tempo, agiliza respostas e reduz tarefas repetitivas no atendimento.',
-      audience: 'Negócios com volume frequente de dúvidas, contatos ou oportunidades comerciais.',
-      features: ['Site completo', 'Chatbot configurado', 'Base inicial de respostas', 'Suporte e acompanhamento'],
-      cta: 'Automatizar meu atendimento',
+      name: 'Site + Aplicativo de Gestão Inteligente', label: 'Gestão completa', price: 'R$ 800', originalPrice: 'R$ 1.200', slotsTaken: 3, slotsTotal: 20, monthly: 'R$ 150/mês',
+      description: 'Aplicativo completo para organizar a operação, conectar atendimento, vendas e tarefas e apoiar a conquista de novos clientes.',
+      value: 'Centraliza a operação, automatiza processos e ajuda sua equipe a tomar decisões melhores para vender mais.',
+      audience: 'Negócios que precisam organizar a operação e acompanhar melhor suas oportunidades comerciais.',
+      features: ['Aplicativo de gestão completo', 'CRM e funil de vendas', 'Atendimento e prospecção integrados', 'Suporte e acompanhamento'],
+      cta: 'Conhecer o aplicativo',
     },
     {
-      name: 'SaaS + Site + Chatbot', label: 'Produto sob medida', price: 'Sob orçamento', monthly: 'Recorrência definida pelo escopo',
-      description: 'Uma plataforma personalizada que conecta sistema, presença institucional e atendimento automatizado.',
+      name: 'SaaS + Aplicativo de Gestão', label: 'Produto sob medida', price: 'Sob orçamento', monthly: 'Recorrência definida pelo escopo',
+      description: 'Uma plataforma personalizada que conecta gestão, atendimento, vendas e prospecção em um único ambiente.',
       value: 'Transforma processos em um produto escalável, centraliza a operação e cria novas possibilidades de crescimento.',
       audience: 'Empresas com processos próprios, produtos digitais ou necessidades que exigem uma solução exclusiva.',
-      features: ['Planejamento técnico', 'Plataforma personalizada', 'Site e chatbot integrados', 'Evolução contínua'],
-      cta: 'Avaliar meu projeto',
+      features: ['Planejamento técnico', 'Plataforma personalizada', 'Aplicativo de gestão integrado', 'Evolução contínua'],
+      cta: 'Criar minha plataforma',
     },
   ],
   en: [
@@ -64,20 +64,20 @@ const planContent = {
       cta: 'I want a complete website',
     },
     {
-      name: 'Website + AI Chatbot', label: 'Smart service', price: 'R$ 800', originalPrice: 'R$ 1,200', slotsTaken: 3, slotsTotal: 20, monthly: 'R$ 150/month',
-      description: 'A complete website with a chatbot prepared to answer questions, present services and support lead generation.',
-      value: 'Keeps the business available longer, speeds up responses and reduces repetitive service tasks.',
-      audience: 'Businesses with a frequent volume of questions, contacts or sales opportunities.',
-      features: ['Complete website', 'Configured chatbot', 'Initial response base', 'Support and monitoring'],
-      cta: 'Automate my service',
+      name: 'Intelligent Management App', label: 'Complete management', price: 'R$ 800', originalPrice: 'R$ 1,200', slotsTaken: 3, slotsTotal: 20, monthly: 'R$ 150/month',
+      description: 'A complete app to organize operations, connect service, sales and tasks, and help win new customers.',
+      value: 'Centralizes operations, automates processes and helps your team make better decisions to increase sales.',
+      audience: 'Businesses that need to organize operations and better track their sales opportunities.',
+      features: ['Complete management app', 'CRM and sales funnel', 'Integrated service and prospecting', 'Support and monitoring'],
+      cta: 'Explore the app',
     },
     {
-      name: 'SaaS + Website + Chatbot', label: 'Custom product', price: 'Custom quote', monthly: 'Recurring fee defined by scope',
-      description: 'A custom platform that connects systems, institutional presence and automated service.',
+      name: 'SaaS + Management App', label: 'Custom product', price: 'Custom quote', monthly: 'Recurring fee defined by scope',
+      description: 'A custom platform that connects management, service, sales and prospecting in one environment.',
       value: 'Turns processes into a scalable product, centralizes operations and creates new growth opportunities.',
       audience: 'Companies with proprietary processes, digital products or needs that require an exclusive solution.',
-      features: ['Technical planning', 'Custom platform', 'Integrated website and chatbot', 'Continuous evolution'],
-      cta: 'Evaluate my project',
+      features: ['Technical planning', 'Custom platform', 'Integrated management app', 'Continuous evolution'],
+      cta: 'Build my platform',
     },
   ],
 };
