@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-export type StarfallPalette = 'blue' | 'violet' | 'orange' | 'pink' | 'green' | 'gray';
+export type StarfallPalette = 'blue' | 'violet' | 'orange' | 'pink' | 'green' | 'gray' | 'carrot';
 
 const paletteColors: Record<StarfallPalette, [string, string, string]> = {
   blue: ['#4f8cff', '#35d5f4', '#8d73ff'],
@@ -10,6 +10,13 @@ const paletteColors: Record<StarfallPalette, [string, string, string]> = {
   pink: ['#ff5b86', '#ff7850', '#ffa257'],
   green: ['#34d399', '#6ee7b7', '#a7f3d0'],
   gray: ['#94a3b8', '#e2e8f0', '#64748b'],
+  carrot: ['#f26a4b', '#f58a70', '#e0a84a'],
+};
+
+// Dark base behind the glow, as raw shader values: navy for the site, charcoal for Prospec (Carvão in the app).
+const navyBase: [number, number, number] = [0.008, 0.014, 0.045];
+const paletteBase: Partial<Record<StarfallPalette, [number, number, number]>> = {
+  carrot: [0.055, 0.055, 0.055],
 };
 
 const vertexShader = `
@@ -25,6 +32,7 @@ const fragmentShader = `
   uniform vec3 iAccentA;
   uniform vec3 iAccentB;
   uniform vec3 iAccentC;
+  uniform vec3 iBase;
 
   float random(vec2 p) {
     return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
@@ -61,8 +69,7 @@ const fragmentShader = `
     float glow = smoothstep(0.18, 0.95, field + veil * 0.52);
     float horizon = exp(-3.8 * abs(uv.y + 0.06 + sin(uv.x * 2.1 + time) * 0.09));
 
-    vec3 navy = vec3(0.008, 0.014, 0.045);
-    vec3 darkColor = navy;
+    vec3 darkColor = iBase;
     darkColor += iAccentA * glow * 0.52;
     darkColor += mix(iAccentB, iAccentC, smoothstep(-0.5, 0.7, uv.x)) * horizon * glow * 0.65;
 
@@ -105,6 +112,7 @@ export function StarfallBackground({ palette = 'blue' }: { palette?: StarfallPal
         iAccentA: { value: new THREE.Color(accentA) },
         iAccentB: { value: new THREE.Color(accentB) },
         iAccentC: { value: new THREE.Color(accentC) },
+        iBase: { value: new THREE.Vector3(...(paletteBase[palette] ?? navyBase)) },
       },
       vertexShader,
       fragmentShader,

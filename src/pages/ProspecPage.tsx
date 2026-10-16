@@ -15,7 +15,7 @@ import {
   Target,
   Terminal,
 } from 'lucide-react';
-import { ProspecMockup } from '../components/ProspecMockup';
+import { ProspecDemo } from '../components/ProspecDemo';
 import { PageIntro } from '../components/PageIntro';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
@@ -161,12 +161,12 @@ export function ProspecPage() {
 
   return (
     <>
-      <PageIntro {...page.intro}>{actions}</PageIntro>
+      <PageIntro {...page.intro} palette="carrot">{actions}</PageIntro>
 
       <section className="section-space pt-0">
         <div className="container-site">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div data-reveal>
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-2 lg:items-center">
+            <div className="min-w-0" data-reveal>
               <p className="eyebrow">{page.about.eyebrow}</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] text-heading sm:text-4xl lg:text-[2.75rem]">
                 {page.about.title}
@@ -175,8 +175,8 @@ export function ProspecPage() {
                 <p key={paragraph} className="mt-5 max-w-xl text-base leading-7 text-muted">{paragraph}</p>
               ))}
             </div>
-            <div data-reveal>
-              <ProspecMockup />
+            <div className="min-w-0" data-reveal>
+              <ProspecDemo />
             </div>
           </div>
         </div>

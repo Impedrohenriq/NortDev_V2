@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight, Building2, ListChecks, Search, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ProspecMockup } from '../components/ProspecMockup';
+import { ProspecDemo } from '../components/ProspecDemo';
 import { prospec } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -73,7 +73,7 @@ export function ProspecLaunch() {
             </div>
           </div>
 
-          <ProspecMockup />
+          <ProspecDemo />
         </div>
       </div>
     </section>
