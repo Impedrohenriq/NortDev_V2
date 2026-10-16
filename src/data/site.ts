@@ -31,6 +31,7 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+  { label: 'Prospec', href: '/prospec', badge: 'Novo', badgeEn: 'New' },
   { label: 'Processo', href: '/processo' },
   { label: 'Preços', href: '/precos' },
 ];
@@ -169,4 +170,12 @@ export const company = {
   whatsappUrl: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento.')}`,
   instagramUrl: 'https://www.instagram.com/northdeveloper/',
   location: 'Brasil · remoto ou presencial',
+};
+
+export const prospec = {
+  appUrl: 'https://prospeccao.northdevsolution.com.br/',
+  trialUrl: {
+    pt: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Quero testar o NorthDev Prospec.')}`,
+    en: `https://wa.me/5531999670890?text=${encodeURIComponent('Hello! I would like to try NorthDev Prospec.')}`,
+  },
 };

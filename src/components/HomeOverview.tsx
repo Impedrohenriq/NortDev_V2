@@ -42,7 +42,7 @@ export function HomeOverview() {
         </div>
 
         <div className="overview-grid mt-10 lg:mt-14">
-          {navItems.map((item, index) => (
+          {navItems.filter((item) => !item.badge).map((item, index) => (
             <TechCard
               key={item.href}
               accent={index === 1 ? 'cyan' : index === 2 ? 'violet' : 'blue'}

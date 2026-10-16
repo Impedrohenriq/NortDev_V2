@@ -1738,3 +1738,228 @@ html:not(.dark) .logo-marquee-item { background: rgba(248, 250, 252, .78); }
   color: var(--muted);
   font-weight: 500;
 }
+
+/* NorthDev Prospec launch */
+.nav-link-launch { display: inline-flex; align-items: center; gap: .4rem; }
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: .12rem .45rem;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: .56rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.mobile-link .nav-badge { margin-left: .5rem; vertical-align: middle; }
+
+.launch-pill {
+  max-width: 100%;
+  gap: .65rem;
+  padding: .35rem .9rem .35rem .35rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: .8rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.launch-pill:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.launch-pill > svg { flex-shrink: 0; transition: transform var(--transition); }
+.launch-pill:hover > svg { transform: translateX(3px); }
+.launch-pill-tag {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: .3rem;
+  border-radius: 999px;
+  padding: .3rem .65rem;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.starfall-badge .launch-pill-tag svg,
+html:not(.dark) .starfall-badge .launch-pill-tag svg { width: .75rem; height: .75rem; color: #ffffff; }
+.launch-pill-text { min-width: 0; text-align: left; font-weight: 600; }
+html:not(.dark) .launch-pill-text { color: #0b1220; }
+.dark .launch-pill-text { color: #e2e8f0; }
+
+.prospec-launch { position: relative; }
+.prospec-launch-panel {
+  position: relative;
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  border-radius: 2rem;
+  padding: 2rem 1.25rem;
+  background:
+    radial-gradient(circle at 88% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 42%),
+    radial-gradient(circle at 6% 92%, color-mix(in srgb, var(--cyan) 9%, transparent), transparent 40%),
+    var(--surface);
+  box-shadow: var(--shadow-card);
+}
+@media (min-width: 640px) { .prospec-launch-panel { padding: 3rem; } }
+@media (min-width: 1024px) { .prospec-launch-panel { grid-template-columns: 1.05fr 1fr; padding: 3.5rem 4rem; } }
+.prospec-launch-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+.prospec-launch-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  padding: .35rem .8rem;
+  color: var(--accent);
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.prospec-launch-tag svg { width: .8rem; height: .8rem; }
+.prospec-launch-tag i {
+  width: .45rem;
+  height: .45rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.prospec-launch-steps { display: grid; gap: 1rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+@media (min-width: 640px) { .prospec-launch-steps { grid-template-columns: 1fr 1fr; } }
+.prospec-launch-steps li { display: flex; gap: .85rem; align-items: flex-start; }
+.prospec-launch-steps .service-icon { width: 2.5rem; height: 2.5rem; flex-shrink: 0; border-radius: .75rem; }
+.prospec-launch-steps .service-icon svg { width: 1.05rem; height: 1.05rem; }
+.prospec-launch-steps strong { display: block; color: var(--heading); font-family: var(--font-display); font-size: 1rem; }
+.prospec-launch-steps p { margin-top: .2rem; color: var(--muted); font-size: .875rem; line-height: 1.45rem; }
+
+.prospec-mockup { position: relative; isolation: isolate; width: 100%; max-width: 34rem; margin: 0 auto; }
+.prospec-mockup-halo {
+  position: absolute;
+  inset: -2rem;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 62%);
+  filter: blur(26px);
+  pointer-events: none;
+}
+.prospec-mockup-frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.prospec-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-soft);
+  padding: .8rem 1.1rem;
+}
+.prospec-mockup-bar strong { color: var(--heading); font-family: var(--font-display); font-size: .8rem; }
+.prospec-mockup-dots { display: flex; gap: .35rem; }
+.prospec-mockup-dots i { width: .55rem; height: .55rem; border-radius: 999px; }
+.prospec-mockup-dots i:first-child { background: #ff6b6b; }
+.prospec-mockup-dots i:nth-child(2) { background: #f5c04e; }
+.prospec-mockup-dots i:nth-child(3) { background: #4fcf8a; }
+.prospec-mockup-body { display: grid; gap: .85rem; padding: 1.1rem; }
+.prospec-mockup-profile {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  border-radius: .85rem;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  padding: .6rem .8rem;
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 700;
+}
+.prospec-mockup-profile svg { width: .95rem; height: .95rem; flex-shrink: 0; }
+.prospec-mockup-filters { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.prospec-mockup-filters > svg { width: .9rem; height: .9rem; color: var(--muted); }
+.prospec-mockup-filters span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-soft);
+  padding: .25rem .6rem;
+  color: var(--body);
+  font-size: .68rem;
+  font-weight: 600;
+}
+.prospec-mockup-count { color: var(--muted); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.prospec-mockup-list { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.prospec-mockup-list li {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .95rem;
+  padding: .65rem .75rem;
+}
+.prospec-mockup-list li:first-child { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.prospec-mockup-avatar {
+  display: grid;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: .65rem;
+  background: var(--surface-soft);
+  color: var(--accent);
+}
+.prospec-mockup-avatar svg { width: .95rem; height: .95rem; }
+.prospec-mockup-company { min-width: 0; flex: 1; }
+.prospec-mockup-company strong { display: block; overflow: hidden; color: var(--heading); font-size: .8rem; text-overflow: ellipsis; white-space: nowrap; }
+.prospec-mockup-company small { display: flex; align-items: center; gap: .25rem; margin-top: .15rem; color: var(--muted); font-size: .68rem; }
+.prospec-mockup-company small svg { width: .7rem; height: .7rem; flex-shrink: 0; }
+.prospec-mockup-score { width: 4.2rem; flex-shrink: 0; text-align: right; }
+.prospec-mockup-score strong { color: var(--heading); font-family: var(--font-display); font-size: .9rem; }
+.prospec-mockup-score small { display: block; color: var(--muted); font-size: .58rem; text-transform: uppercase; letter-spacing: .1em; }
+.prospec-mockup-score > span { display: block; height: .25rem; margin-top: .3rem; overflow: hidden; border-radius: 999px; background: var(--surface-soft); }
+.prospec-mockup-score > span i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--accent)); }
+.prospec-mockup-draft {
+  border: 1px dashed color-mix(in srgb, var(--violet) 45%, transparent);
+  border-radius: .95rem;
+  background: color-mix(in srgb, var(--violet) 7%, transparent);
+  padding: .7rem .85rem;
+}
+.prospec-mockup-draft span { display: flex; align-items: center; gap: .35rem; color: var(--violet); font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.prospec-mockup-draft span svg { width: .8rem; height: .8rem; }
+.prospec-mockup-draft p { margin-top: .35rem; color: var(--body); font-size: .76rem; line-height: 1.2rem; }
+
+.prospec-step-card { min-height: 15rem; padding: 1.5rem; }
+.prospec-differentials { display: grid; gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 1.5rem; background: var(--line); }
+@media (min-width: 768px) { .prospec-differentials { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1280px) { .prospec-differentials { grid-template-columns: repeat(3, 1fr); } }
+.prospec-differential { display: flex; gap: 1rem; align-items: flex-start; background: var(--surface); padding: 1.75rem 1.5rem; }
+.prospec-differential .service-icon { flex-shrink: 0; }
+.prospec-differential h3 { color: var(--heading); font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; line-height: 1.35rem; }
+.prospec-differential p { margin-top: .45rem; color: var(--muted); font-size: .875rem; line-height: 1.5rem; }
+.prospec-example-card { padding: 1.5rem; }
+@media (min-width: 640px) { .prospec-example-card { padding: 1.75rem; } }
+.prospec-example-list { display: grid; gap: 1rem; margin-top: 1.25rem; }
+.prospec-example-list dt { color: var(--accent); font-size: .62rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.prospec-example-list dd { margin: .25rem 0 0; color: var(--body); font-size: .9rem; line-height: 1.45rem; }
+.prospec-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  border-radius: 2rem;
+  padding: 3rem 1.25rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+    var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.prospec-cta .section-title { max-width: 48rem; }
+@media (min-width: 640px) { .prospec-cta { padding: 4rem 3rem; } }

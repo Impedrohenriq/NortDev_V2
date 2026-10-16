@@ -6,7 +6,8 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const heroContent = {
   pt: {
-    badge: 'Software com estratégia e direção',
+    launchTag: 'Novo',
+    launch: 'Lançamento: NorthDev Prospec — teste a nova ferramenta de prospecção',
     title: 'Ideias fortes.',
     highlight: 'Produtos que avançam.',
     copy: 'Criamos software, automações e experiências digitais sob medida para transformar desafios complexos em produtos claros, rápidos e prontos para crescer.',
@@ -25,7 +26,8 @@ const heroContent = {
     scroll: 'Explore',
   },
   en: {
-    badge: 'Software with strategy and direction',
+    launchTag: 'New',
+    launch: 'Launch: NorthDev Prospec — try our new prospecting tool',
     title: 'Strong ideas.',
     highlight: 'Products that move forward.',
     copy: 'We create custom software, automation and digital experiences to turn complex challenges into clear, fast products ready to grow.',
@@ -73,9 +75,12 @@ export function Hero() {
             visible: { transition: { delayChildren: 0.12, staggerChildren: 0.09 } },
           }}
         >
-          <motion.div className="starfall-badge" variants={itemVariants}>
-            <Sparkles aria-hidden="true" />
-            {content.badge}
+          <motion.div variants={itemVariants}>
+            <Link to="/prospec" className="starfall-badge launch-pill">
+              <span className="launch-pill-tag"><Sparkles aria-hidden="true" />{content.launchTag}</span>
+              <span className="launch-pill-text">{content.launch}</span>
+              <ArrowRight aria-hidden="true" />
+            </Link>
           </motion.div>
 
           <motion.h1 className="starfall-title" variants={itemVariants}>

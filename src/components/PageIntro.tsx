@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
+import type { ReactNode } from 'react';
 import { StarfallBackground } from './StarfallBackground';
 import type { StarfallPalette } from './StarfallBackground';
 
@@ -8,9 +9,10 @@ type PageIntroProps = {
   highlight: string;
   description: string;
   palette?: StarfallPalette;
+  children?: ReactNode;
 };
 
-export function PageIntro({ eyebrow, title, highlight, description, palette = 'blue' }: PageIntroProps) {
+export function PageIntro({ eyebrow, title, highlight, description, palette = 'blue', children }: PageIntroProps) {
   const reduceMotion = useReducedMotion();
   const itemVariants = {
     hidden: { opacity: 0, y: 24 },
@@ -41,6 +43,7 @@ export function PageIntro({ eyebrow, title, highlight, description, palette = 'b
             <span className="text-gradient"> {highlight}</span>
           </motion.h1>
           <motion.p className="page-copy mx-auto mt-6" variants={itemVariants}>{description}</motion.p>
+          {children && <motion.div className="mt-9 w-full" variants={itemVariants}>{children}</motion.div>}
         </motion.div>
       </div>
     </section>

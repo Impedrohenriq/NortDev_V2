@@ -11,6 +11,8 @@ export type NavChild = {
 export type NavItem = {
   label: string;
   href: string;
+  badge?: string;
+  badgeEn?: string;
   children?: NavChild[];
 };
 

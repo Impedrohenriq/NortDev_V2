@@ -18,6 +18,7 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((module) => 
 const LandingPagesPage = lazy(() => import('./pages/LandingPagesPage').then((module) => ({ default: module.LandingPagesPage })));
 const SitesPage = lazy(() => import('./pages/SitesPage').then((module) => ({ default: module.SitesPage })));
 const ChatbotsPage = lazy(() => import('./pages/ChatbotsPage').then((module) => ({ default: module.ChatbotsPage })));
+const ProspecPage = lazy(() => import('./pages/ProspecPage').then((module) => ({ default: module.ProspecPage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then((module) => ({ default: module.PricingPage })));
 const ProcessPage = lazy(() => import('./pages/ProcessPage').then((module) => ({ default: module.ProcessPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
@@ -31,6 +32,7 @@ const routeMetadata = {
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'Landing pages de alta conversão para transformar tráfego pago em oportunidades reais de venda.'],
     '/projetos/sites': ['Sites Institucionais | North Dev', 'Sites institucionais que constroem autoridade, credibilidade e presença digital duradoura.'],
     '/projetos/chatbots': ['Gestão Inteligente | North Dev', 'Plataforma completa para organizar sua operação, conquistar novos clientes e aumentar suas vendas.'],
+    '/prospec': ['NorthDev Prospec | Encontre empresas que combinam com o que você vende', 'Plataforma de prospecção B2B: encontre empresas pelo perfil certo, priorize com aderência explicada e prepare a abordagem com IA.'],
     '/precos': ['Preços | North Dev', 'Conheça os planos da North Dev para landing pages, sites completos, aplicativos de gestão inteligente e produtos SaaS.'],
     '/processo': ['Processo | North Dev', 'Entenda como a North Dev conduz Modelos da descoberta à entrega e evolução.'],
   },
@@ -42,6 +44,7 @@ const routeMetadata = {
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'High-conversion landing pages that turn paid traffic into real sales opportunities.'],
     '/projetos/sites': ['Institutional Websites | North Dev', 'Institutional websites that build authority, credibility and lasting digital presence.'],
     '/projetos/chatbots': ['Intelligent Management | North Dev', 'A complete platform to organize your operation, win new customers and increase sales.'],
+    '/prospec': ['NorthDev Prospec | Find companies that match what you sell', 'B2B prospecting platform: find companies with the right profile, prioritize with explained fit and prepare outreach with AI.'],
     '/precos': ['Pricing | North Dev', 'Explore North Dev plans for landing pages, complete websites, intelligent management apps and SaaS products.'],
     '/processo': ['Process | North Dev', 'See how North Dev leads projects from discovery to delivery and evolution.'],
   },
@@ -143,6 +146,7 @@ function Site() {
                 <Route path="/projetos/landing-pages" element={<LandingPagesPage />} />
                 <Route path="/projetos/sites" element={<SitesPage />} />
                 <Route path="/projetos/chatbots" element={<ChatbotsPage />} />
+                <Route path="/prospec" element={<ProspecPage />} />
                 <Route path="/precos" element={<PricingPage />} />
                 <Route path="/processo" element={<ProcessPage />} />
                 <Route path="*" element={<NotFoundPage />} />

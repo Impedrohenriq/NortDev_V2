@@ -88,6 +88,7 @@ export function Footer({ refreshKey }: FooterProps) {
     '/sobre': 'About',
     '/solucoes': 'Solutions',
     '/modelos': 'Projects',
+    '/prospec': 'Prospec',
     '/processo': 'Process',
     '/precos': 'Pricing',
   };

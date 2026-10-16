@@ -20,6 +20,7 @@ const englishLabels: Record<string, string> = {
   '/sobre': 'About',
   '/solucoes': 'Solutions',
   '/modelos': 'Projects',
+  '/prospec': 'Prospec',
   '/processo': 'Process',
   '/precos': 'Pricing',
 };
@@ -96,9 +97,10 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
               <NavLink
                 key={item.href}
                 to={item.href}
-                className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
+                className={({ isActive }) => `nav-link ${item.badge ? 'nav-link-launch' : ''} ${isActive ? 'nav-link-active' : ''}`}
               >
                 {language === 'pt' ? item.label : englishLabels[item.href] ?? item.label}
+                {item.badge && <span className="nav-badge">{language === 'pt' ? item.badge : item.badgeEn}</span>}
               </NavLink>
             );
           })}
@@ -189,6 +191,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                   onClick={closeMobile}
                 >
                   {language === 'pt' ? item.label : englishLabels[item.href] ?? item.label}
+                  {item.badge && <span className="nav-badge">{language === 'pt' ? item.badge : item.badgeEn}</span>}
                 </NavLink>
               );
             })}
