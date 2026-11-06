@@ -191,18 +191,19 @@ export function ProspecPage() {
           <div data-reveal>
             <SectionHeading eyebrow={page.verbs.eyebrow} title={page.verbs.title} description={page.verbs.description} />
           </div>
-          <div className="mt-10 grid auto-rows-fr gap-4 md:grid-cols-2 lg:mt-14 xl:grid-cols-4">
+          <ol className="step-line mt-10 lg:mt-14">
             {page.verbs.items.map(([Icon, title, description], index) => (
-              <TechCard key={title} accent={accents[index % 3]} className="prospec-step-card" revealDelay={index * 0.06}>
-                <div className="flex items-center justify-between">
+              <li key={title} className="step-line-item" data-reveal>
+                <span className="step-line-node" aria-hidden="true" />
+                <div className="step-line-head">
                   <span className="service-icon"><Icon /></span>
-                  <span className="service-number">0{index + 1}</span>
+                  <span className="step-line-count">0{index + 1}</span>
                 </div>
-                <h3 className="mt-8 font-display text-2xl font-bold tracking-tight text-heading">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
-              </TechCard>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 

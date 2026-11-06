@@ -110,6 +110,7 @@ export function ProjectsPage() {
                   key={card.href}
                   accent={card.accent}
                   className="overview-card"
+                  interactive
                   revealDelay={index * 0.07}
                 >
                   <span className="service-icon"><Icon /></span>

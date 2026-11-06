@@ -2,7 +2,6 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { navItems } from '../data/site';
 import { SectionHeading } from './SectionHeading';
-import { TechCard } from './TechCard';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const pageDescriptions: Record<string, string> = {
@@ -41,25 +40,17 @@ export function HomeOverview() {
           />
         </div>
 
-        <div className="overview-grid mt-10 lg:mt-14">
-          {navItems.filter((item) => !item.badge).map((item, index) => (
-            <TechCard
-              key={item.href}
-              accent={index === 1 ? 'cyan' : index === 2 ? 'violet' : 'blue'}
-              className="overview-card"
-              revealDelay={index * 0.07}
-            >
-              <span className="service-number">0{index + 1}</span>
-              <div>
-                <h2>{language === 'pt' ? item.label : labels[item.href]}</h2>
-                <p>{descriptions[item.href]}</p>
-              </div>
-              <Link to={item.href} className="overview-link">
-                {language === 'pt' ? 'Acessar página' : 'Open page'} <ArrowUpRight className="size-4" aria-hidden="true" />
+        <ul className="index-list mt-10 lg:mt-14">
+          {navItems.filter((item) => !item.badge).map((item) => (
+            <li key={item.href} data-reveal>
+              <Link to={item.href} className="index-row">
+                <h3 className="index-row-title">{language === 'pt' ? item.label : labels[item.href]}</h3>
+                <p className="index-row-text">{descriptions[item.href]}</p>
+                <span className="index-row-arrow" aria-hidden="true"><ArrowUpRight /></span>
               </Link>
-            </TechCard>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
