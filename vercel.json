@@ -9,6 +9,11 @@
       "source": "/Modelos",
       "destination": "/modelos",
       "statusCode": 308
+    },
+    {
+      "source": "/projetos/chatbots",
+      "destination": "/projetos/gestao",
+      "statusCode": 301
     }
   ],
   "rewrites": [

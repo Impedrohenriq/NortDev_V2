@@ -1,7 +1,7 @@
 import { ArrowUpRight, Boxes, Check, LayoutDashboard, PanelsTopLeft, Rocket } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
+import { whatsappLink } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const planDesign = [
@@ -101,6 +101,14 @@ export function Pricing() {
         <div className="pricing-grid mt-12 lg:mt-16">
           {plans.map((plan, index) => {
             const { icon: Icon, accent, featured } = planDesign[index];
+            const hasFixedPrice = 'originalPrice' in plan && Boolean(plan.originalPrice);
+            const message = language === 'pt'
+              ? (hasFixedPrice
+                ? `Olá! Tenho interesse no plano ${plan.name} (${plan.price}). Pode me passar os próximos passos?`
+                : `Olá! Quero um orçamento para o plano ${plan.name}.`)
+              : (hasFixedPrice
+                ? `Hello! I am interested in the ${plan.name} plan (${plan.price}). Could you share the next steps?`
+                : `Hello! I would like a quote for the ${plan.name} plan.`);
             return (
               <TechCard
                 key={plan.name}
@@ -136,9 +144,13 @@ export function Pricing() {
                         <div
                           className="pricing-scarcity-bar"
                           role="progressbar"
+                          aria-label={language === 'pt' ? `Vagas preenchidas no plano ${plan.name}` : `Filled spots on the ${plan.name} plan`}
                           aria-valuemin={0}
                           aria-valuemax={plan.slotsTotal}
                           aria-valuenow={plan.slotsTaken}
+                          aria-valuetext={language === 'pt'
+                            ? `${plan.slotsTaken} de ${plan.slotsTotal} vagas preenchidas`
+                            : `${plan.slotsTaken} of ${plan.slotsTotal} spots filled`}
                         >
                           <span style={{ width: `${(plan.slotsTaken / plan.slotsTotal) * 100}%` }} />
                         </div>
@@ -170,9 +182,14 @@ export function Pricing() {
                   {plan.features.map((feature) => <li key={feature}><Check />{feature}</li>)}
                 </ul>
 
-                <Link to="/#contato" className={featured ? 'button-primary pricing-cta' : 'button-secondary pricing-cta'}>
+                <a
+                  href={whatsappLink(message)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={featured ? 'button-primary pricing-cta' : 'button-secondary pricing-cta'}
+                >
                   {plan.cta} <ArrowUpRight />
-                </Link>
+                </a>
               </TechCard>
             );
           })}

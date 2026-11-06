@@ -1,6 +1,7 @@
 import { PageIntro } from '../components/PageIntro';
 import { Contact } from '../sections/Contact';
 import { Pricing } from '../sections/Pricing';
+import { ProspecPricing } from '../sections/ProspecPricing';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export function PricingPage() {
@@ -23,7 +24,8 @@ export function PricingPage() {
         palette="green"
       />
       <Pricing />
-      <Contact />
+      <ProspecPricing />
+      <Contact topic="pricing" />
     </>
   );
 }

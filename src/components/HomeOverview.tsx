@@ -10,7 +10,7 @@ const pageDescriptions: Record<string, string> = {
   '/solucoes': 'Explore software, automações, SaaS e evolução de produtos digitais.',
   '/modelos': 'Veja experiências digitais desenvolvidas para diferentes mercados e objetivos.',
   '/processo': 'Entenda as etapas que conduzem cada projeto da descoberta à evolução.',
-  '/precos': 'Confira os planos da North Dev para landing pages, sites completos, chatbots com IA e produtos SaaS.',
+  '/precos': 'Confira os planos da North Dev para landing pages, sites completos, aplicativos de gestão inteligente e produtos SaaS.',
 };
 
 export function HomeOverview() {
@@ -20,7 +20,7 @@ export function HomeOverview() {
     '/solucoes': 'Explore software, automation, SaaS and digital product evolution.',
     '/modelos': 'See digital experiences created for different markets and goals.',
     '/processo': 'Understand the stages that lead each project from discovery to evolution.',
-    '/precos': 'See North Dev plans for landing pages, full websites, AI chatbots and SaaS products.',
+    '/precos': 'See North Dev plans for landing pages, full websites, intelligent management apps and SaaS products.',
   };
   const labels: Record<string, string> = {
     '/sobre': 'About',

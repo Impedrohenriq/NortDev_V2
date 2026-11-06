@@ -25,7 +25,7 @@ export const navItems: NavItem[] = [
       {
         label: 'Gestão Inteligente',
         labelEn: 'Intelligent Management',
-        href: '/projetos/chatbots',
+        href: '/projetos/gestao',
         description: 'Gestão, atendimento, vendas e prospecção em um só lugar.',
         descriptionEn: 'Management, service, sales and prospecting in one place.',
       },
@@ -84,11 +84,12 @@ export const projects: Project[] = [
     description: 'Landing page de alta conversão para um estúdio de estética automotiva, com direção visual imersiva e foco em agendamento.',
     descriptionEn: 'A high-conversion landing page for an auto detailing studio, with immersive visual direction and a focus on bookings.',
     url: 'https://estetica-automotiva2.vercel.app/',
-    image: '/projects/estetica-automotiva.png',
+    image: '/projects/estetica-automotiva.webp',
     imageWidth: 1265,
     imageHeight: 712,
     accent: 'blue',
     type: 'landing',
+    featured: true,
   },
   {
     name: 'Vértice Imóveis',
@@ -102,6 +103,7 @@ export const projects: Project[] = [
     imageHeight: 712,
     accent: 'cyan',
     type: 'site',
+    featured: true,
   },
   {
     name: 'Sorriso Prime',
@@ -136,11 +138,12 @@ export const projects: Project[] = [
     description: 'Vitrine mobile first para venda de iPhones, com catálogo organizado, experiência refinada e contato direto pelo WhatsApp.',
     descriptionEn: 'A mobile-first iPhone storefront with an organized catalog, refined experience and direct WhatsApp contact.',
     url: 'https://mjemporium.vercel.app/',
-    image: '/projects/mj-emporium.png',
+    image: '/projects/mj-emporium.webp',
     imageWidth: 1265,
     imageHeight: 712,
     accent: 'blue',
     type: 'landing',
+    featured: true,
   },
   {
     name: 'Bolo & Champagne',
@@ -164,16 +167,101 @@ export const processSteps: ProcessStep[] = [
   { number: '04', title: 'Evoluir', description: 'Entregamos, medimos e deixamos o produto preparado para os próximos movimentos.' },
 ];
 
+export const whatsappNumber = '5531999670890';
+
+export function whatsappLink(message: string) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+export type WhatsappTopic = 'default' | 'landing' | 'sites' | 'management' | 'prospec' | 'pricing' | 'process';
+
+/** Mensagens pré-preenchidas do WhatsApp, por assunto da página em que o visitante está. */
+export const whatsappMessages: Record<WhatsappTopic, { pt: string; en: string }> = {
+  default: {
+    pt: 'Olá! Gostaria de solicitar um orçamento.',
+    en: 'Hello! I would like to request a quote.',
+  },
+  landing: {
+    pt: 'Olá! Quero saber mais sobre uma landing page para o meu negócio.',
+    en: 'Hello! I would like to know more about a landing page for my business.',
+  },
+  sites: {
+    pt: 'Olá! Quero saber mais sobre um site institucional para o meu negócio.',
+    en: 'Hello! I would like to know more about an institutional website for my business.',
+  },
+  management: {
+    pt: 'Olá! Quero conhecer o aplicativo de Gestão Inteligente.',
+    en: 'Hello! I would like to learn about the Intelligent Management app.',
+  },
+  prospec: {
+    pt: 'Olá! Quero saber mais sobre o NorthDev Prospec.',
+    en: 'Hello! I would like to know more about NorthDev Prospec.',
+  },
+  pricing: {
+    pt: 'Olá! Quero tirar dúvidas sobre os planos e preços.',
+    en: 'Hello! I would like to ask about your plans and pricing.',
+  },
+  process: {
+    pt: 'Olá! Quero começar um projeto e entender como funciona o processo.',
+    en: 'Hello! I would like to start a project and understand how the process works.',
+  },
+};
+
+const whatsappTopicByPath: Record<string, WhatsappTopic> = {
+  '/projetos/landing-pages': 'landing',
+  '/projetos/sites': 'sites',
+  '/projetos/gestao': 'management',
+  '/prospec': 'prospec',
+  '/precos': 'pricing',
+  '/processo': 'process',
+};
+
+export function whatsappTopicForPath(pathname: string): WhatsappTopic {
+  return whatsappTopicByPath[pathname] ?? 'default';
+}
+
 export const company = {
   email: 'northdev.solutions@gmail.com',
   phone: '+55 (31) 99967-0890',
-  whatsappUrl: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento.')}`,
+  whatsappUrl: whatsappLink(whatsappMessages.default.pt),
   instagramUrl: 'https://www.instagram.com/northdeveloper/',
   location: 'Brasil · remoto ou presencial',
 };
 
+/**
+ * Planos do NorthDev Prospec, copiados da página oficial de planos do produto
+ * (https://prospeccao.northdevsolution.com.br/planos), conferida em 06/11/2026.
+ * A API pública do Prospec não libera CORS para este domínio, então os valores ficam aqui:
+ * ao mudar um preço no Prospec, atualize este bloco e `prospecPricingCheckedAt`.
+ */
+export const prospecPricingCheckedAt = '2026-11-06';
+
+export type ProspecPlan = {
+  code: 'BASICO' | 'PROFISSIONAL' | 'EQUIPE';
+  name: { pt: string; en: string };
+  monthly: number;
+  /** Valor anual (equivale a 10 mensalidades: "2 meses grátis"). */
+  annual?: number;
+  credits: number;
+  users: number;
+  extraUser?: { monthly: number; credits: number };
+  featured?: boolean;
+};
+
+export const prospecPlans: ProspecPlan[] = [
+  { code: 'BASICO', name: { pt: 'Básico', en: 'Basic' }, monthly: 249, credits: 1_000, users: 2 },
+  { code: 'PROFISSIONAL', name: { pt: 'Profissional', en: 'Professional' }, monthly: 449, annual: 4_490, credits: 2_500, users: 3, featured: true },
+  { code: 'EQUIPE', name: { pt: 'Equipe', en: 'Team' }, monthly: 990, annual: 9_900, credits: 6_000, users: 5, extraUser: { monthly: 149, credits: 800 } },
+];
+
+/** Plano separado, só para acompanhar concorrentes no Instagram. */
+export const prospecCompetitionPlan = { monthly: 49.9, annual: 499, users: 2, competitors: 5, aiSuggestions: 60 };
+
+export const prospecCreditPacks = [100, 500, 1_000];
+
 export const prospec = {
   appUrl: 'https://prospeccao.northdevsolution.com.br/',
+  plansUrl: 'https://prospeccao.northdevsolution.com.br/planos',
   trialUrl: {
     pt: `https://wa.me/5531999670890?text=${encodeURIComponent('Olá! Quero testar o NorthDev Prospec.')}`,
     en: `https://wa.me/5531999670890?text=${encodeURIComponent('Hello! I would like to try NorthDev Prospec.')}`,

@@ -1,14 +1,18 @@
 import { ArrowUpRight, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
-import { company } from '../data/site';
+import { company, whatsappLink, whatsappMessages } from '../data/site';
+import type { WhatsappTopic } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export function Contact() {
+type ContactProps = {
+  /** Assunto da página: define a mensagem pré-preenchida do WhatsApp. */
+  topic?: WhatsappTopic;
+};
+
+export function Contact({ topic = 'default' }: ContactProps) {
   const reduceMotion = useReducedMotion();
   const { language } = useLanguage();
-  const whatsappUrl = language === 'pt'
-    ? company.whatsappUrl
-    : `https://wa.me/5531999670890?text=${encodeURIComponent('Hello! I would like to request a quote.')}`;
+  const whatsappUrl = whatsappLink(whatsappMessages[topic][language]);
 
   return (
     <section id="contato" className="section-space pb-6 sm:pb-8">

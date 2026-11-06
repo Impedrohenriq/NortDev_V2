@@ -3,14 +3,27 @@ import { Link } from 'react-router-dom';
 import { PageIntro } from '../components/PageIntro';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
+import { projects } from '../data/site';
 import { Contact } from '../sections/Contact';
 import { useLanguage } from '../i18n/LanguageContext';
+import type { ProjectType } from '../types/site';
 
-const hubCards = [
+type HubCard = {
+  href: string;
+  icon: typeof Rocket;
+  accent: 'blue' | 'cyan' | 'violet';
+  /** Categoria de `projects` usada para contar modelos e mostrar miniaturas. */
+  type?: ProjectType;
+  pt: { eyebrow: string; title: string; description: string };
+  en: { eyebrow: string; title: string; description: string };
+};
+
+const hubCards: HubCard[] = [
   {
     href: '/projetos/landing-pages',
     icon: Rocket,
-    accent: 'blue' as const,
+    accent: 'blue',
+    type: 'landing',
     pt: {
       eyebrow: '01 · Conversão',
       title: 'Landing Pages',
@@ -25,7 +38,8 @@ const hubCards = [
   {
     href: '/projetos/sites',
     icon: LayoutTemplate,
-    accent: 'cyan' as const,
+    accent: 'cyan',
+    type: 'site',
     pt: {
       eyebrow: '02 · Autoridade',
       title: 'Sites Institucionais',
@@ -38,9 +52,9 @@ const hubCards = [
     },
   },
   {
-    href: '/projetos/chatbots',
+    href: '/projetos/gestao',
     icon: Bot,
-    accent: 'violet' as const,
+    accent: 'violet',
     pt: {
       eyebrow: '03 · Automação',
       title: 'Gestão Inteligente',
@@ -86,6 +100,11 @@ export function ProjectsPage() {
             {hubCards.map((card, index) => {
               const Icon = card.icon;
               const copy = language === 'pt' ? card.pt : card.en;
+              const items = card.type ? projects.filter((project) => project.type === card.type) : [];
+              const count = items.length;
+              const countLabel = count > 0
+                ? ` · ${count} ${language === 'pt' ? (count === 1 ? 'modelo' : 'modelos') : (count === 1 ? 'project' : 'projects')}`
+                : '';
               return (
                 <TechCard
                   key={card.href}
@@ -95,9 +114,24 @@ export function ProjectsPage() {
                 >
                   <span className="service-icon"><Icon /></span>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{copy.eyebrow}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{copy.eyebrow}{countLabel}</p>
                     <h2 className="mt-3">{copy.title}</h2>
                     <p>{copy.description}</p>
+                    {count > 0 && (
+                      <div className="overview-thumbs" aria-hidden="true">
+                        {items.slice(0, 3).map((project) => (
+                          <img
+                            key={project.name}
+                            src={project.image}
+                            alt=""
+                            width={project.imageWidth}
+                            height={project.imageHeight}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <Link to={card.href} className="overview-link">
                     {language === 'pt' ? 'Ver categoria' : 'Open category'} <ArrowUpRight className="size-4" aria-hidden="true" />

@@ -15,13 +15,16 @@ import {
   Target,
   Terminal,
 } from 'lucide-react';
+import { Faq } from '../components/Faq';
 import { ProspecDemo } from '../components/ProspecDemo';
 import { PageIntro } from '../components/PageIntro';
 import { SectionHeading } from '../components/SectionHeading';
 import { TechCard } from '../components/TechCard';
+import { prospecFaq } from '../data/faq';
 import { prospec } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Contact } from '../sections/Contact';
+import { ProspecPricing } from '../sections/ProspecPricing';
 
 const content = {
   pt: {
@@ -31,7 +34,7 @@ const content = {
       highlight: 'vende.',
       description: 'Descubra novos potenciais clientes, escolha onde prospectar e organize sua próxima abordagem com dados empresariais e inteligência de mercado.',
     },
-    primary: 'Quero testar o Prospec',
+    primary: 'Falar com a equipe',
     access: 'Já tenho acesso',
     about: {
       eyebrow: 'O que é',
@@ -89,7 +92,7 @@ const content = {
       highlight: 'sell.',
       description: 'Discover new potential customers, choose where to prospect and organize your next outreach with business data and market intelligence.',
     },
-    primary: 'I want to try Prospec',
+    primary: 'Talk to the team',
     access: 'I already have access',
     about: {
       eyebrow: 'What it is',
@@ -221,6 +224,8 @@ export function ProspecPage() {
         </div>
       </section>
 
+      <ProspecPricing />
+
       <section className="section-space pt-0">
         <div className="container-site">
           <div data-reveal>
@@ -256,7 +261,22 @@ export function ProspecPage() {
         </div>
       </section>
 
-      <Contact />
+      <section className="section-space pt-0">
+        <div className="container-site">
+          <div data-reveal>
+            <SectionHeading
+              eyebrow={language === 'pt' ? 'Perguntas frequentes' : 'Frequently asked questions'}
+              title={language === 'pt' ? 'Dúvidas sobre créditos, usuários e planos.' : 'Questions about credits, users and plans.'}
+              align="center"
+            />
+          </div>
+          <div className="mt-10 lg:mt-14" data-reveal>
+            <Faq items={prospecFaq[language]} />
+          </div>
+        </div>
+      </section>
+
+      <Contact topic="prospec" />
     </>
   );
 }

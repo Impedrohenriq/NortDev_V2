@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { company, navItems } from '../data/site';
+import { company, navItems, whatsappLink, whatsappMessages } from '../data/site';
 import { scrollToPageTarget } from '../hooks/useSmoothScroll';
 import { useLanguage } from '../i18n/LanguageContext';
 import { InfiniteLogoMarquee } from './InfiniteLogoMarquee';
@@ -92,9 +92,7 @@ export function Footer({ refreshKey }: FooterProps) {
     '/processo': 'Process',
     '/precos': 'Pricing',
   };
-  const whatsappUrl = language === 'pt'
-    ? company.whatsappUrl
-    : `https://wa.me/5531999670890?text=${encodeURIComponent('Hello! I would like to request a quote.')}`;
+  const whatsappUrl = whatsappLink(whatsappMessages.default[language]);
 
   useLayoutEffect(() => {
     const footer = footerRef.current;

@@ -22,7 +22,7 @@ const capabilities = {
   ],
 };
 
-export function ChatbotsPage() {
+export function ManagementPage() {
   const { language } = useLanguage();
   const intro = language === 'pt' ? {
     eyebrow: 'Gestão inteligente',
@@ -106,7 +106,7 @@ export function ChatbotsPage() {
         </div>
       </section>
 
-      <Contact />
+      <Contact topic="management" />
     </>
   );
 }
