@@ -1,0 +1,4 @@
+# Redirects de servidor para o Cloudflare Pages (o vercel.json não vale neste host).
+# Formato: origem destino status. Mantidos em sincronia com o vercel.json.
+/projetos/chatbots /projetos/gestao 301
+/Modelos /modelos 308
