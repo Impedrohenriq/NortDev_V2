@@ -25,6 +25,7 @@ import { prospec } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Contact } from '../sections/Contact';
 import { ProspecPricing } from '../sections/ProspecPricing';
+import { ProspecShowcase } from '../sections/ProspecShowcase';
 
 const content = {
   pt: {
@@ -204,6 +205,8 @@ export function ProspecPage() {
           </div>
         </div>
       </section>
+
+      <ProspecShowcase />
 
       <section className="section-space pt-0">
         <div className="container-site">
