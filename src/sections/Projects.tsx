@@ -8,6 +8,8 @@ import type { ProjectType } from '../types/site';
 
 type ProjectsProps = {
   filter?: ProjectType;
+  /** Mostra só os projetos marcados como `featured` e um link para a página de Modelos. */
+  featured?: boolean;
   hideHeading?: boolean;
   emptyState?: {
     title: string;
@@ -15,9 +17,10 @@ type ProjectsProps = {
   };
 };
 
-export function Projects({ filter, hideHeading = false, emptyState }: ProjectsProps) {
+export function Projects({ filter, featured = false, hideHeading = false, emptyState }: ProjectsProps) {
   const { language } = useLanguage();
-  const filtered = filter ? projects.filter((project) => project.type === filter) : projects;
+  const byType = filter ? projects.filter((project) => project.type === filter) : projects;
+  const filtered = featured ? byType.filter((project) => project.featured) : byType;
 
   return (
     <section id="modelos" className="section-space overflow-hidden">
@@ -36,6 +39,14 @@ export function Projects({ filter, hideHeading = false, emptyState }: ProjectsPr
         )}
 
         <ProjectsGrid projects={filtered} emptyState={emptyState} />
+
+        {featured && (
+          <div className="mt-10 flex justify-center">
+            <Link to="/modelos" className="button-secondary">
+              {language === 'pt' ? 'Ver todos os modelos' : 'See all projects'} <ArrowUpRight className="size-4" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -37,6 +37,8 @@ export type Project = {
   imageHeight: number;
   accent: 'blue' | 'cyan';
   type: ProjectType;
+  /** Exibido na vitrine da Home. */
+  featured?: boolean;
 };
 
 export type ProcessStep = {

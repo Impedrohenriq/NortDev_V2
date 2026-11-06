@@ -22,7 +22,7 @@ const expertise = [
   },
   {
     title: 'Automação e atendimento',
-    description: 'Chatbots inteligentes para WhatsApp que capturam leads, qualificam contatos e melhoram o atendimento.',
+    description: 'Atendimento no WhatsApp e gestão com IA que capturam leads, qualificam contatos e melhoram o atendimento.',
     icon: MessageCircleMore,
     accent: 'cyan' as const,
   },
@@ -41,7 +41,7 @@ const capabilities = [
     icon: Target,
   },
   {
-    title: 'Chatbots para WhatsApp',
+    title: 'Atendimento no WhatsApp com IA',
     description: 'Automação inteligente para capturar leads 24 horas por dia, qualificar clientes e melhorar o atendimento.',
     icon: MessageCircleMore,
   },
@@ -84,13 +84,13 @@ const commitments = [
 
 const englishExpertise = [
   { title: 'Digital presence', description: 'Landing pages, complete websites and responsive web experiences designed for conversion.', icon: Target, accent: 'blue' as const },
-  { title: 'Automation and service', description: 'Smart WhatsApp chatbots that capture leads, qualify contacts and improve customer service.', icon: MessageCircleMore, accent: 'cyan' as const },
+  { title: 'Automation and service', description: 'WhatsApp service and AI-powered management that capture leads, qualify contacts and improve customer service.', icon: MessageCircleMore, accent: 'cyan' as const },
   { title: 'Custom systems', description: 'ERPs, CRMs, sales funnels and SaaS platforms developed for each operation.', icon: Cpu, accent: 'violet' as const },
 ];
 
 const englishCapabilities = [
   { title: 'Websites and landing pages', description: 'Responsive, conversion-optimized experiences built with strong UX and UI practices.', icon: Target },
-  { title: 'WhatsApp chatbots', description: 'Smart automation that captures leads 24 hours a day, qualifies customers and improves service.', icon: MessageCircleMore },
+  { title: 'AI-powered WhatsApp service', description: 'Smart automation that captures leads 24 hours a day, qualifies customers and improves service.', icon: MessageCircleMore },
   { title: 'Custom systems', description: 'ERPs, CRMs, sales funnels and SaaS platforms developed specifically for each need.', icon: Cpu },
   { title: 'Integration and security', description: 'System connections, data protection and best-practice compliance for safer operations.', icon: Link },
   { title: 'Continuous evolution', description: 'Constant improvements, updates and optimizations that follow business growth.', icon: Zap },

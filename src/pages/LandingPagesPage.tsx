@@ -104,7 +104,7 @@ export function LandingPagesPage() {
         <Projects filter="landing" hideHeading />
       </section>
 
-      <Contact />
+      <Contact topic="landing" />
     </>
   );
 }

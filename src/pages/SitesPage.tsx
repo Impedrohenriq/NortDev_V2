@@ -111,7 +111,7 @@ export function SitesPage() {
         />
       </section>
 
-      <Contact />
+      <Contact topic="sites" />
     </>
   );
 }

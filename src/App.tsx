@@ -1,8 +1,9 @@
 import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import type { Location } from 'react-router-dom';
+import { FloatingCta } from './components/FloatingCta';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { useReveal } from './hooks/useReveal';
@@ -17,7 +18,7 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage').then((module) => 
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((module) => ({ default: module.ProjectsPage })));
 const LandingPagesPage = lazy(() => import('./pages/LandingPagesPage').then((module) => ({ default: module.LandingPagesPage })));
 const SitesPage = lazy(() => import('./pages/SitesPage').then((module) => ({ default: module.SitesPage })));
-const ChatbotsPage = lazy(() => import('./pages/ChatbotsPage').then((module) => ({ default: module.ChatbotsPage })));
+const ManagementPage = lazy(() => import('./pages/ManagementPage').then((module) => ({ default: module.ManagementPage })));
 const ProspecPage = lazy(() => import('./pages/ProspecPage').then((module) => ({ default: module.ProspecPage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then((module) => ({ default: module.PricingPage })));
 const ProcessPage = lazy(() => import('./pages/ProcessPage').then((module) => ({ default: module.ProcessPage })));
@@ -31,7 +32,7 @@ const routeMetadata = {
     '/modelos': ['Modelos | North Dev', 'Conheça Modelos e experiências digitais desenvolvidos pela North Dev.'],
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'Landing pages de alta conversão para transformar tráfego pago em oportunidades reais de venda.'],
     '/projetos/sites': ['Sites Institucionais | North Dev', 'Sites institucionais que constroem autoridade, credibilidade e presença digital duradoura.'],
-    '/projetos/chatbots': ['Gestão Inteligente | North Dev', 'Plataforma completa para organizar sua operação, conquistar novos clientes e aumentar suas vendas.'],
+    '/projetos/gestao': ['Gestão Inteligente | North Dev', 'Plataforma completa para organizar sua operação, conquistar novos clientes e aumentar suas vendas.'],
     '/prospec': ['NorthDev Prospec | Encontre empresas que combinam com o que você vende', 'Plataforma de prospecção B2B: encontre empresas pelo perfil certo, priorize com aderência explicada e prepare a abordagem com IA.'],
     '/precos': ['Preços | North Dev', 'Conheça os planos da North Dev para landing pages, sites completos, aplicativos de gestão inteligente e produtos SaaS.'],
     '/processo': ['Processo | North Dev', 'Entenda como a North Dev conduz Modelos da descoberta à entrega e evolução.'],
@@ -43,7 +44,7 @@ const routeMetadata = {
     '/modelos': ['Projects | North Dev', 'Explore digital experiences developed by North Dev.'],
     '/projetos/landing-pages': ['Landing Pages | North Dev', 'High-conversion landing pages that turn paid traffic into real sales opportunities.'],
     '/projetos/sites': ['Institutional Websites | North Dev', 'Institutional websites that build authority, credibility and lasting digital presence.'],
-    '/projetos/chatbots': ['Intelligent Management | North Dev', 'A complete platform to organize your operation, win new customers and increase sales.'],
+    '/projetos/gestao': ['Intelligent Management | North Dev', 'A complete platform to organize your operation, win new customers and increase sales.'],
     '/prospec': ['NorthDev Prospec | Find companies that match what you sell', 'B2B prospecting platform: find companies with the right profile, prioritize with explained fit and prepare outreach with AI.'],
     '/precos': ['Pricing | North Dev', 'Explore North Dev plans for landing pages, complete websites, intelligent management apps and SaaS products.'],
     '/processo': ['Process | North Dev', 'See how North Dev leads projects from discovery to delivery and evolution.'],
@@ -145,7 +146,8 @@ function Site() {
                 <Route path="/modelos" element={<ProjectsPage />} />
                 <Route path="/projetos/landing-pages" element={<LandingPagesPage />} />
                 <Route path="/projetos/sites" element={<SitesPage />} />
-                <Route path="/projetos/chatbots" element={<ChatbotsPage />} />
+                <Route path="/projetos/gestao" element={<ManagementPage />} />
+                <Route path="/projetos/chatbots" element={<Navigate to="/projetos/gestao" replace />} />
                 <Route path="/prospec" element={<ProspecPage />} />
                 <Route path="/precos" element={<PricingPage />} />
                 <Route path="/processo" element={<ProcessPage />} />
@@ -156,6 +158,7 @@ function Site() {
         </AnimatePresence>
       </main>
       <Footer refreshKey={footerLayoutVersion} />
+      <FloatingCta />
     </div>
   );
 }

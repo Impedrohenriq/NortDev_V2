@@ -23,7 +23,7 @@ export function ProcessPage() {
         palette="orange"
       />
       <Process />
-      <Contact />
+      <Contact topic="process" />
     </>
   );
 }

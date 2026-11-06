@@ -16,7 +16,7 @@ const launchContent = {
       [Building2, 'Conheça', 'Ficha, contatos disponíveis e presença digital antes do contato.'],
       [ListChecks, 'Aborde', 'Listas organizadas e rascunhos de abordagem com IA.'],
     ],
-    primary: 'Quero testar o Prospec',
+    primary: 'Falar com a equipe',
     secondary: 'Conhecer a ferramenta',
   },
   en: {
@@ -30,7 +30,7 @@ const launchContent = {
       [Building2, 'Understand', 'Company profile, available contacts and digital presence before reaching out.'],
       [ListChecks, 'Reach out', 'Organized lists and AI-assisted outreach drafts.'],
     ],
-    primary: 'I want to try Prospec',
+    primary: 'Talk to the team',
     secondary: 'Explore the tool',
   },
 } as const;
