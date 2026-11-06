@@ -6,9 +6,11 @@ type TechCardProps = Omit<HTMLMotionProps<'article'>, 'children'> & {
   children: ReactNode;
   accent?: 'blue' | 'cyan' | 'violet';
   revealDelay?: number;
+  /** Só cards que são alvo de clique sobem no hover; os demais ficam parados para não sugerir ação. */
+  interactive?: boolean;
 };
 
-export function TechCard({ children, accent = 'blue', className = '', revealDelay = 0, ...props }: TechCardProps) {
+export function TechCard({ children, accent = 'blue', className = '', revealDelay = 0, interactive = false, ...props }: TechCardProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -18,8 +20,8 @@ export function TechCard({ children, accent = 'blue', className = '', revealDela
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16 }}
       transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : revealDelay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={reduceMotion ? undefined : { y: -8, scale: 1.008, transition: { type: 'spring', stiffness: 360, damping: 26, mass: 0.55, delay: 0 } }}
-      whileTap={reduceMotion ? undefined : { scale: 0.995 }}
+      whileHover={reduceMotion || !interactive ? undefined : { y: -8, scale: 1.008, transition: { type: 'spring', stiffness: 360, damping: 26, mass: 0.55, delay: 0 } }}
+      whileTap={reduceMotion || !interactive ? undefined : { scale: 0.995 }}
       {...props}
     >
       <span className="circuit-trace circuit-trace-top" aria-hidden="true" />

@@ -141,7 +141,7 @@ export function ProspecPricing({ id = 'planos-prospec' }: ProspecPricingProps) {
           })}
         </div>
 
-        <TechCard accent="blue" className="prospec-competition" revealDelay={0.1}>
+        <div className="prospec-competition" data-reveal>
           <div className="prospec-competition-copy">
             <p className="pricing-label">{pt ? 'Só a concorrência' : 'Competition only'}</p>
             <h3 className="pricing-name">
@@ -167,7 +167,7 @@ export function ProspecPricing({ id = 'planos-prospec' }: ProspecPricingProps) {
               {pt ? 'Quero esse plano' : 'I want this plan'} <ArrowUpRight aria-hidden="true" />
             </a>
           </div>
-        </TechCard>
+        </div>
 
         <p className="pricing-note">
           {pt
